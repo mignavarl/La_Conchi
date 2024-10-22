@@ -31,20 +31,20 @@ int	m_ischar(char *c, t_cmds *node)
 	if ((ft_strncmp(c, APPEND, 2) == 0 || ft_strncmp(c, DELIMITER, 2) == 0) &&
 		(c[2] != PIPE || c[2] != INPUT || c[2] != OUTPUT))
 		{
-			if (c[0] == INPUT)
+			if (c[0] == INPUT && node)
 				node->delim = 1;
-			else if (c[0] == OUTPUT)
+			else if (c[0] == OUTPUT && node)
 				node->append = 1;
 			return (2);
 		}
 	if ((c[0] == PIPE || c[0] == INPUT || c[0] == OUTPUT) &&
 		(c[1] != PIPE || c[1] != INPUT || c[1] != OUTPUT))
 		{
-			if (c[0] == PIPE)
+			if (c[0] == PIPE && node)
 				node->pipe = 1;
-			else if (c[0] == INPUT)
+			else if (c[0] == INPUT && node)
 				node->input = 1;
-			else if (c[0] == OUTPUT)
+			else if (c[0] == OUTPUT && node)
 				node->output = 1;
 			return (1);
 		}

@@ -53,6 +53,7 @@ void	print_cmd(t_cmds *comand)
 	int i;
 
 	i = 0;
+	printf("Print\n");
 	while (comand != NULL)
 	{
 		printf("CMD (%d) = %s\n", i, comand->cmd);
@@ -112,8 +113,9 @@ int main(void)
 		// 	printf(RED"A\n"END); 
 		// }
 		//TODO: Separar en comandos y enlistar
-		list_cmd(command, data.words);//TODO: NO SE QUE C***** HAY QUE HACER
-		print_cmd(&command);
+		command = NULL;
+		command = list_cmd(command, data.words);
+		print_cmd(command);
 		// //Ejecutar cosas
 		// else
 		// {

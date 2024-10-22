@@ -84,7 +84,7 @@ int		m_ischar(char *c, t_cmds *node);
 void	execute_cmds(char **words, int num_words);
 
 //LIST_COMMAND.C
-void	list_cmd(t_cmds **command, char **words);
+t_cmds	*list_cmd(t_cmds *command, char **words);
 
 
 #endif
