@@ -56,7 +56,7 @@ void	print_cmd(t_cmds *comand)
 	printf("Print\n");
 	while (comand != NULL)
 	{
-		printf("CMD (%d) = %s\n", i, comand->cmd);
+		printf(CYAN"CMD (%d) = %s\n"END, i, comand->cmd);
 		if (comand->next == NULL)
 			break;
 		i++;
@@ -90,7 +90,7 @@ int main(void)
 	while (1)
 	{
 		find_signal();
-		line = readline(GREEN"@La Conchi: "END);
+		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
 		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");

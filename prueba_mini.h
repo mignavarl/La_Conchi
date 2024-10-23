@@ -16,7 +16,6 @@
 # define OUTPUT '>'
 # define DELIMITER "<<"
 # define APPEND ">>"
-# define SPACE ' '
 
 //COLORS
 # define RED	"\001\033[1;31m\002"
