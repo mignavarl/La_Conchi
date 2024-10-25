@@ -1,52 +1,5 @@
 #include "prueba_mini.h"
 
-t_cmds	*m_lst_intnew(char *com)
-{
-	t_cmds	*s;
-
-	s = malloc(sizeof(t_cmds));
-	if (!s)
-		return (NULL);
-	s -> cmd = com;
-	s -> next = NULL;
-	return (s);
-}
-
-void	m_lstadd_front(t_cmds **lst, t_cmds *cmd)
-{
-	cmd -> next = *lst;
-	*lst = cmd;
-}
-
-t_cmds	*m_lstlast(t_cmds *lst)
-{
-	t_cmds	*l;
-
-	l = lst;
-	while (l != NULL)
-	{
-		if (l -> next == NULL)
-			return (l);
-		l = l -> next;
-	}
-	return (0);
-}
-
-void	m_lstadd_back(t_cmds **lst, t_cmds *cmd)
-{
-	t_cmds	*l;
-
-	if (!cmd)
-		return ;
-	if (!*lst)
-	{
-		*lst = cmd;
-		return ;
-	}
-	l = m_lstlast(*lst);
-	l->next = cmd;
-}
-
 int	init_word(char *word)
 {
 	int	init;
@@ -111,12 +64,12 @@ char	*m_find_word(char *line)
 
 int	next_word(char *word, int i)
 {
-	printf("Next word: %s\n", word);
 	while (!m_ischar(&word[i], NULL) && word[i])
 		i++;
 	while (m_ischar(&word[i], NULL) && word[i])
-		i++;
-	return (i - 1);
+		i--;
+	printf("Next word: %s -- i = %d\n", word, i);
+	return (i);
 }
 
 t_cmds	*list_cmd(t_cmds *command, char **words)
@@ -134,19 +87,21 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 		{
 			//Mirar chars y si es el ultimo ponerselo al siguiente
 			sym = m_ischar(&words[w][i], command);
-			if (sym == 0)
+			if (sym == 0)//NO ES CHAR
 			{
 				printf(RED"4 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
 				m_lstadd_back(&command, m_lst_intnew(m_find_word(&words[w][i])));
 				printf("i = %d\n", i);
 				i = next_word(words[w], i);
+				if (words[w][i] == '\0')
+					i -= 1;
 				printf("i = %d\n", i);
 				if (words[w][i + 1] == '\0')
 					break ;
-				sym = m_ischar(&words[w][i], NULL);
+				sym = m_ischar(&words[w][i], NULL) - 1;
 			}
 			else if ((sym == 1 && words[w][i + 1] != '\0') ||
-				(sym == 2 && words[w][i + 2] != '\0'))
+				(sym == 2 && words[w][i + 2] != '\0'))//ES CHAR, NO EL ÚLTIMO
 			{
 				com = sym + i;
 				while (words[w][com])
@@ -154,20 +109,30 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 					if (m_ischar(&words[w][com], command) || words[w][com + 1] == '\0')
 					{
 						printf(RED"1 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
-						m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, com - i - 1)));
+						if ((com - i - 1) == 0)
+							m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, 1)));
+						else
+							m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, com - i - 1)));
 						break ;
 					}
 					com++;
 				}
+				printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
+				// if (words[w][com + 1] == '\0')
+				// 	i = com - 2;
+				// else
+				// 	i = com + sym - 1;
+				i = com;
+				while (!m_ischar(&words[w][i], NULL))
+					i--;
 				sym = m_ischar(&words[w][com], command);
 				printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
-				i = com - 1;
 			}
 			else if ((sym == 1 && words[w][i + 1] == '\0') ||
-				(sym == 2 && words[w][i + 2] == '\0'))
+				(sym == 2 && words[w][i + 2] == '\0'))// ES CHAR Y SÍ EL ÚLTIMO
 			{
 				com = 0;
-				if (!words[w + 1] || !m_ischar(words[w + 1], command))
+				if (!words[w + 1] || !m_ischar(words[w + 1], command))//HABRÍA QUE MIRAR ANTES QUE NO ACABE EN CHAR
 				{
 					printf(RED"2 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
 					m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
@@ -194,9 +159,9 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 
 /*TODO: 
 		ls OK
-		|ls KO: 0 = |
-				1 = s (se come la l)
-		ls| KO: 0 = ls (se come |)
-		ls|d KO: 0 = ls
-				 1 = d  (se come |)
+		|ls OK: 0 = |
+				1 = ls
+		ls| OK: 0 = ls
+				1 = |
+		ls|d KO: Bucle infinito: queda |d
 */

@@ -6,7 +6,8 @@ SRC = extract_prueba.c\
 		count.c\
 		check_chars.c\
 		execute.c\
-		list_command.c
+		list_command.c\
+		list_mini.c
 
 OBJ = ${SRC:.c=.o}
 CC = gcc

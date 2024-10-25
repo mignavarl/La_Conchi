@@ -1,0 +1,48 @@
+#include "prueba_mini.h"
+
+t_cmds	*m_lst_intnew(char *com)
+{
+	t_cmds	*s;
+
+	s = malloc(sizeof(t_cmds));
+	if (!s)
+		return (NULL);
+	s -> cmd = com;
+	s -> next = NULL;
+	return (s);
+}
+
+void	m_lstadd_front(t_cmds **lst, t_cmds *cmd)
+{
+	cmd -> next = *lst;
+	*lst = cmd;
+}
+
+t_cmds	*m_lstlast(t_cmds *lst)
+{
+	t_cmds	*l;
+
+	l = lst;
+	while (l != NULL)
+	{
+		if (l -> next == NULL)
+			return (l);
+		l = l -> next;
+	}
+	return (0);
+}
+
+void	m_lstadd_back(t_cmds **lst, t_cmds *cmd)
+{
+	t_cmds	*l;
+
+	if (!cmd)
+		return ;
+	if (!*lst)
+	{
+		*lst = cmd;
+		return ;
+	}
+	l = m_lstlast(*lst);
+	l->next = cmd;
+}

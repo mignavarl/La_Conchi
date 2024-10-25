@@ -85,5 +85,10 @@ void	execute_cmds(char **words, int num_words);
 //LIST_COMMAND.C
 t_cmds	*list_cmd(t_cmds *command, char **words);
 
+//LIST_MINI.C
+t_cmds	*m_lst_intnew(char *com);
+void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
+t_cmds	*m_lstlast(t_cmds *lst);
+void	m_lstadd_back(t_cmds **lst, t_cmds *cmd);
 
 #endif
