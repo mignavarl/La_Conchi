@@ -38,5 +38,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		start++;
 	}
 	sub[a] = '\0';
+	printf("SUB: %s\n", sub);
 	return (sub);
 }

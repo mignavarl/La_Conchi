@@ -40,10 +40,16 @@ int	find_last_sym(char * word)
 {
 	int	l;
 
-	l = ft_strlen(word);
+	l = ft_strlen(word) - 1;
+	printf("Word = %s\nLen = %d\n", word, l);
+	//printf("Char = %c", word[l]);
 	while (m_ischar(&word[l], NULL))
+	{
+		printf(YELLOW"Char = %c\n"END, word[l]);
 		l--;
-	return (l - 1);
+	}
+	printf("Last_sym = %d\n", (l - 1));
+	return (l + 1);
 }
 
 char	*m_find_word(char *line)
@@ -109,20 +115,19 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 					if (m_ischar(&words[w][com], command) || words[w][com + 1] == '\0')
 					{
 						printf(RED"1 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
-						if ((com - i - 1) == 0)
-							m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, 1)));
-						else
-							m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, com - i - 1)));
+						m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, sym)));
+						// if ((com - i - 1) == 0 || sym == 1)
+						// 	m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, 1)));
+						// else if (sym == 2)
+						// 	m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, 2)));
+						// else
+						// 	m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, com - i - 1)));
 						break ;
 					}
 					com++;
 				}
 				printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
-				// if (words[w][com + 1] == '\0')
-				// 	i = com - 2;
-				// else
-				// 	i = com + sym - 1;
-				i = com;
+				i = com - 1;
 				while (!m_ischar(&words[w][i], NULL))
 					i--;
 				sym = m_ischar(&words[w][com], command);
@@ -134,7 +139,7 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 				com = 0;
 				if (!words[w + 1] || !m_ischar(words[w + 1], command))//HABRÍA QUE MIRAR ANTES QUE NO ACABE EN CHAR
 				{
-					printf(RED"2 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
+					printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
 					m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
 					break ;
 				}
