@@ -12,7 +12,7 @@ SRC = extract_prueba.c\
 OBJ = ${SRC:.c=.o}
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -fsanitize=leak -g3
 MAKEFLAGS = --no-print-directory
 LFLAGS = -L libft -lft
 
