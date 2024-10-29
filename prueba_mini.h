@@ -79,16 +79,20 @@ void	find_signal(void);
 int		check_chars(char **words, t_chars *chars);
 int		m_ischar(char *c, t_cmds *node);
 
+//EXECUTE_CMD.C
+void	execute_cmds(t_cmds *command);
+
 //EXECUTE.C
-void	execute_cmds(char **words, int num_words);
+void	execute();
 
 //LIST_COMMAND.C
 t_cmds	*list_cmd(t_cmds *command, char **words);
 
 //LIST_MINI.C
 t_cmds	*m_lst_intnew(char *com);
-void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
 t_cmds	*m_lstlast(t_cmds *lst);
+void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
 void	m_lstadd_back(t_cmds **lst, t_cmds *cmd);
+int		m_lstsize(t_cmds *lst);
 
 #endif

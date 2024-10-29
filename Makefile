@@ -6,6 +6,7 @@ SRC = extract_prueba.c\
 		count.c\
 		check_chars.c\
 		execute.c\
+		execute_cmd.c\
 		list_command.c\
 		list_mini.c
 

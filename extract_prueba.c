@@ -119,7 +119,7 @@ int main(void)
 		// //Ejecutar cosas
 		// else
 		// {
-		// 	execute_cmds(data.words, count_words(line));
+		execute(&data, &command);
 		// }
 		//RESET
 		// add_history(line);

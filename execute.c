@@ -1,29 +1,34 @@
 #include "prueba_mini.h"
 
-void	execute_pwd()
+void	loop_cmd(t_cmds *now, t_cmds *next)
 {
-	char	*s;
-
-	s = malloc(100 * sizeof(char));
-	printf("%s\n", getcwd(s, 100));
-	free(s);
+	if (!m_ischar(next->next, NULL))
+		next = next->next;
+	
 }
 
-void	execute_cd(char **words, int num_words)
+void	execute(t_data	*data, t_cmds **cmd)
 {
-	if (num_words > 2)
+	t_cmds	*now;
+	t_cmds	*next;
+	int		size;
+	int		i;
+
+	now = cmd;
+	size = m_lstsize(cmd);
+	if (size > 1)
+		next = now->next;
+	else
 	{
-		printf("cd: too many arguments\n");
+		execute_cmds(now);
 		return ;
 	}
-	else
-		chdir(words[1]);
-}
-
-void	execute_cmds(char **words, int num_words)
-{
-	if (!ft_strcmp(words[0], "cd"))
-		execute_cd(words, num_words);
-	if (!ft_strcmp(words[0], "pwd"))
-		execute_pwd();
+	i = 0;
+	while (i < size)
+	{
+		loop_cmd(now, next);
+		now = next->next;
+		next = now->next;
+		i++;
+	}
 }

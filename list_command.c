@@ -161,12 +161,3 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 	}
 	return (command);
 }
-
-/*TODO: 
-		ls OK
-		|ls OK: 0 = |
-				1 = ls
-		ls| OK: 0 = ls
-				1 = |
-		ls|d KO: Bucle infinito: queda |d
-*/

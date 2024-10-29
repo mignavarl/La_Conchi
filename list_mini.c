@@ -1,5 +1,20 @@
 #include "prueba_mini.h"
 
+int	m_lstsize(t_cmds *lst)
+{
+	t_cmds	*l;
+	int		i;
+
+	l = lst;
+	i = 0;
+	while (l != NULL)
+	{
+		i++;
+		l = l -> next;
+	}
+	return (i);
+}
+
 t_cmds	*m_lst_intnew(char *com)
 {
 	t_cmds	*s;
