@@ -8,6 +8,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "libft/libft.h"
+# include "env.h"
 
 # define TRUE 1
 # define FALSE 0
