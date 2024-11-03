@@ -119,7 +119,7 @@ int main(void)
 		// //Ejecutar cosas
 		// else
 		// {
-		execute(&data, &command);
+		execute(&command);
 		// }
 		//RESET
 		// add_history(line);
