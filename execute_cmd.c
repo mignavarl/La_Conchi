@@ -9,7 +9,7 @@ void	execute_pwd()
 	free(s);
 }
 
-void	execute_cd(char *cd, t_cmds *command)
+void execute_cd(t_cmds *command)
 {
 	// if (num_words > 2)
 	// {
@@ -34,7 +34,7 @@ void	execute_cd(char *cd, t_cmds *command)
 void	execute_cmds(t_cmds *command)
 {
 	if (!ft_strcmp(command->cmd, "cd"))
-		execute_cd(command->cmd, &command);
+		execute_cd(command);
 	if (!ft_strcmp(command->cmd, "pwd"))
 		execute_pwd();
 }
