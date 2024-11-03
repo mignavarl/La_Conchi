@@ -81,10 +81,12 @@ int		check_chars(char **words, t_chars *chars);
 int		m_ischar(char *c, t_cmds *node);
 
 //EXECUTE_CMD.C
+void execute_cd(t_cmds *command);
 void	execute_cmds(t_cmds *command);
 
 //EXECUTE.C
-void	execute();
+void loop_cmd(t_cmds *next);
+void execute(t_cmds **cmd);
 
 //LIST_COMMAND.C
 t_cmds	*list_cmd(t_cmds *command, char **words);
