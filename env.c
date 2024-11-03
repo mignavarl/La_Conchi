@@ -57,3 +57,48 @@ void free_env(t_env *env_list)
         free(tmp);
     }
 }
+// Función para actualizar o agregar una variable de entorno
+void update_env_var(t_env **env_list, char *key, char *value)
+{
+    t_env *current = *env_list;
+
+    // Buscar si la variable ya existe
+    while (current)
+    {
+        if (strcmp(current->key, key) == 0)
+        {
+            free(current->value);
+            current->value = strdup(value);
+            return;
+        }
+        current = current->next;
+    }
+
+    // Si no existe, agregar una nueva variable
+    add_env_var(env_list, key, value);
+}
+
+// Función para eliminar una variable de entorno
+void remove_env_var(t_env **env_list, char *key)
+{
+    t_env *current = *env_list;
+    t_env *prev = NULL;
+
+    while (current)
+    {
+        if (strcmp(current->key, key) == 0)
+        {
+            if (prev)
+                prev->next = current->next;
+            else
+                *env_list = current->next;
+
+            free(current->key);
+            free(current->value);
+            free(current);
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+}
