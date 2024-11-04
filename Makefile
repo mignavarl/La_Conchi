@@ -7,6 +7,8 @@ SRC = extract_prueba.c\
 		check_chars.c\
 		execute.c\
 		execute_cmd.c\
+		execute_cd.c\
+		execute_pwd.c\
 		list_command.c\
 		list_mini.c
 

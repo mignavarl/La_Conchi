@@ -7,6 +7,8 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include "libft/libft.h"
 # include "env.h"
 
@@ -17,6 +19,8 @@
 # define OUTPUT '>'
 # define DELIMITER "<<"
 # define APPEND ">>"
+# define READ 0
+# define WRITE 1
 
 //COLORS
 # define RED	"\001\033[1;31m\002"
@@ -80,14 +84,25 @@ void	find_signal(void);
 int		check_chars(char **words, t_chars *chars);
 int		m_ischar(char *c, t_cmds *node);
 
+//-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C
-void execute_cd(t_cmds *command);
 void	execute_cmds(t_cmds *command);
 
+//EXECUTE_CD.C
+void 	execute_cd(t_cmds *command);
+
+//EXECUTE_PWD.C
+void	execute_pwd(void);
+
+//EXECUTE_REST.C
+void	execute_rest(t_cmds	*command);
+
 //EXECUTE.C
-void loop_cmd(t_cmds *next);
+void loop_cmd(t_cmds *now, t_cmds *next);
 void execute(t_cmds **cmd);
 
+
+//-----------------LIST FUNCTIONS-----------------------//
 //LIST_COMMAND.C
 t_cmds	*list_cmd(t_cmds *command, char **words);
 
@@ -97,5 +112,9 @@ t_cmds	*m_lstlast(t_cmds *lst);
 void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
 void	m_lstadd_back(t_cmds **lst, t_cmds *cmd);
 int		m_lstsize(t_cmds *lst);
+
+//------------------------MAKE CHARS--------------------//
+//MAKE_PIPE.C
+void	make_pipe(t_cmds *now);
 
 #endif

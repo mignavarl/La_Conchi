@@ -1,34 +1,38 @@
 #include "prueba_mini.h"
 
-void loop_cmd(t_cmds *next)
+void loop_cmd(t_cmds *now, t_cmds *next)
 {
-	if (!m_ischar(next->cmd, NULL))
-		next = next->next;
-	
+	char	*command;
+
+	while (now || now->next != NULL)
+	{
+		command = ft_strdup(now->cmd);
+		while (!m_ischar(next->cmd, NULL) || next->next != NULL)
+		{
+			command = ft_threejoin(command, " ", next->cmd); 
+			next = next->next;
+		}
+		if (!ft_strcmp(next->cmd, "|"))
+			make_pipe(command);
+		if (!ft_strcmp(next->cmd, "<"))
+			make_input();
+		now = next->next;
+	}
+	waitpid(-1, NULL, 0);
 }
 
 void	execute(t_cmds **cmd)
 {
 	t_cmds	*now;
 	t_cmds	*next;
-	int		size;
-	int		i;
 
 	now = *cmd;
-	size = m_lstsize(*cmd);
-	if (size > 1)
+	if (m_lstsize(*cmd) > 1)
 		next = now->next;
 	else
 	{
 		execute_cmds(now);
 		return ;
 	}
-	i = 0;
-	while (i < size)
-	{
-		loop_cmd(next);
-		now = next;
-		next = now->next;
-		i++;
-	}
+	loop_cmd(now, next);
 }

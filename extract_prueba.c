@@ -84,6 +84,7 @@ int main(void)
 	t_cmds	*command;
 	char	*line;
 
+	command = malloc(sizeof(t_cmds));
 	ft_memset(&chars, 0, sizeof(t_chars));
 	ft_memset(&data, 0, sizeof(t_data));
 	ft_memset(&command, 0, sizeof(t_cmds));

@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"libft.h": "c",
-		"prueba_mini.h": "c"
+		"prueba_mini.h": "c",
+		"types.h": "c"
 	}
 }
