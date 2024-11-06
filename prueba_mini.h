@@ -82,7 +82,7 @@ void	find_signal(void);
 
 //CHECK_CHARS.C
 int		check_chars(char **words, t_chars *chars);
-int		m_ischar(char *c, t_cmds *node);
+int		m_ischar(char *c);
 
 //-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C

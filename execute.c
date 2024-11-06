@@ -7,7 +7,7 @@ void loop_cmd(t_cmds *now, t_cmds *next)
 	while (now && now->next != NULL)
 	{
 		command = ft_strdup(now->cmd);
-		while (next->next != NULL && next->cmd && !m_ischar(next->cmd, NULL))
+		while (next->next != NULL && next->cmd && !m_ischar(next->cmd))
 		{
 			command = ft_threejoin(command, " ", next->cmd); 
 			next = next->next;
