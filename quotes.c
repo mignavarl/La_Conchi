@@ -47,7 +47,7 @@ char	*extract_quote(char *line, int start, int final)
 {
 	char *quote;
 
-	quote = ft_substr(line, (start + 1), (final - start - 1));
+	quote = ft_substr(line, (start), (final - start - 1));
 	//printf("Quote: %s\n", quote);
 	return (quote);
 }
@@ -62,7 +62,7 @@ char	*find_quote(char *line, int i)
 	// 	while_end(line, i);
 	// 	return (0);
 	// }
-	l = i + 1;
+	l = i;
 	while (line[l])
 	{
 		if ((line[i] == '"' && line[l] == '"') || (line[i] == '\'' && line[l] == '\''))

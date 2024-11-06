@@ -97,7 +97,11 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 		i = 0;
 		while (words[w][i])
 		{
-			//Mirar chars y si es el ultimo ponerselo al siguiente
+			if (i == 0 && (words[w][i] == '"' || words[w][i] == '\''))
+			{
+				m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], 1, (ft_strlen(words[w]) - 2))));
+				break ;
+			}
 			sym = m_ischar(&words[w][i]);
 			if (sym == 0)//NO ES CHAR
 			{
@@ -122,12 +126,6 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 					{
 						printf(RED"1 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
 						m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, sym)));
-						// if ((com - i - 1) == 0 || sym == 1)
-						// 	m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, 1)));
-						// else if (sym == 2)
-						// 	m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, 2)));
-						// else
-						// 	m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, com - i - 1)));
 						break ;
 					}
 					com++;
@@ -142,24 +140,8 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 			else if ((sym == 1 && words[w][i + 1] == '\0') ||
 				(sym == 2 && words[w][i + 2] == '\0'))// ES CHAR Y SÍ EL ÚLTIMO
 			{
-				com = 0;
-				if (!words[w + 1] || !m_ischar(words[w + 1]))//HABRÍA QUE MIRAR ANTES QUE NO ACABE EN CHAR
-				{
-					printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
-					m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
-					break ;
-				}
-				w++;
-				while (words[w][com])
-				{
-					if (m_ischar(&words[w][com]) || words[w][com + 1] == '\0')
-					{
-						printf(RED"3 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
-						m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, com - i)));
-						break ;
-					}
-					com++;
-				}
+				printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
+				m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
 			}
 			i++;
 		}
