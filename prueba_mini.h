@@ -99,7 +99,7 @@ void	execute_rest(t_cmds	*command);
 
 //EXECUTE.C
 void loop_cmd(t_cmds *now, t_cmds *next);
-void execute(t_cmds **cmd);
+void execute(t_cmds **cmd, char **envp);
 
 
 //-----------------LIST FUNCTIONS-----------------------//

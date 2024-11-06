@@ -12,16 +12,18 @@ void loop_cmd(t_cmds *now, t_cmds *next)
 			command = ft_threejoin(command, " ", next->cmd); 
 			next = next->next;
 		}
-		// if (!ft_strcmp(next->cmd, "|"))
-		// 	make_pipe(command);
+		if (!ft_strcmp(next->cmd, "|"))
+			make_pipe(command);
 		// if (!ft_strcmp(next->cmd, "<"))
 		// 	make_input();
+		else
+			execute_cmds(now);
 		now = next->next;
 	}
 	waitpid(-1, NULL, 0);
 }
 
-void	execute(t_cmds **cmd)
+void	execute(t_cmds **cmd, char **envp)
 {
 	t_cmds	*now;
 	t_cmds	*next;

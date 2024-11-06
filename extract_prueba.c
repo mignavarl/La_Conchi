@@ -77,8 +77,10 @@ void	m_listclear(t_cmds **lst, void (*del)(void *))
 	}
 }
 
-int main(void)
+int main(int argc, char **argv, char *envp[])
 {
+	(void)argc;
+	(void)argv;
 	t_chars	chars;
 	t_data	data;
 	t_cmds	*command;
@@ -120,7 +122,7 @@ int main(void)
 		// //Ejecutar cosas
 		// else
 		// {
-		execute(&command);
+		execute(&command, envp);
 		// }
 		//RESET
 		// add_history(line);
