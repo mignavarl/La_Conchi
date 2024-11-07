@@ -115,7 +115,6 @@ int main(int argc, char **argv, char *envp[])
 		// {
 		// 	printf(RED"A\n"END); 
 		// }
-		//TODO: Separar en comandos y enlistar
 		command = NULL;
 		command = list_cmd(command, data.words);
 		print_cmd(command);

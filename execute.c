@@ -13,7 +13,7 @@ void loop_cmd(t_cmds *now, t_cmds *next)
 			next = next->next;
 		}
 		if (!ft_strcmp(next->cmd, "|"))
-			make_pipe(command);
+			make_pipe(ft_split(command, ' '));
 		// if (!ft_strcmp(next->cmd, "<"))
 		// 	make_input();
 		else
@@ -23,7 +23,7 @@ void loop_cmd(t_cmds *now, t_cmds *next)
 	waitpid(-1, NULL, 0);
 }
 
-void	execute(t_cmds **cmd, char **envp)
+void	execute(t_cmds **cmd)//TODO:añadir env y enviar a execute y loop
 {
 	t_cmds	*now;
 	t_cmds	*next;

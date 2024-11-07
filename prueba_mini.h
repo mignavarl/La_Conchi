@@ -115,6 +115,6 @@ int		m_lstsize(t_cmds *lst);
 
 //------------------------MAKE CHARS--------------------//
 //MAKE_PIPE.C
-void	make_pipe(t_cmds *now);
+void	make_pipe(char **command);
 
 #endif

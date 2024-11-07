@@ -1,5 +1,13 @@
 #include "prueba_mini.h"
 
+void	child(char **command)
+{
+	char	*route;
+
+	//route = search_route(command[0]);//TODO: y el envp
+	execve(route, command, );
+}
+
 void	make_pipe(char **command)
 {
 	pid_t	pid;
