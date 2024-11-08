@@ -2,6 +2,8 @@
 	"files.associations": {
 		"libft.h": "c",
 		"prueba_mini.h": "c",
-		"types.h": "c"
+		"types.h": "c",
+		"type_traits": "cpp",
+		"cmath": "cpp"
 	}
 }

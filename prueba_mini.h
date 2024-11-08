@@ -86,7 +86,7 @@ int		m_ischar(char *c);
 
 //-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C
-void	execute_cmds(t_cmds *command);
+void	execute_cmds(t_cmds *command, t_env *env);
 
 //EXECUTE_CD.C
 void 	execute_cd(t_cmds *command);
@@ -98,8 +98,8 @@ void	execute_pwd(void);
 void	execute_rest(t_cmds	*command);
 
 //EXECUTE.C
-void loop_cmd(t_cmds *now, t_cmds *next);
-void execute(t_cmds **cmd, char **envp);
+void loop_cmd(t_cmds *now, t_cmds *next, t_env *env);
+void execute(t_cmds **cmd, t_env *env);
 
 
 //-----------------LIST FUNCTIONS-----------------------//
@@ -115,6 +115,6 @@ int		m_lstsize(t_cmds *lst);
 
 //------------------------MAKE CHARS--------------------//
 //MAKE_PIPE.C
-void	make_pipe(char **command);
+void	make_pipe(char **command, t_env *env);
 
 #endif

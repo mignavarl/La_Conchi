@@ -1,6 +1,6 @@
 #include "prueba_mini.h"
 
-void loop_cmd(t_cmds *now, t_cmds *next)
+void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
 {
 	char	*command;
 
@@ -13,17 +13,17 @@ void loop_cmd(t_cmds *now, t_cmds *next)
 			next = next->next;
 		}
 		if (!ft_strcmp(next->cmd, "|"))
-			make_pipe(ft_split(command, ' '));
+			make_pipe(ft_split(command, ' '), env);
 		// if (!ft_strcmp(next->cmd, "<"))
 		// 	make_input();
 		else
-			execute_cmds(now);
+			execute_cmds(now, env);
 		now = next->next;
 	}
 	waitpid(-1, NULL, 0);
 }
 
-void	execute(t_cmds **cmd)//TODO:añadir env y enviar a execute y loop
+void	execute(t_cmds **cmd, t_env *env)
 {
 	t_cmds	*now;
 	t_cmds	*next;
@@ -33,8 +33,8 @@ void	execute(t_cmds **cmd)//TODO:añadir env y enviar a execute y loop
 		next = now->next;
 	else
 	{
-		execute_cmds(now);
+		execute_cmds(now, env);
 		return ;
 	}
-	loop_cmd(now, next);
+	loop_cmd(now, next, env);
 }

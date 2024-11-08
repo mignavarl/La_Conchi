@@ -1,14 +1,38 @@
 #include "prueba_mini.h"
 
-void	child(char **command)
+char	**set_env(t_env *env)
 {
-	char	*route;
+	char	**envp;
+	t_env	*tmp;
+	int		i;
 
-	//route = search_route(command[0]);//TODO: y el envp
-	execve(route, command, );
+	envp == malloc((m_lstsize(env) + 1) * sizeof(char *));
+	if (!envp)
+		return (NULL);
+	tmp = env;
+	i = 0;
+	while (tmp)
+	{
+		envp[i] = ft_strdup(tmp->value);
+		if (!envp[i])
+			return (ft_free_double(envp), NULL);
+		tmp = tmp->next;
+		i++;
+	}
+	return (envp);
 }
 
-void	make_pipe(char **command)
+void	child(char **command, t_env *env)
+{
+	char	*route;
+	char	**envp;
+
+	//envp = set_env(env);//TODO: poner en el env en el **
+	//route = search_route(command[0], envp);//TODO: buscar la ruta con el envp
+	//execve(route, command, envp);
+}
+
+void	make_pipe(char **command, t_env *env)
 {
 	pid_t	pid;
 	int		pipefd[2];
@@ -22,7 +46,7 @@ void	make_pipe(char **command)
 		close(pipefd[READ]);
 		dup2(pipefd[WRITE], STDOUT_FILENO);
 		close(pipefd[WRITE]);
-		child(command);
+		child(command, env);
 	}
 	else
 	{

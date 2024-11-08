@@ -84,6 +84,7 @@ int main(int argc, char **argv, char *envp[])
 	t_chars	chars;
 	t_data	data;
 	t_cmds	*command;
+	t_env	env;
 	char	*line;
 
 	command = malloc(sizeof(t_cmds));
@@ -121,7 +122,7 @@ int main(int argc, char **argv, char *envp[])
 		// //Ejecutar cosas
 		// else
 		// {
-		execute(&command, envp);
+		execute(&command, &env);
 		// }
 		//RESET
 		// add_history(line);
