@@ -6,12 +6,15 @@
 
 t_env *init_env(char **envp)
 {
-    t_env *env_list = NULL;
-    int i = 0;
+    t_env	*env_list;
+    int		i;
+	char	*equal_sign;
 
-    while (envp[i])
+    env_list = NULL;
+	i = 0;
+	while (envp[i])
     {
-        char *equal_sign = strchr(envp[i], '=');
+        equal_sign = strchr(envp[i], '=');
         if (equal_sign)
         {
             t_env *new_env = malloc(sizeof(t_env));
@@ -22,7 +25,7 @@ t_env *init_env(char **envp)
         }
         i++;
     }
-    return env_list;
+    return (env_list);
 }
 
 void add_env_var(t_env **env_list, char *key, char *value)

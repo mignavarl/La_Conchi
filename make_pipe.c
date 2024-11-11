@@ -24,12 +24,12 @@ char	**set_env(t_env *env)
 
 void	child(char **command, t_env *env)
 {
-	char	*route;
 	char	**envp;
+	char	*route;
 
-	//envp = set_env(env);//TODO: poner en el env en el **
-	//route = search_route(command[0], envp);//TODO: buscar la ruta con el envp
-	//execve(route, command, envp);
+	envp = set_env(env);
+	route = search_route(command[0], envp);
+	execve(route, command, envp);
 }
 
 void	make_pipe(char **command, t_env *env)

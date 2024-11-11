@@ -107,10 +107,7 @@ int main(int argc, char **argv, char *envp[])
 			printf("NADA\n");
 		}
 		else
-		{
 			add_history(line);
-			//ft_free_double(data.words);
-		}
 		//Buscar en words
 		// if (!check_chars(data.words, &chars))
 		// {
@@ -125,7 +122,6 @@ int main(int argc, char **argv, char *envp[])
 		execute(&command, &env);
 		// }
 		//RESET
-		// add_history(line);
 		ft_memset(&chars, 0, sizeof(t_chars));
 		// if (data.words)
 		ft_free_double(data.words);

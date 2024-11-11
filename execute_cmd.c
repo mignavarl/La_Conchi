@@ -1,11 +1,13 @@
 #include "prueba_mini.h"
 
-void	execute_cmds(t_cmds *command)
+void	execute_cmd(char **command, t_env *env)
 {
-	if (!ft_strcmp(command->cmd, "cd"))
+	if (!command || !env)
+		return ;//TODO:funcion salir
+	if (!ft_strcmp(command[0], "cd"))
 		execute_cd(command);
-	if (!ft_strcmp(command->cmd, "pwd"))
+	if (!ft_strcmp(command[0], "pwd"))
 		execute_pwd();
 	// else
-	// 	execute_rest(command);//TODO:execute_rest.c
+	// 	execute_rest(command, env);//TODO:execute_rest.c
 }

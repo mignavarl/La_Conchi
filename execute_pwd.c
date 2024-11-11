@@ -4,7 +4,7 @@ void	execute_pwd(void)
 {
 	char	*s;
 
-	s = malloc(100 * sizeof(char));
-	printf("%s\n", getcwd(s, 100));
+	s = getcwd(NULL, 0);
+	printf("%s\n", s);
 	free(s);
 }

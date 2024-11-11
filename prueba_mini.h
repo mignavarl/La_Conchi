@@ -86,21 +86,24 @@ int		m_ischar(char *c);
 
 //-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C
-void	execute_cmds(t_cmds *command, t_env *env);
+void	execute_cmd(char **command, t_env *env);
 
 //EXECUTE_CD.C
-void 	execute_cd(t_cmds *command);
+void 	execute_cd(char **command);
 
 //EXECUTE_PWD.C
 void	execute_pwd(void);
 
 //EXECUTE_REST.C
-void	execute_rest(t_cmds	*command);
+void	execute_rest(char **command, t_env *env);
 
 //EXECUTE.C
 void loop_cmd(t_cmds *now, t_cmds *next, t_env *env);
 void execute(t_cmds **cmd, t_env *env);
 
+//EXECUTE_UTILS.C
+char	*search_route(char *command, char **envp);
+char	**set_env(t_env *env);
 
 //-----------------LIST FUNCTIONS-----------------------//
 //LIST_COMMAND.C
