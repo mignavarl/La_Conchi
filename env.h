@@ -15,6 +15,7 @@ char *get_env_var(t_env *env_list, char *key);
 void update_env_var(t_env **env_list, char *key, char *value);
 void remove_env_var(t_env **env_list, char *key);
 void free_env(t_env *env_list);
+int		env_lstsize(t_env *lst);
 
 #endif // ENV_H
 

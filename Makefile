@@ -10,7 +10,10 @@ SRC = extract_prueba.c\
 		execute_cd.c\
 		execute_pwd.c\
 		list_command.c\
-		list_mini.c
+		list_mini.c\
+		env.c\
+		execute_rest.c\
+		execute_utils.c
 
 OBJ = ${SRC:.c=.o}
 CC = gcc

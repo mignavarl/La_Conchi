@@ -105,3 +105,18 @@ void remove_env_var(t_env **env_list, char *key)
         current = current->next;
     }
 }
+
+int	env_lstsize(t_env *lst)
+{
+	t_env	*l;
+	int		i;
+
+	l = lst;
+	i = 0;
+	while (l != NULL)
+	{
+		i++;
+		l = l -> next;
+	}
+	return (i);
+}

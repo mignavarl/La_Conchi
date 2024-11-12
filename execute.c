@@ -2,30 +2,36 @@
 
 void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
 {
-	char	*command;
+	char	**command;
+	int		i;
 
+	i = 0;
+	command = malloc(sizeof(char *));
 	while (now)
 	{
-		command = ft_strdup(now->cmd);
 		while (next && next->cmd && !m_ischar(next->cmd))
 		{
-			command = ft_threejoin(command, " ", next->cmd); 
+			command[i] = ft_strdup(next->cmd);
 			next = next->next;
+			i++;
 		}
+		command[i] = NULL;
 		if (next && m_ischar(next->cmd))
 		{
 			// if (!ft_strcmp(next->cmd, "|"))
-			// 	make_pipe(ft_split(command, ' '), env);
+			// 	make_pipe(command, env);
 			// if (!ft_strcmp(next->cmd, "<"))
-			// 	make_input();
+			// 	make_input(command, env);
 		}
 		else
 		{
-			execute_cmd(ft_split(command, ' '), env);
+			execute_cmd(command, env);
+			printf("execute\n");
 			break ;
 		}
 		now = next->next;
 	}
+	printf("wait\n");
 	waitpid(-1, NULL, 0);
 }
 

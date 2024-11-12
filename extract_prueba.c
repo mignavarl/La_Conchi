@@ -11,7 +11,7 @@ char	**search_in_line(char *line)
 	num_words = count_words(line);
 	if (num_words < 0)
 	{
-		printf(RED"Close the quotes\n"END);
+		//printf(RED"Close the quotes\n"END);
 		//search_end_while(line);
 		return (NULL);
 	}
@@ -42,7 +42,7 @@ char	**search_in_line(char *line)
 	w = 0;
 	while (w < num_words)
 	{
-		printf("Word [%d] = %s / %d\n", w, words[w], w);
+		//printf("Word [%d] = %s / %d\n", w, words[w], w);
 		w++;
 	}
 	return (words);
@@ -53,10 +53,10 @@ void	print_cmd(t_cmds *comand)
 	int i;
 
 	i = 0;
-	printf("Print\n");
+	//printf("Print\n");
 	while (comand != NULL)
 	{
-		printf(CYAN"CMD (%d) = %s\n"END, i, comand->cmd);
+		//printf(CYAN"CMD (%d) = %s\n"END, i, comand->cmd);
 		if (comand->next == NULL)
 			break;
 		i++;
@@ -84,13 +84,16 @@ int main(int argc, char **argv, char *envp[])
 	t_chars	chars;
 	t_data	data;
 	t_cmds	*command;
-	t_env	env;
+	t_env	*env;
 	char	*line;
 
 	command = malloc(sizeof(t_cmds));
+	env = malloc(sizeof(t_env));
 	ft_memset(&chars, 0, sizeof(t_chars));
 	ft_memset(&data, 0, sizeof(t_data));
 	ft_memset(&command, 0, sizeof(t_cmds));
+	env = NULL;
+	env = init_env(envp);
 	while (1)
 	{
 		find_signal();
@@ -115,11 +118,11 @@ int main(int argc, char **argv, char *envp[])
 		// }
 		command = NULL;
 		command = list_cmd(command, data.words);
-		print_cmd(command);
+		//print_cmd(command);
 		// //Ejecutar cosas
 		// else
 		// {
-		execute(&command, &env);
+		execute(&command, env);
 		// }
 		//RESET
 		ft_memset(&chars, 0, sizeof(t_chars));

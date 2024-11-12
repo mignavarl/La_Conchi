@@ -9,12 +9,12 @@ int	init_word(char *word)
 	{
 		if (!m_ischar(&word[init]))
 		{
-			printf(BLUE"Init word = %d\n"END, init);
+			//printf(BLUE"Init word = %d\n"END, init);
 			return (init);
 		}
 		init++;
 	}
-	printf(BLUE"Init word = %d\n"END, init);
+	//printf(BLUE"Init word = %d\n"END, init);
 	return (0);
 }
 
@@ -32,7 +32,7 @@ int	word_len(char *word)
 	}
 	while (m_ischar(&word[len - 1]) > 0)
 		len--;
-	printf(BLUE"Word len = %d\n"END, len);
+	//printf(BLUE"Word len = %d\n"END, len);
 	return (len);
 }
 
@@ -41,14 +41,14 @@ int	find_last_sym(char * word)
 	int	l;
 
 	l = ft_strlen(word) - 1;
-	printf("Word = %s\nLen = %d\n", word, l);
+	//printf("Word = %s\nLen = %d\n", word, l);
 	//printf("Char = %c", word[l]);
 	while (m_ischar(&word[l]))
 	{
-		printf(YELLOW"Char = %c\n"END, word[l]);
+		//printf(YELLOW"Char = %c\n"END, word[l]);
 		l--;
 	}
-	printf("Last_sym = %d\n", (l - 1));
+	//printf("Last_sym = %d\n", (l - 1));
 	return (l + 1);
 }
 
@@ -64,12 +64,11 @@ char	*m_find_word(char *line)
 	end = init;
 	while (!m_ischar(&line[end]) && line[end])
 	{
-		printf(BLUE"line end[%d] = %c \n"END, end, line[end]);
 		end++;
 		if (m_ischar(&line[end]))
 			break ;
 	}
-	printf("Find_word: Line = %s -- init = %d -- end = %d\n", line, init, end);
+	//printf("Find_word: Line = %s -- init = %d -- end = %d\n", line, init, end);
 	word = ft_substr(line, init, end);
 	return (word);
 }
@@ -80,7 +79,7 @@ int	next_word(char *word, int i)
 		i++;
 	while (m_ischar(&word[i]) && word[i])
 		i--;
-	printf("Next word: %s -- i = %d\n", word, i);
+	//printf("Next word: %s -- i = %d\n", word, i);
 	return (i);
 }
 
@@ -105,13 +104,13 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 			sym = m_ischar(&words[w][i]);
 			if (sym == 0)//NO ES CHAR
 			{
-				printf(RED"4 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
+				//printf(RED"4 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
 				m_lstadd_back(&command, m_lst_intnew(m_find_word(&words[w][i])));
-				printf("i = %d\n", i);
+				//printf("i = %d\n", i);
 				i = next_word(words[w], i);
 				if (words[w][i] == '\0')
 					i -= 1;
-				printf("i = %d\n", i);
+				//printf("i = %d\n", i);
 				if (words[w][i + 1] == '\0')
 					break ;
 				sym = m_ischar(&words[w][i]) - 1;
@@ -124,23 +123,23 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 				{
 					if (m_ischar(&words[w][com]) || words[w][com + 1] == '\0')
 					{
-						printf(RED"1 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
+						//printf(RED"1 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
 						m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, sym)));
 						break ;
 					}
 					com++;
 				}
-				printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
+				//printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
 				i = com - 1;
 				while (!m_ischar(&words[w][i]))
 					i--;
 				sym = m_ischar(&words[w][com]);
-				printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
+				//printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
 			}
 			else if ((sym == 1 && words[w][i + 1] == '\0') ||
 				(sym == 2 && words[w][i + 2] == '\0'))// ES CHAR Y SÍ EL ÚLTIMO
 			{
-				printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
+				//printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
 				m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
 			}
 			i++;

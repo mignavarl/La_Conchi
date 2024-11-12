@@ -98,8 +98,8 @@ void	execute_pwd(void);
 void	execute_rest(char **command, t_env *env);
 
 //EXECUTE.C
-void loop_cmd(t_cmds *now, t_cmds *next, t_env *env);
-void execute(t_cmds **cmd, t_env *env);
+void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env);
+void	execute(t_cmds **cmd, t_env *env);
 
 //EXECUTE_UTILS.C
 char	*search_route(char *command, char **envp);

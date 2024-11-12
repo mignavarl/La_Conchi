@@ -53,6 +53,7 @@ char	**set_env(t_env *env)
 
 	tmp = env;
 	i = 0;
+	envp = malloc(env_lstsize(env) * sizeof(char *));
 	while (tmp)
 	{
 		envp[i] = ft_threejoin(tmp->key, "=", tmp->value);

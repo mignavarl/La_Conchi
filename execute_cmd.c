@@ -8,6 +8,6 @@ void	execute_cmd(char **command, t_env *env)
 		execute_cd(command);
 	if (!ft_strcmp(command[0], "pwd"))
 		execute_pwd();
-	// else
-	// 	execute_rest(command, env);//TODO:execute_rest.c
+	else
+		execute_rest(command, env);//TODO:execute_rest.c
 }
