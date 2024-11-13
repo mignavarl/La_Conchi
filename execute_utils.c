@@ -24,6 +24,8 @@ char	*search_route(char *command, char **envp)
 	char	**route;
 	int		i;
 
+	if (access(command, F_OK) == 0)
+		return(command);
 	path = search_path(envp);
 	if (!path)
 		return (NULL);

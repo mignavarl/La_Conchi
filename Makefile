@@ -13,7 +13,8 @@ SRC = extract_prueba.c\
 		list_mini.c\
 		env.c\
 		execute_rest.c\
-		execute_utils.c
+		execute_utils.c\
+		make_pipe.c
 
 OBJ = ${SRC:.c=.o}
 CC = gcc

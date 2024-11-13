@@ -5,10 +5,11 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
 	char	**command;
 	int		i;
 
-	i = 0;
-	command = malloc(sizeof(char *));
 	while (now)
 	{
+		i = 1;
+		command = malloc(sizeof(char *));
+		command[0] = ft_strdup(now->cmd);
 		while (next && next->cmd && !m_ischar(next->cmd))
 		{
 			command[i] = ft_strdup(next->cmd);
@@ -18,20 +19,21 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
 		command[i] = NULL;
 		if (next && m_ischar(next->cmd))
 		{
-			// if (!ft_strcmp(next->cmd, "|"))
-			// 	make_pipe(command, env);
+			printf("If execute\n");
+			if (!ft_strcmp(next->cmd, "|"))
+				make_pipe(command, env);
 			// if (!ft_strcmp(next->cmd, "<"))
 			// 	make_input(command, env);
 		}
 		else
 		{
 			execute_cmd(command, env);
-			printf("execute\n");
 			break ;
 		}
 		now = next->next;
+		next = now->next;
+		ft_free_double(command);
 	}
-	printf("wait\n");
 	waitpid(-1, NULL, 0);
 }
 

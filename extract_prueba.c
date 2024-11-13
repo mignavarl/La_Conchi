@@ -11,13 +11,18 @@ char	**search_in_line(char *line)
 	num_words = count_words(line);
 	if (num_words < 0)
 	{
-		//printf(RED"Close the quotes\n"END);
+		printf(RED"Close the quotes\n"END);
 		//search_end_while(line);
 		return (NULL);
 	}
 	words = (char **)ft_calloc(num_words + 1, sizeof(char *));
 	w = 0;
-	while (line[i])
+	if (line[0] == '\0')
+	{
+		words[0] = '\0';
+		return(words);
+	}
+	while (line && line[i])
 	{
 		if (line[i] != '"' && line[i] != '\'' && line[i] != ' ')
 		{
@@ -39,28 +44,28 @@ char	**search_in_line(char *line)
 		}
 		i++;
 	}
-	w = 0;
-	while (w < num_words)
-	{
-		//printf("Word [%d] = %s / %d\n", w, words[w], w);
-		w++;
-	}
+	// w = 0;
+	// while (w < num_words)
+	// {
+	// 	printf("Word [%d] = %s / %d\n", w, words[w], w);
+	// 	w++;
+	// }
 	return (words);
 }
 
-void	print_cmd(t_cmds *comand)
+void	print_cmd(t_cmds **comand)
 {
 	int i;
 
 	i = 0;
 	//printf("Print\n");
-	while (comand != NULL)
+	while ((*comand) != NULL)
 	{
-		//printf(CYAN"CMD (%d) = %s\n"END, i, comand->cmd);
-		if (comand->next == NULL)
+		printf(CYAN"CMD (%d) = %s\n"END, i, (*comand)->cmd);
+		if ((*comand)->next == NULL)
 			break;
 		i++;
-		comand = comand->next;
+		(*comand) = (*comand)->next;
 	}
 }
 
@@ -109,24 +114,23 @@ int main(int argc, char **argv, char *envp[])
 		{
 			printf("NADA\n");
 		}
-		else
+		if (data.words[0])
+		{
 			add_history(line);
-		//Buscar en words
-		// if (!check_chars(data.words, &chars))
-		// {
-		// 	printf(RED"A\n"END); 
-		// }
-		command = NULL;
-		command = list_cmd(command, data.words);
-		//print_cmd(command);
-		// //Ejecutar cosas
-		// else
-		// {
-		execute(&command, env);
+			//Buscar en words
+			// if (!check_chars(data.words, &chars))
+			// {
+			// 	printf(RED"A\n"END); 
+			// }
+			command = NULL;
+			command = list_cmd(command, data.words);
+			//print_cmd(&command);
+			//printf("cmd = %p\n", command);
+			execute(&command, env);
+		}
 		// }
 		//RESET
 		ft_memset(&chars, 0, sizeof(t_chars));
-		// if (data.words)
 		ft_free_double(data.words);
 		m_listclear(&command, free);
 		free(line);

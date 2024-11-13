@@ -14,7 +14,8 @@ void	execute_rest(char **command, t_env *env)
 	if (pid == 0)
 	{
 		execve(route, command, envp);
-		//TODO: si falla execve
+		//TODO: si falla execve liberar
+		exit(0);
 	}
 	waitpid(-1, NULL, 0);
 }
