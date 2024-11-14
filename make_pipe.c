@@ -1,5 +1,14 @@
 #include "prueba_mini.h"
 
+void	close_pipe(int pipe_fd[2])
+{
+	printf(RED"Close\n"END);
+	close(pipe_fd[READ]);
+	close(pipe_fd[WRITE]);
+	dup(STDIN_FILENO);
+	dup(STDOUT_FILENO);
+}
+
 void	child(char **command, t_env *env)
 {
 	char	**envp;
@@ -10,27 +19,26 @@ void	child(char **command, t_env *env)
 	execve(route, command, envp);
 }
 
-void	make_pipe(char **command, t_env *env)
+void	make_pipe(char **command, t_env *env, t_data *data)
 {
 	pid_t	pid;
-	int		pipefd[2];
 
-	pipe(pipefd);
+	pipe(data->pipe_fd);
 	printf("Make pipe\n");
 	pid = fork();
 	if (pid < 0)
 		perror("Fork mal hecho");//TODO:funcion para salir
 	if (pid == 0)
 	{
-		close(pipefd[READ]);
-		dup2(pipefd[WRITE], STDOUT_FILENO);
-		close(pipefd[WRITE]);
+		close(data->pipe_fd[READ]);
+		dup2(data->pipe_fd[WRITE], STDOUT_FILENO);
+		close(data->pipe_fd[WRITE]);
 		child(command, env);
 	}
 	else
 	{
-		close(pipefd[WRITE]);
-		dup2(pipefd[READ], STDIN_FILENO);
-		close(pipefd[READ]);
+		close(data->pipe_fd[WRITE]);
+		dup2(data->pipe_fd[READ], STDIN_FILENO);
+		close(data->pipe_fd[READ]);
 	}
 }

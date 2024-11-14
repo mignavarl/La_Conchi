@@ -58,7 +58,7 @@ void	print_cmd(t_cmds **comand)
 	int i;
 
 	i = 0;
-	//printf("Print\n");
+	printf(CYAN"Print\n"END);
 	while ((*comand) != NULL)
 	{
 		printf(CYAN"CMD (%d) = %s\n"END, i, (*comand)->cmd);
@@ -124,9 +124,9 @@ int main(int argc, char **argv, char *envp[])
 			// }
 			command = NULL;
 			command = list_cmd(command, data.words);
-			//print_cmd(&command);
+			//print_cmd(&command);//PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
-			execute(&command, env);
+			execute(&command, env, &data);
 		}
 		// }
 		//RESET
@@ -134,6 +134,7 @@ int main(int argc, char **argv, char *envp[])
 		ft_free_double(data.words);
 		m_listclear(&command, free);
 		free(line);
+		//close_pipe(data.pipe_fd);
 	}
 	return 0;
 }

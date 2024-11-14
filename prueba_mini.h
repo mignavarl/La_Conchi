@@ -59,6 +59,7 @@ struct s_cmds
 struct s_data
 {
 	t_chars	*ptr_chars;
+	int		pipe_fd[2];
 	char	**words;
 };
 
@@ -98,8 +99,8 @@ void	execute_pwd(void);
 void	execute_rest(char **command, t_env *env);
 
 //EXECUTE.C
-void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env);
-void	execute(t_cmds **cmd, t_env *env);
+void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data);
+void	execute(t_cmds **cmd, t_env *env, t_data *data);
 
 //EXECUTE_UTILS.C
 char	*search_route(char *command, char **envp);
@@ -118,6 +119,7 @@ int		m_lstsize(t_cmds *lst);
 
 //------------------------MAKE CHARS--------------------//
 //MAKE_PIPE.C
-void	make_pipe(char **command, t_env *env);
+void	make_pipe(char **command, t_env *env, t_data *data);
+void	close_pipe(int pipe_fd[2]);
 
 #endif

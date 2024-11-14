@@ -1,6 +1,6 @@
 #include "prueba_mini.h"
 
-void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
+void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 {
 	char	**command;
 	int		i;
@@ -19,9 +19,8 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
 		command[i] = NULL;
 		if (next && m_ischar(next->cmd))
 		{
-			printf("If execute\n");
 			if (!ft_strcmp(next->cmd, "|"))
-				make_pipe(command, env);
+				make_pipe(command, env, data);
 			// if (!ft_strcmp(next->cmd, "<"))
 			// 	make_input(command, env);
 		}
@@ -37,7 +36,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env)
 	waitpid(-1, NULL, 0);
 }
 
-void	execute(t_cmds **cmd, t_env *env)
+void	execute(t_cmds **cmd, t_env *env, t_data *data)
 {
 	t_cmds	*now;
 	t_cmds	*next;
@@ -46,7 +45,7 @@ void	execute(t_cmds **cmd, t_env *env)
 	if (m_lstsize(*cmd) > 1)
 	{
 		next = now->next;
-		loop_cmd(now, next, env);
+		loop_cmd(now, next, env, data);
 	}
 	else
 	{

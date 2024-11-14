@@ -43,15 +43,6 @@ int	search_end_quote(char *line, int i)
 	return (0);
 }
 
-char	*extract_quote(char *line, int start, int final)
-{
-	char *quote;
-
-	quote = ft_substr(line, (start), (final - start - 1));
-	//printf("Quote: %s\n", quote);
-	return (quote);
-}
-
 char	*find_quote(char *line, int i)
 {
 	int 	l;
@@ -62,12 +53,12 @@ char	*find_quote(char *line, int i)
 	// 	while_end(line, i);
 	// 	return (0);
 	// }
-	l = i;
+	l = i + 1;
 	while (line[l])
 	{
 		if ((line[i] == '"' && line[l] == '"') || (line[i] == '\'' && line[l] == '\''))
 		{
-			quote = extract_quote(line, i, l);
+			quote = ft_substr(&line[i], 1, (l - i) - 1);
 			break ;
 		}
 		l++;
