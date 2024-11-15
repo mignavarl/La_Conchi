@@ -2,11 +2,10 @@
 
 void	close_pipe(int pipe_fd[2])
 {
-	printf(RED"Close\n"END);
 	close(pipe_fd[READ]);
 	close(pipe_fd[WRITE]);
+	close(STDIN_FILENO);
 	dup(STDIN_FILENO);
-	dup(STDOUT_FILENO);
 }
 
 void	child(char **command, t_env *env)

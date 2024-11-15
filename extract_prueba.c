@@ -134,7 +134,7 @@ int main(int argc, char **argv, char *envp[])
 		ft_free_double(data.words);
 		m_listclear(&command, free);
 		free(line);
-		//close_pipe(data.pipe_fd);
+		close_pipe(data.pipe_fd);
 	}
 	return 0;
 }
