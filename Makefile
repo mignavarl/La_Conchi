@@ -14,7 +14,8 @@ SRC = extract_prueba.c\
 		env.c\
 		execute_rest.c\
 		execute_utils.c\
-		make_pipe.c
+		make_pipe.c\
+		make_input.c
 
 OBJ = ${SRC:.c=.o}
 CC = gcc

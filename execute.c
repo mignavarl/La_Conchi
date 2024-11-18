@@ -26,10 +26,16 @@ void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		command[i] = NULL;
 		if (next && m_ischar(next->cmd))
 		{
+			data->to_close = 1;
 			if (!ft_strcmp(next->cmd, "|"))
 				make_pipe(command, env, data);
-			// if (!ft_strcmp(next->cmd, "<"))
-			// 	make_input(command, env);
+			if (!ft_strcmp(next->cmd, "<"))
+			{
+				next = next->next;
+				make_input(command, env, next->cmd);
+				if (!next->next)
+					break ;
+			}
 		}
 		else
 		{
@@ -40,7 +46,6 @@ void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		next = now->next;
 		ft_free_double(command);
 	}
-	waitpid(-1, NULL, 0);
 }
 
 void	execute(t_cmds **cmd, t_env *env, t_data *data)

@@ -62,6 +62,7 @@ struct s_data
 	int		pipe_fd[2];
 	int		clon_stdin;
 	int		clon_stdout;
+	int		to_close;
 	char	**words;
 };
 
@@ -123,5 +124,9 @@ int		m_lstsize(t_cmds *lst);
 //MAKE_PIPE.C
 void	make_pipe(char **command, t_env *env, t_data *data);
 void	close_pipe(int pipe_fd[2], t_data *data);
+void	child(char **command, t_env *env);//Quizás crear un archivo para él
+
+//MAKE_INPUT.C <
+void	make_input(char **command, t_env *env, char *file);
 
 #endif

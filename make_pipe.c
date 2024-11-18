@@ -2,7 +2,7 @@
 
 void	close_pipe(int pipe_fd[2], t_data *data)
 {
-	if (pipe_fd[READ] || pipe_fd[WRITE])
+	if (data->to_close == 1)
 	{
 		close(pipe_fd[READ]);
 		close(pipe_fd[WRITE]);
