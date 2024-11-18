@@ -127,6 +127,8 @@ int main(int argc, char **argv, char *envp[])
 			//print_cmd(&command);//PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
+			while (waitpid(-1, NULL, 0) != -1)
+				continue; ;
 		}
 		// }
 		//RESET
@@ -134,7 +136,7 @@ int main(int argc, char **argv, char *envp[])
 		ft_free_double(data.words);
 		m_listclear(&command, free);
 		free(line);
-		close_pipe(data.pipe_fd);
+		close_pipe(data.pipe_fd, &data);
 	}
 	return 0;
 }

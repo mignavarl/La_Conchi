@@ -1,10 +1,17 @@
 #include "prueba_mini.h"
 
-void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
+void	save_fd(t_data *data)
+{
+	data->clon_stdin = dup(STDIN_FILENO);
+	data->clon_stdout = dup(STDOUT_FILENO);
+}
+
+void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 {
 	char	**command;
 	int		i;
 
+	save_fd(data);
 	while (now)
 	{
 		i = 1;

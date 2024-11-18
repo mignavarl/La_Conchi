@@ -60,6 +60,8 @@ struct s_data
 {
 	t_chars	*ptr_chars;
 	int		pipe_fd[2];
+	int		clon_stdin;
+	int		clon_stdout;
 	char	**words;
 };
 
@@ -120,6 +122,6 @@ int		m_lstsize(t_cmds *lst);
 //------------------------MAKE CHARS--------------------//
 //MAKE_PIPE.C
 void	make_pipe(char **command, t_env *env, t_data *data);
-void	close_pipe(int pipe_fd[2]);
+void	close_pipe(int pipe_fd[2], t_data *data);
 
 #endif
