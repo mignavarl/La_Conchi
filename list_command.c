@@ -43,13 +43,15 @@ int	find_last_sym(char *word)
 	l = ft_strlen(word) - 1;
 	//printf("Word = %s\nLen = %d\n", word, l);
 	//printf("Char = %c", word[l]);
-	while (m_ischar(&word[l]) && word[l])
+	if (l < 0)
+		return (0);
+	while (l >= 0 && m_ischar(&word[l]))
 	{
 		//printf(YELLOW"Char = %c\n"END, word[l]);
 		l--;
 	}
-	if (word[l] == '\0')
-		return (ft_strlen(word) - 1);
+	// if (word[l] == '\0')
+	// 	return (ft_strlen(word) - 1);
 	//printf("Last_sym = %d\n", (l - 1));
 	return (l + 1);
 }

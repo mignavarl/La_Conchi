@@ -80,7 +80,6 @@ void	m_listclear(t_cmds **lst, void (*del)(void *))
 	}
 	while (*lst != NULL)
 	{
-		printf("libera list\n");
 		tmp = *lst;
 		*lst = tmp -> next;
 		del(tmp -> cmd);
@@ -131,7 +130,7 @@ int main(int argc, char **argv, char *envp[])
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
 			while (waitpid(-1, NULL, 0) != -1)
-				continue; ;
+				continue ;
 		}
 		// }
 		//RESET

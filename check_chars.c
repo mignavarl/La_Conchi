@@ -29,7 +29,7 @@
 int	m_ischar(char *c)
 {
 	if (c == NULL || (c[0] == '\0'))
-		return 0; 
+		return 0;
 	if (ft_strlen(c) > 1)
 	{
 		if ((ft_strncmp(c, APPEND, 2) == 0 || ft_strncmp(c, DELIMITER, 2) == 0) &&

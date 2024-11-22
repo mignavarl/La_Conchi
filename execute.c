@@ -6,6 +6,21 @@ void	save_fd(t_data *data)
 	data->clon_stdout = dup(STDOUT_FILENO);
 }
 
+int	count_com(t_cmds *now)
+{
+	t_cmds *tmp;
+	int		i;
+	
+	tmp = now;
+	i = 0;
+	while(tmp && tmp->cmd && !m_ischar(tmp->cmd))
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i + 1);
+}
+
 void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 {
 	char	**command;
@@ -15,11 +30,12 @@ void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 	while (now)
 	{
 		i = 1;
-		command = malloc(sizeof(char *));
+		command = malloc(count_com(now) * sizeof(char *));//TODO: función saber cuantos hay
 		command[0] = ft_strdup(now->cmd);
 		while (next && next->cmd && !m_ischar(next->cmd))
 		{
 			command[i] = ft_strdup(next->cmd);
+			//printf("[%d] = %s\n", i, next->cmd);
 			next = next->next;
 			i++;
 		}
@@ -36,10 +52,10 @@ void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				if (!next->next)
 					break ;
 			}
-			if (!ft_strcmp(next->cmd, ">"))
-			{
+			// if (!ft_strcmp(next->cmd, ">"))
+			// {
 				
-			}
+			// }
 		}
 		else
 		{
@@ -48,7 +64,6 @@ void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		}
 		now = next->next;
 		next = now->next;
-		ft_free_double(command);
 	}
 }
 
@@ -59,7 +74,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 
 	now = *cmd;
 	if (m_lstsize(*cmd) > 1)
-	{
+	{	
 		next = now->next;
 		loop_cmd(now, next, env, data);
 	}
