@@ -32,18 +32,8 @@
 # define WHITE	"\001\033[1;37m\002"
 # define END	"\001\033[0m\002"
 
-typedef struct s_chars	t_chars;
 typedef struct s_data	t_data;
 typedef struct s_cmds	t_cmds;
-
-struct s_chars
-{
-	int	pipe;
-	int	input;
-	int	output;
-	int	append;
-	int	delim;
-};
 
 struct s_cmds
 {
@@ -58,7 +48,6 @@ struct s_cmds
 
 struct s_data
 {
-	t_chars	*ptr_chars;
 	int		pipe_fd[2];
 	int		clon_stdin;
 	int		clon_stdout;
@@ -85,7 +74,6 @@ char	*find_words(char *line, int i);
 void	find_signal(void);
 
 //CHECK_CHARS.C
-int		check_chars(char **words, t_chars *chars);
 int		m_ischar(char *c);
 
 //-----------------EXECUTE------------------------------//
@@ -119,6 +107,7 @@ t_cmds	*m_lstlast(t_cmds *lst);
 void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
 void	m_lstadd_back(t_cmds **lst, t_cmds *cmd);
 int		m_lstsize(t_cmds *lst);
+void	m_listclear(t_cmds **lst, void (*del)(void *));
 
 //------------------------MAKE CHARS--------------------//
 //MAKE_PIPE.C
@@ -128,5 +117,10 @@ void	child(char **command, t_env *env);//Quizás crear un archivo para él
 
 //MAKE_INPUT.C <
 void	make_input(char **command, t_env *env, char *file);
+
+
+//-----------------------EXIT_MINI-----------------------//
+//EXIT_MINI.C
+void	free_execve(char **command, t_env *env, char **envp, char *route);
 
 #endif

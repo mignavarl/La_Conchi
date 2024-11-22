@@ -1,5 +1,9 @@
 #ifndef ENV_H
-#define ENV_H
+# define ENV_H
+
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
 
 typedef struct s_env
 {
@@ -9,7 +13,7 @@ typedef struct s_env
 } t_env;
 
 // Declaraciones de funciones
-t_env *init_env(char **envp);
+t_env *init_env(char **envp, t_env *env);
 void add_env_var(t_env **env_list, char *key, char *value);
 char *get_env_var(t_env *env_list, char *key);
 void update_env_var(t_env **env_list, char *key, char *value);

@@ -2,8 +2,8 @@
 
 void	execute_rest(char **command, t_env *env)
 {
-	char	*route;
 	char	**envp;
+	char	*route;
 	pid_t	pid;
 
 	envp = set_env(env);
@@ -15,6 +15,14 @@ void	execute_rest(char **command, t_env *env)
 	{
 		execve(route, command, envp);
 		//TODO: si falla execve liberar
-		exit(0);
+		printf("%s: command not found\n", command[0]);
+		free_execve(command, env, envp, route);
+	}
+	else
+	{
+		ft_free_double(envp);
+		free(route);
+		if (command)
+			ft_free_double(command);
 	}
 }

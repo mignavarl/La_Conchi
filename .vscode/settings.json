@@ -4,6 +4,7 @@
 		"prueba_mini.h": "c",
 		"types.h": "c",
 		"type_traits": "cpp",
-		"cmath": "cpp"
+		"cmath": "cpp",
+		"env.h": "c"
 	}
 }

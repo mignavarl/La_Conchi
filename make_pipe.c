@@ -21,6 +21,8 @@ void	child(char **command, t_env *env)
 	envp = set_env(env);
 	route = search_route(command[0], envp);
 	execve(route, command, envp);
+	printf("%s: command not found\n", command[0]);
+	free_execve(command, env, envp, route);
 }
 
 void	make_pipe(char **command, t_env *env, t_data *data)
@@ -43,5 +45,7 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 		close(data->pipe_fd[WRITE]);
 		dup2(data->pipe_fd[READ], STDIN_FILENO);
 		close(data->pipe_fd[READ]);
+		ft_free_double(command);
+		free_env(env);
 	}
 }

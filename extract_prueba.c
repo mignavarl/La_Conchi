@@ -71,42 +71,45 @@ void	print_cmd(t_cmds **comand)
 
 void	m_listclear(t_cmds **lst, void (*del)(void *))
 {
-	t_cmds	*l;
+	t_cmds	*tmp;
 
+	if (!lst)
+	{
+		del(lst);
+		return ;
+	}
 	while (*lst != NULL)
 	{
-		l = *lst;
-		*lst = l -> next;
-		del(l -> cmd);
-		free(l);
+		printf("libera list\n");
+		tmp = *lst;
+		*lst = tmp -> next;
+		del(tmp -> cmd);
+		free(tmp);
 	}
+	lst = NULL;
 }
 
 int main(int argc, char **argv, char *envp[])
 {
 	(void)argc;
 	(void)argv;
-	t_chars	chars;
 	t_data	data;
 	t_cmds	*command;
 	t_env	*env;
 	char	*line;
 
-	command = malloc(sizeof(t_cmds));
-	env = malloc(sizeof(t_env));
-	ft_memset(&chars, 0, sizeof(t_chars));
 	ft_memset(&data, 0, sizeof(t_data));
-	ft_memset(&command, 0, sizeof(t_cmds));
-	env = NULL;
-	env = init_env(envp);
 	while (1)
 	{
+		env = NULL;
+		env = init_env(envp, env);
 		find_signal();
 		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
 		if (!line || !ft_strcmp(line, "exit"))
 		{
 			printf("exit\n");
 			free(line);
+			free_env(env);
 			break ;
 		}
 		data.words = search_in_line(line);
@@ -132,10 +135,10 @@ int main(int argc, char **argv, char *envp[])
 		}
 		// }
 		//RESET
-		ft_memset(&chars, 0, sizeof(t_chars));
-		ft_free_double(data.words);
-		m_listclear(&command, free);
 		free(line);
+		ft_free_double(data.words);
+		free_env(env);
+		m_listclear(&command, free);
 		close_pipe(data.pipe_fd, &data);
 	}
 	return 0;

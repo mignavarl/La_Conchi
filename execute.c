@@ -36,6 +36,10 @@ void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				if (!next->next)
 					break ;
 			}
+			if (!ft_strcmp(next->cmd, ">"))
+			{
+				
+			}
 		}
 		else
 		{

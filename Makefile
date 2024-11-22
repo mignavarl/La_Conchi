@@ -15,12 +15,13 @@ SRC = extract_prueba.c\
 		execute_rest.c\
 		execute_utils.c\
 		make_pipe.c\
-		make_input.c
+		make_input.c\
+		exit_mini.c
 
 OBJ = ${SRC:.c=.o}
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address -fsanitize=leak -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=leak -g3
 MAKEFLAGS = --no-print-directory
 LFLAGS = -L libft -lft
 
