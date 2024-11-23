@@ -114,7 +114,7 @@ int	env_lstsize(t_env *lst)
 	while (l != NULL)
 	{
 		i++;
-		l = l -> next;
+		l = l->next;
 	}
 	return (i);
 }

@@ -3,6 +3,7 @@ SRC = extract_prueba.c\
 		quotes.c\
 		words.c\
 		signal.c\
+		main.c\
 		count.c\
 		check_chars.c\
 		execute.c\
@@ -30,7 +31,7 @@ RM = rm -f
 all: ${NAME}
 
 ${NAME}: ${OBJ}
-	@cd libft && $(MAKE)
+	@$(MAKE) -C libft
 	${CC} ${CFLAGS} ${OBJ} $(LFLAGS) -lreadline -o ${NAME}
 
 clean:

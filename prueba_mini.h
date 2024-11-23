@@ -96,6 +96,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data);
 //EXECUTE_UTILS.C
 char	*search_route(char *command, char **envp);
 char	**set_env(t_env *env);
+void 	ft_safe_free(void **ptr);
 
 //-----------------LIST FUNCTIONS-----------------------//
 //LIST_COMMAND.C

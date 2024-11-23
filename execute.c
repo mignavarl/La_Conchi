@@ -21,50 +21,69 @@ int	count_com(t_cmds *now)
 	return (i + 1);
 }
 
-void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
+void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 {
-	char	**command;
-	int		i;
+    char    **command;
+    int     i;
 
-	save_fd(data);
-	while (now)
-	{
-		i = 1;
-		command = malloc(count_com(now) * sizeof(char *));//TODO: función saber cuantos hay
-		command[0] = ft_strdup(now->cmd);
-		while (next && next->cmd && !m_ischar(next->cmd))
-		{
-			command[i] = ft_strdup(next->cmd);
-			//printf("[%d] = %s\n", i, next->cmd);
-			next = next->next;
-			i++;
-		}
-		command[i] = NULL;
-		if (next && m_ischar(next->cmd))
-		{
-			data->to_close = 1;
-			if (!ft_strcmp(next->cmd, "|"))
-				make_pipe(command, env, data);
-			if (!ft_strcmp(next->cmd, "<"))
-			{
-				next = next->next;
-				make_input(command, env, next->cmd);
-				if (!next->next)
-					break ;
-			}
-			// if (!ft_strcmp(next->cmd, ">"))
-			// {
-				
-			// }
-		}
+    save_fd(data);
+    while (now)
+    {
+        i = 1;
+        command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
+        if (!command) 
+            return; // Si malloc falla, salimos de la función
+
+        command[0] = ft_strdup(now->cmd);  // Copia del comando
+        if (!command[0])  // Verifica si la asignación falla
+        {
+            free(command);  // Liberar el array de comandos en caso de error
+            return;
+        }
+
+        while (next && next->cmd && !m_ischar(next->cmd))
+        {
+            command[i] = ft_strdup(next->cmd);  // Copia de los comandos siguientes
+            if (!command[i])  // Verifica si la asignación falla
+            {
+                ft_free_double(command);  // Liberar el array de comandos si algo falla
+                return;
+            }
+            next = next->next;
+            i++;
+        }
+        command[i] = NULL;  // Terminamos el array de comandos
+        if (next && m_ischar(next->cmd))
+        {
+            data->to_close = 1;
+            if (!ft_strcmp(next->cmd, "|"))
+                make_pipe(command, env, data);
+            if (!ft_strcmp(next->cmd, "<"))
+            {
+                next = next->next;
+                make_input(command, env, next->cmd);
+                if (!next->next)
+                    break ;
+            }
+        }
+        else
+        {
+            execute_cmd(command, env);  // Ejecutar el comando
+			break;
+        }
+
+     //   ft_free_double(command);  // Liberar el array de comandos después de usarlo
+        // now = next->next;
+        // next = now->next;
+		if(next)
+        	now = next->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
-		{
-			execute_cmd(command, env);
-			break ;
-		}
-		now = next->next;
-		next = now->next;
-	}
+			now = NULL;
+		if (now)
+        	next = now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
+		else
+			next = NULL;
+    }
 }
 
 void	execute(t_cmds **cmd, t_env *env, t_data *data)
