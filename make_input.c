@@ -23,7 +23,6 @@ void	make_input(char **command, t_env *env, char *file)
 	else
 	{
 		ft_free_double(command);
-		// free_env(env);
 		close(fd_input);
 	}
 }

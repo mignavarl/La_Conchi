@@ -7,6 +7,11 @@ void execute_cd(char **command)
 	i = 0;
 	while (command[i])
 		i++;
+	if (i == 1)
+	{
+		printf("cd: no argument\n");
+		return ;
+	}
 	if (i != 2)
 	{
 		printf("cd: too many arguments\n");

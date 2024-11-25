@@ -82,7 +82,8 @@ void	m_listclear(t_cmds **lst, void (*del)(void *))
 	{
 		tmp = *lst;
 		*lst = tmp -> next;
-		del(tmp -> cmd);
+		if (tmp -> cmd)
+			del(tmp -> cmd);
 		free(tmp);
 	}
 	lst = NULL;

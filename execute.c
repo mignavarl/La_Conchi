@@ -18,6 +18,7 @@ int	count_com(t_cmds *now)
 		tmp = tmp->next;
 		i++;
 	}
+	//printf("count = %d\n", i);
 	return (i + 1);
 }
 
@@ -27,13 +28,14 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
     int     i;
 
     save_fd(data);
+	check_first_output(now, next);//TODO:si empieza por > hacerlo aparte dentro del loop
     while (now)
     {
         i = 1;
         command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
         if (!command) 
             return; // Si malloc falla, salimos de la función
-
+		printf("Despues calloc\n");
         command[0] = ft_strdup(now->cmd);  // Copia del comando
         if (!command[0])  // Verifica si la asignación falla
         {
@@ -65,21 +67,27 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
                 if (!next->next)
                     break ;
             }
+			if (!ft_strcmp(next->cmd, ">"))
+			{
+				next = next->next;
+				make_output(command, env, next->cmd);
+				if (!next->next)
+					break ;
+			}
         }
         else
         {
             execute_cmd(command, env);  // Ejecutar el comando
-			break;
+			break ;
         }
-
      //   ft_free_double(command);  // Liberar el array de comandos después de usarlo
         // now = next->next;
         // next = now->next;
-		if(next)
+		if(next->next)
         	now = next->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
 			now = NULL;
-		if (now)
+		if (now->next)
         	next = now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
 			next = NULL;

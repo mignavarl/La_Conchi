@@ -17,12 +17,13 @@ SRC = extract_prueba.c\
 		execute_utils.c\
 		make_pipe.c\
 		make_input.c\
+		make_output.c\
 		exit_mini.c
 
 OBJ = ${SRC:.c=.o}
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address #-fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=leak
 MAKEFLAGS = --no-print-directory
 LFLAGS = -L libft -lft
 
@@ -38,13 +39,11 @@ clean:
 	@cd libft && $(MAKE) clean
 	@echo "[🧹 Limpiando... 🧹]"
 	@${RM} ${OBJ}
-	@${RM} ${OBJ_BONUS}
 
 fclean: clean
 	@cd libft && $(MAKE) fclean
 	@echo "    [🗑️ Mucho 🗑️ ]"
 	@${RM} ${NAME}
-	@${RM} ${BONUS}
 
 re: fclean all
 	@echo "[🛠️  Rehaciendo...🛠️ ]"

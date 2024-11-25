@@ -22,7 +22,5 @@ void	execute_rest(char **command, t_env *env)
 	{
 		ft_free_double(envp);
 		free(route);
-		if (command)
-			ft_free_double(command);
 	}
 }

@@ -52,18 +52,18 @@ int main(int argc, char **argv, char *envp[])
 			// }
 			command = NULL;
 			command = list_cmd(command, data.words);
-			//print_cmd(&command);//PARA IMPRIMIR
+			// print_cmd(&command);//PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
 			while (waitpid(-1, NULL, 0) != -1)
 				continue ;
+			m_listclear(&command, free);
 		}
 		// }
 		//RESET
+		free_env(env);
 		free(line);
 		ft_free_double(data.words);
-		// free_env(env);
-		m_listclear(&command, free);
 		close_pipe(data.pipe_fd, &data);
 	}
 	return 0;

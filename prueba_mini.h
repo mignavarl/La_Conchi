@@ -119,6 +119,10 @@ void	child(char **command, t_env *env);//Quizás crear un archivo para él
 //MAKE_INPUT.C <
 void	make_input(char **command, t_env *env, char *file);
 
+//MAKE.OUTPUT.C >
+void	make_output(char **command, t_env *env, char *file);
+void	check_first_output(t_cmds *now, t_cmds *next);
+
 
 //-----------------------EXIT_MINI-----------------------//
 //EXIT_MINI.C
