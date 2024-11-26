@@ -28,9 +28,20 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
     int     i;
 
     save_fd(data);
-	check_first_output(now, next);//TODO:si empieza por > hacerlo aparte dentro del loop
+	i = 0;
     while (now)
     {
+		if (i == 0 && !ft_strcmp(now->cmd, ">"))
+		{
+			first_argument_output(next->cmd);
+			if (next->next)
+			{
+				now = next;
+				next = next->next;
+			}
+			else
+				break ;
+		}
         i = 1;
         command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
         if (!command) 
@@ -42,7 +53,6 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
             free(command);  // Liberar el array de comandos en caso de error
             return;
         }
-
         while (next && next->cmd && !m_ischar(next->cmd))
         {
             command[i] = ft_strdup(next->cmd);  // Copia de los comandos siguientes

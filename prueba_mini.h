@@ -121,7 +121,7 @@ void	make_input(char **command, t_env *env, char *file);
 
 //MAKE.OUTPUT.C >
 void	make_output(char **command, t_env *env, char *file);
-void	check_first_output(t_cmds *now, t_cmds *next);
+void	first_argument_output(char *file);
 
 
 //-----------------------EXIT_MINI-----------------------//

@@ -27,12 +27,4 @@ void	find_signal(void)
 {
 	signal(SIGINT, trapper); 
 	signal(SIGQUIT, SIG_IGN);
-	// int	i;
-
-	// i = 1;
-	// while (1 <= 64)
-	// {
-	// 	signal(i, trapper);
-	// 	i++;
-	// }
 }

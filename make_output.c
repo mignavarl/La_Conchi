@@ -1,16 +1,37 @@
 #include "prueba_mini.h"
 
-void	check_first_output(t_cmds *now, t_cmds *next)
+void	ctrl_c(int sig)
 {
-	int	fd_output;
-
-	if(!ft_strcmp(now->cmd, ">"))
+	if (sig == 2)
 	{
-		printf("Check_file\n");
-		fd_output = open(next->cmd, O_WRONLY | O_CREAT | O_TRUNC, 00644);
-		dup2(fd_output, STDOUT_FILENO);
-		close(fd_output);
+		sigaction();
 	}
+	return (NULL);
+}
+
+void	signal_output(void)
+{
+	signal(SIGINT, ctrl_c);
+}
+
+void	first_argument_output(char *file)
+{
+	int		fd_output;
+	char	*input;
+
+	fd_output = open(file, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+	while (1)
+	{
+		signal_output();
+		input = get_next_line(0);
+		if (!input)
+			break ;
+		ft_putstr_fd(input, fd_output);
+		free(input);
+	}
+	close(fd_output);
+	fd_output = open(file, O_RDWR);
+	dup2(fd_output, STDOUT_FILENO);
 }
 
 void	make_output(char **command, t_env *env, char *file)
