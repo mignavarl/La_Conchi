@@ -71,7 +71,7 @@ int		count_words(char *line);
 char	*find_words(char *line, int i);
 
 //SIGNAL.C
-void	find_signal(void);
+void	find_signal();
 
 //CHECK_CHARS.C
 int		m_ischar(char *c);

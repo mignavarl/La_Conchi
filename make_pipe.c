@@ -10,6 +10,7 @@ void	close_pipe(int pipe_fd[2], t_data *data)
 		dup2(data->clon_stdout, STDOUT_FILENO);
 		close(data->clon_stdin);
 		close(data->clon_stdout);
+		data->to_close = 0;
 	}
 }
 

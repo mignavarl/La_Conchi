@@ -1,37 +1,11 @@
 #include "prueba_mini.h"
 
-void	ctrl_c(int sig)
-{
-	if (sig == 2)
-	{
-		sigaction();
-	}
-	return (NULL);
-}
-
-void	signal_output(void)
-{
-	signal(SIGINT, ctrl_c);
-}
-
 void	first_argument_output(char *file)
 {
 	int		fd_output;
-	char	*input;
 
-	fd_output = open(file, O_WRONLY | O_TRUNC | O_CREAT, 00644);
-	while (1)
-	{
-		signal_output();
-		input = get_next_line(0);
-		if (!input)
-			break ;
-		ft_putstr_fd(input, fd_output);
-		free(input);
-	}
+	fd_output = open(file, O_TRUNC | O_CREAT, 00644);
 	close(fd_output);
-	fd_output = open(file, O_RDWR);
-	dup2(fd_output, STDOUT_FILENO);
 }
 
 void	make_output(char **command, t_env *env, char *file)

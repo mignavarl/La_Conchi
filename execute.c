@@ -33,11 +33,13 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
     {
 		if (i == 0 && !ft_strcmp(now->cmd, ">"))
 		{
+			data->to_close = 1;
 			first_argument_output(next->cmd);
 			if (next->next)
 			{
-				now = next;
-				next = next->next;
+				now = next->next;
+				now = now->next;
+				next = now->next;
 			}
 			else
 				break ;
@@ -46,7 +48,6 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
         command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
         if (!command) 
             return; // Si malloc falla, salimos de la función
-		printf("Despues calloc\n");
         command[0] = ft_strdup(now->cmd);  // Copia del comando
         if (!command[0])  // Verifica si la asignación falla
         {

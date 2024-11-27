@@ -7,7 +7,7 @@ void	execute_rest(char **command, t_env *env)
 	pid_t	pid;
 
 	envp = set_env(env);
-	route = search_route(command[0], envp);
+	route = search_route(command[0], envp);//TODO:mirar route con ejecutable
 	pid = fork();
 	if (pid < 0)
 		perror("Fork mal hecho");
