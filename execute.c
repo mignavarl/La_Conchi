@@ -33,7 +33,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		if (i == 0 && !ft_strcmp(now->cmd, ">"))
 		{
 			data->to_close = 1;
-			first_argument_output(next->cmd, next);
+			first_argument_output(next->cmd);
 			if (next->next)
 			{
 				now = next->next;
@@ -49,7 +49,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		}
         i = 1;
         command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
-        if (!command) 
+        if (!command)
             return; // Si malloc falla, salimos de la función
         command[0] = ft_strdup(now->cmd);  // Copia del comando
         if (!command[0])  // Verifica si la asignación falla
@@ -79,14 +79,20 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
                 next = next->next;
                 make_input(command, env, next->cmd);
                 if (!next->next)
+				{
+					ft_free_double(command);
                     break ;
+				}
             }
 			if (!ft_strcmp(next->cmd, ">"))
 			{
 				next = next->next;
 				make_output(command, env, next->cmd);
 				if (!next->next)
+				{
+					ft_free_double(command);
 					break ;
+				}
 			}
         }
         else
@@ -105,7 +111,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
         	next = now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
 			next = NULL;
-    }
+	}
 }
 
 void	execute(t_cmds **cmd, t_env *env, t_data *data)
