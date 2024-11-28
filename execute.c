@@ -18,7 +18,6 @@ int	count_com(t_cmds *now)
 		tmp = tmp->next;
 		i++;
 	}
-	//printf("count = %d\n", i);
 	return (i + 1);
 }
 
@@ -34,12 +33,16 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		if (i == 0 && !ft_strcmp(now->cmd, ">"))
 		{
 			data->to_close = 1;
-			first_argument_output(next->cmd);
+			first_argument_output(next->cmd, next);
 			if (next->next)
 			{
 				now = next->next;
-				now = now->next;
-				next = now->next;
+				if (m_ischar(now->cmd))
+					now = now->next;
+				if (now->next)
+					next = now->next;
+				else
+					next = NULL;
 			}
 			else
 				break ;

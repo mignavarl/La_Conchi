@@ -1,10 +1,11 @@
 #include "prueba_mini.h"
 
-void	first_argument_output(char *file)
+void	first_argument_output(char *file, t_cmds *next)
 {
 	int		fd_output;
 
-	fd_output = open(file, O_TRUNC | O_CREAT, 00644);
+	fd_output = open(file, O_WRONLY, O_TRUNC | O_CREAT, 00644);
+	dup2(fd_output, STDOUT_FILENO);
 	close(fd_output);
 }
 
