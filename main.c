@@ -39,10 +39,8 @@ int main(int argc, char **argv, char *envp[])
 		}
 		data.words = search_in_line(line);
 		if (!data.words)
-		{
-			printf("NADA\n");
-		}
-		if (data.words[0])
+			;
+		else if (data.words[0])
 		{
 			add_history(line);
 			//Buscar en words
