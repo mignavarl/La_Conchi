@@ -26,7 +26,7 @@ char	*search_route(char *command, char **envp)
 	int		i;
 
 	if (access(command, F_OK) == 0)
-		return(command);
+		return(ft_strdup(command));
 	path = search_path(envp);
 	if (!path)
 		return (NULL);

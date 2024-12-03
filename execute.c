@@ -42,10 +42,12 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			first_argument_output(next->cmd);
 			if (next->next)
 			{
-				restaure_fd(data);
 				now = next->next;
 				if (m_ischar(now->cmd))
+				{
+					restaure_fd(data);
 					now = now->next;
+				}
 				if (now->next)
 					next = now->next;
 				else
