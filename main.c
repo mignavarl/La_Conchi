@@ -37,12 +37,12 @@ int main(int argc, char **argv, char *envp[])
 			free_env(env);
 			break ;
 		}
+		add_history(line);
 		data.words = search_in_line(line);
 		if (!data.words)
 			;
 		else if (data.words[0])
 		{
-			add_history(line);
 			//Buscar en words
 			// if (!check_chars(data.words, &chars))
 			// {

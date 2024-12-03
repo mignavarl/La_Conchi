@@ -21,6 +21,12 @@ int	count_com(t_cmds *now)
 	return (i + 1);
 }
 
+void	restaure_fd(t_data *data)
+{
+	dup2(data->clon_stdout, STDOUT_FILENO);
+	close(data->clon_stdout);
+}
+
 void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 {
     char    **command;
@@ -36,6 +42,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			first_argument_output(next->cmd);
 			if (next->next)
 			{
+				restaure_fd(data);
 				now = next->next;
 				if (m_ischar(now->cmd))
 					now = now->next;
@@ -76,7 +83,9 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
                 make_pipe(command, env, data);
             if (!ft_strcmp(next->cmd, "<"))
             {
+				//printf("Input:\n%s\n", next->cmd);
                 next = next->next;
+				//printf("%s\n", next->cmd);
                 make_input(command, env, next->cmd);
                 if (!next->next)
 				{
