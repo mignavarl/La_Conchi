@@ -30,8 +30,5 @@ void	make_output(char **command, t_env *env, char *file)
 		child(command, env);
 	}
 	else
-	{
-		ft_free_double(command);
 		close(fd_output);
-	}
 }

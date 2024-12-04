@@ -47,6 +47,5 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 		dup2(data->pipe_fd[READ], STDIN_FILENO);
 		close(data->pipe_fd[READ]);
 		ft_free_double(command);
-		// free_env(env);
 	}
 }
