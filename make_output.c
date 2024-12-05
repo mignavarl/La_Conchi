@@ -1,5 +1,38 @@
 #include "prueba_mini.h"
 
+t_cmds	*last_file_output(t_cmds *node)
+{
+	t_cmds	*first;
+	t_cmds	*last;
+	int		fd;
+
+	first = node;
+	if (first->next)
+	{
+		last = first->next;
+		if (ft_strcmp(last->cmd, ">"))
+			return (node);
+	}
+	else
+		return (node);
+	while (1)
+	{
+		printf(RED"last = %s\n"END, last->cmd);
+		if (last->next)
+			first = last->next;
+		if (first->next)
+		{
+			printf(RED"first = %s\n"END, first->cmd);
+			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+			close(fd);
+			last = first->next;
+		}
+		else
+			return (first);
+	}
+	return (first);
+}
+
 void	first_argument_output(char *file)
 {
 	int		fd_output;

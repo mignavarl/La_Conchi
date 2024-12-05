@@ -122,6 +122,7 @@ void	make_input(char **command, t_env *env, char *file);
 //MAKE.OUTPUT.C >
 void	make_output(char **command, t_env *env, char *file);
 void	first_argument_output(char *file);
+t_cmds	*last_file_output(t_cmds *node);
 
 
 //-----------------------EXIT_MINI-----------------------//

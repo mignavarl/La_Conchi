@@ -97,7 +97,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
             }
 			if (!ft_strcmp(next->cmd, ">"))
 			{
-				next = next->next;
+				next = last_file_output(next->next);
 				make_output(command, env, next->cmd);
 				if (!next->next)
 				{
