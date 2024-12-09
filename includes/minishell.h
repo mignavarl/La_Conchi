@@ -9,7 +9,7 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include "env.h"
 
 # define TRUE 1

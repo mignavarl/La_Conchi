@@ -18,11 +18,12 @@ SRCS = main.c\
 		$(EXE_DIR)execute_cd.c\
 		$(EXE_DIR)execute_cmd.c\
 		$(EXE_DIR)execute_pwd.c\
-		$(EXE_DIR)execute_rest\
+		$(EXE_DIR)execute_rest.c\
+		$(EXE_DIR)execute_utils.c\
 		$(EXE_DIR)execute.c\
 		$(LIST_DIR)list_command.c\
 		$(LIST_DIR)list_mini.c\
-		$(LIST_DIR)list_utils\
+		$(LIST_DIR)list_utils.c\
 		$(MAKE_DIR)make_input.c\
 		$(MAKE_DIR)make_output.c\
 		$(MAKE_DIR)make_pipe.c\
@@ -60,7 +61,7 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(LFLAGS) -o $(NAME)
 
 clean:
-	${RM} -Rf $(OBJ_DIR)
+	@${RM} -Rf $(OBJ_DIR)
 	@cd libft && $(MAKE) clean
 
 fclean: clean
