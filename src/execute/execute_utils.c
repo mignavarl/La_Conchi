@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 char	*search_path(char **envp)
 {

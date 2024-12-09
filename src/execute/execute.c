@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 void	save_fd(t_data *data)
 {

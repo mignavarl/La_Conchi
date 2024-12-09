@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 void	execute_cmd(char **command, t_env *env)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prueba_mini.h"
+#include "minishell.h"
 
 char	**search_in_line(char *line);
 

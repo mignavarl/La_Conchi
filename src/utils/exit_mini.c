@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 void	free_execve(char **command, t_env *env, char **envp, char *route)
 {

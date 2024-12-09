@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 void	make_input(char **command, t_env *env, char *file)
 {

@@ -1,44 +1,67 @@
-NAME = prueba
-SRC = extract_prueba.c\
-		quotes.c\
-		words.c\
-		signal.c\
-		main.c\
-		count.c\
-		check_chars.c\
-		execute.c\
-		execute_cmd.c\
-		execute_cd.c\
-		execute_pwd.c\
-		list_command.c\
-		list_mini.c\
-		env.c\
-		execute_rest.c\
-		execute_utils.c\
-		make_pipe.c\
-		make_input.c\
-		make_output.c\
-		exit_mini.c
-
-OBJ = ${SRC:.c=.o}
+NAME = minishell
+#~~~~~~ Directories ~~~~~~
+SRC_DIR = ./src/
+OBJ_DIR = ./obj/
+INC_DIR = ./includes/
+LIB_DIR = ./libft/
+#~~~~ Src Directories ~~~~
+ENV_DIR = enviroment/
+EXE_DIR = execute/
+LIST_DIR = list_functions/
+MAKE_DIR = make_redirs/
+PARS_DIR = parse/
+SIG_DIR = signal/
+UTIL_DIR = utils/
+#~~~~~~ Src Files ~~~~~~~
+SRCS = main.c\
+		$(ENV_DIR)env.c\
+		$(EXE_DIR)execute_cd.c\
+		$(EXE_DIR)execute_cmd.c\
+		$(EXE_DIR)execute_pwd.c\
+		$(EXE_DIR)execute_rest\
+		$(EXE_DIR)execute.c\
+		$(LIST_DIR)list_command.c\
+		$(LIST_DIR)list_mini.c\
+		$(LIST_DIR)list_utils\
+		$(MAKE_DIR)make_input.c\
+		$(MAKE_DIR)make_output.c\
+		$(MAKE_DIR)make_pipe.c\
+		$(PARS_DIR)check_chars.c\
+		$(PARS_DIR)count.c\
+		$(PARS_DIR)quotes.c\
+		$(PARS_DIR)search_in_line.c\
+		$(PARS_DIR)words.c\
+		$(SIG_DIR)signal.c\
+		$(UTIL_DIR)exit_mini.c
+#~~~~~~ Obj Files ~~~~~~~
+OBJ_FILES = $(SRCS:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+#~~~~~~ Includes ~~~~~~~~
+INCLUDES = $(INC_DIR)minishell.h\
+			$(INC_DIR)env.h
+#~~~~~~ Compiling ~~~~~~~
 CC = gcc
-
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=leak
 MAKEFLAGS = --no-print-directory
-LFLAGS = -L libft -lft
-
+LFLAGS = -L libft -lft -lreadline
 RM = rm -f
+#~~~~~~~ Dir Obj ~~~~~~~~
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -I $(LIB_DIR) -c $< -o $@
 
-all: ${NAME}
+all: obj ${NAME}
 
-${NAME}: ${OBJ}
+obj:
+	@mkdir -p $(OBJ_DIR)
+
+$(NAME): $(OBJS)
 	@$(MAKE) -C libft
-	${CC} ${CFLAGS} ${OBJ} $(LFLAGS) -lreadline -o ${NAME}
+	$(CC) $(OBJS) $(CFLAGS) $(LFLAGS) -o $(NAME)
 
 clean:
+	${RM} -Rf $(OBJ_DIR)
 	@cd libft && $(MAKE) clean
-	@echo "[🧹 Limpiando... 🧹]"
-	@${RM} ${OBJ}
 
 fclean: clean
 	@cd libft && $(MAKE) fclean
@@ -46,6 +69,5 @@ fclean: clean
 	@${RM} ${NAME}
 
 re: fclean all
-	@echo "[🛠️  Rehaciendo...🛠️ ]"
 
-.PHONY: all clean fclean re 
+.PHONY: all clean fclean re

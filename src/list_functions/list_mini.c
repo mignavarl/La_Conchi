@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 int	m_lstsize(t_cmds *lst)
 {

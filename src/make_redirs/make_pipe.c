@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 void	close_pipe(int pipe_fd[2], t_data *data)
 {

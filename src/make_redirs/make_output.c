@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 t_cmds	*last_file_output(t_cmds *node)
 {

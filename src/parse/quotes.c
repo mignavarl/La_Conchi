@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 /* DESUSO
 void	while_end(char *line, int i)
 {

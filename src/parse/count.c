@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prueba_mini.h"
+#include "minishell.h"
 
 int	count_end_quote(char *line, int i)
 {

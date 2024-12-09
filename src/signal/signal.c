@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prueba_mini.h"
+#include "minishell.h"
 
 void	trapper(int sig)
 {

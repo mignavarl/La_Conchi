@@ -1,4 +1,4 @@
-#include "prueba_mini.h"
+#include "minishell.h"
 
 // int	check_chars(char **words, t_chars *chars)//EN DESUSO
 // {
