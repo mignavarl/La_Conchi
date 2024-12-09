@@ -129,4 +129,9 @@ t_cmds	*last_file_output(t_cmds *node);
 //EXIT_MINI.C
 void	free_execve(char **command, t_env *env, char **envp, char *route);
 
+//-----------------------ENVIROMENT-----------------------//
+
+//-----------------------LEXER FUNCTIONS-----------------------//
+int lexer(char **words); 
+
 #endif

@@ -30,6 +30,7 @@ SRCS = main.c\
 		$(PARS_DIR)check_chars.c\
 		$(PARS_DIR)count.c\
 		$(PARS_DIR)quotes.c\
+		$(PARS_DIR)lexer.c\
 		$(PARS_DIR)search_in_line.c\
 		$(PARS_DIR)words.c\
 		$(SIG_DIR)signal.c\
