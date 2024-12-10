@@ -12,7 +12,21 @@
 
 #include "minishell.h"
 
-char	**search_in_line(char *line);
+void	print_cmd(t_cmds **comand)//TODO: BORRAR
+{
+	int i;
+
+	i = 0;
+	printf(CYAN"Print\n"END);
+	while ((*comand) != NULL)
+	{
+		printf(CYAN"CMD (%d) = %s\n"END, i, (*comand)->cmd);
+		if ((*comand)->next == NULL)
+			break;
+		i++;
+		(*comand) = (*comand)->next;
+	}
+}
 
 int main(int argc, char **argv, char *envp[])
 {
@@ -38,7 +52,7 @@ int main(int argc, char **argv, char *envp[])
 			break ;
 		}
 		add_history(line);
-		data.words = search_in_line(line);
+		data.words = search_in_line(line, &data);
 		if (!data.words)
 			;
 		else if (data.words[0])
@@ -57,8 +71,6 @@ int main(int argc, char **argv, char *envp[])
 				continue ;
 			m_listclear(&command, free);
 		}
-		// }
-		//RESET
 		free_env(env);
 		free(line);
 		ft_free_double(data.words);

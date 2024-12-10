@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quotes.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-12-10 10:32:15 by mignavar          #+#    #+#             */
+/*   Updated: 2024-12-10 10:32:15 by mignavar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 /* DESUSO
 void	while_end(char *line, int i)
@@ -43,22 +55,33 @@ int	search_end_quote(char *line, int i)
 	return (0);
 }
 
-char	*find_quote(char *line, int i)
+char	*find_quote(char *line, int i, t_data *data)
 {
 	int 	l;
+	// int		n;
 	char	*quote;
+	// char	*tmp_quote;
 
-	// if (!search_end_quote(line, i))
-	// {
-	// 	while_end(line, i);
-	// 	return (0);
-	// }
 	l = i + 1;
+	(void)data;//temporal
 	while (line[l])
 	{
 		if ((line[i] == '"' && line[l] == '"') || (line[i] == '\'' && line[l] == '\''))
 		{
 			quote = ft_substr(&line[i], 1, (l - i) - 1);
+			// n = l + 1;
+			// while (line[n] && line[n] != ' ')
+			// {
+			// 	if (line[n] != '"' || line[n] != '\'')
+			// 	{
+			// 		tmp_quote = ft_strdup(quote);
+			// 		free(quote);
+			// 		quote = ft_strjoin(tmp_quote, &line[n]);
+			// 		free(tmp_quote);
+			// 	}
+			// 	n++;
+			// }
+			// data->quote_chars = n - 1;
 			break ;
 		}
 		l++;

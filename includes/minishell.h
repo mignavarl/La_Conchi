@@ -53,13 +53,17 @@ struct s_data
 	int		clon_stdout;
 	int		to_close;
 	char	**words;
+	int		quote_chars;
 };
+
+//----------------PARSE--------------------------------//
+char	**search_in_line(char *line, t_data *data);
 
 //QUOTES.C
 void	while_end(char *line, int i);
 int		search_end_quote(char *line, int i);
 char	*extract_quote(char *line, int start, int final);
-char	*find_quote(char *line, int i);
+char	*find_quote(char *line, int i, t_data *data);
 void	search_end_while(char *line);
 
 //COUNT.C
@@ -132,6 +136,6 @@ void	free_execve(char **command, t_env *env, char **envp, char *route);
 //-----------------------ENVIROMENT-----------------------//
 
 //-----------------------LEXER FUNCTIONS-----------------------//
-int lexer(char **words); 
+int		lexer(char **words); 
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-12-10 10:30:32 by mignavar          #+#    #+#             */
+/*   Updated: 2024-12-10 10:30:32 by mignavar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	init_word(char *word)
@@ -9,12 +21,10 @@ int	init_word(char *word)
 	{
 		if (!m_ischar(&word[init]))
 		{
-			//printf(BLUE"Init word = %d\n"END, init);
 			return (init);
 		}
 		init++;
 	}
-	//printf(BLUE"Init word = %d\n"END, init);
 	return (0);
 }
 
@@ -32,7 +42,6 @@ int	word_len(char *word)
 	}
 	while (m_ischar(&word[len - 1]) > 0)
 		len--;
-	//printf(BLUE"Word len = %d\n"END, len);
 	return (len);
 }
 
@@ -41,18 +50,10 @@ int	find_last_sym(char *word)
 	int	l;
 
 	l = ft_strlen(word) - 1;
-	//printf("Word = %s\nLen = %d\n", word, l);
-	//printf("Char = %c", word[l]);
 	if (l < 0)
 		return (0);
 	while (l >= 0 && m_ischar(&word[l]))
-	{
-		//printf(YELLOW"Char = %c\n"END, word[l]);
 		l--;
-	}
-	// if (word[l] == '\0')
-	// 	return (ft_strlen(word) - 1);
-	//printf("Last_sym = %d\n", (l - 1));
 	return (l + 1);
 }
 
@@ -72,7 +73,6 @@ char	*m_find_word(char *line)
 		if (m_ischar(&line[end]))
 			break ;
 	}
-	//printf("Find_word: Line = %s -- init = %d -- end = %d\n", line, init, end);
 	word = ft_substr(line, init, end);
 	return (word);
 }
@@ -83,7 +83,6 @@ int	next_word(char *word, int i)
 		i++;
 	while (m_ischar(&word[i]) && word[i])
 		i--;
-	//printf("Next word: %s -- i = %d\n", word, i);
 	return (i);
 }
 
