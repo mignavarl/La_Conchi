@@ -72,7 +72,7 @@ int		count_end_word(char *line, int i);
 int		count_words(char *line);
 
 //WORDS.C
-char	*find_words(char *line, int i);
+char	*find_words(char *line, int i, t_data *data);
 
 //SIGNAL.C
 void	find_signal();
@@ -129,9 +129,12 @@ void	first_argument_output(char *file);
 t_cmds	*last_file_output(t_cmds *node);
 
 
-//-----------------------EXIT_MINI-----------------------//
+//-----------------------UTILS-----------------------//
 //EXIT_MINI.C
 void	free_execve(char **command, t_env *env, char **envp, char *route);
+
+//FT_JOINCHAR.C
+char	*ft_joinchar(char *str, char c);
 
 //-----------------------ENVIROMENT-----------------------//
 

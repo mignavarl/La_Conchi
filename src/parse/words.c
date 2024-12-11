@@ -12,10 +12,11 @@
 
 #include "minishell.h"
 
-char *find_words(char *line, int i)
+char *find_words(char *line, int i, t_data *data)
 {
 	int		l;
 	char	*word;
+	char	*tmp_word;
 
 	l = i;
 	while(line[l])
@@ -27,5 +28,23 @@ char *find_words(char *line, int i)
 	word = ft_substr(line, i, (l - i));
 	if (!word)
 		return (NULL);
+	if (line[l] && (line[l] == '"' || line[l] == '\''))
+	{
+		while (line[l])
+		{
+			if (line[l] != '"' && line[l] != '\'')
+			{
+				tmp_word = ft_strdup(word);
+				if (!word)
+					return (NULL);
+				free(word);
+				word = ft_joinchar(tmp_word, line[l]);
+				if (!word)
+					return (NULL);
+			}
+			l++;
+		}
+	}
+	data->quote_chars = l;
 	return (word);
 }

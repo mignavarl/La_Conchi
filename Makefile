@@ -34,7 +34,8 @@ SRCS = main.c\
 		$(PARS_DIR)search_in_line.c\
 		$(PARS_DIR)words.c\
 		$(SIG_DIR)signal.c\
-		$(UTIL_DIR)exit_mini.c
+		$(UTIL_DIR)exit_mini.c\
+		$(UTIL_DIR)ft_joinchar.c
 #~~~~~~ Obj Files ~~~~~~~
 OBJ_FILES = $(SRCS:.c=.o)
 OBJS = $(addprefix $(OBJ_DIR), $(OBJ_FILES))

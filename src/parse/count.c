@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	count_end_quote(char *line, int i)
+//TODO: DESUSO ---- BOORRAR
+/*int	count_end_quote(char *line, int i)
 {
 	int		l;
 
@@ -38,7 +38,7 @@ int	count_end_word(char *line, int i)
 		l++;
 	}
 	return (l - i);
-}
+}*/
 
 int	count_words(char *line)
 {
@@ -49,21 +49,24 @@ int	count_words(char *line)
 	word = 0;
 	while (line[i])
 	{
-		if ((line[i] != '"' && line[i] != '\'' && line[i] != ' '))
-		{
-			i += count_end_word(line, i);
+		if (line[i] == ' ')
 			word++;
-		}
-		if (line[i] == '"' || line[i] == '\'')
-		{
-			if (count_end_quote(line, i) < 0)
-				return (-1);
-			i += count_end_quote(line, i);
-			word++;
-		}
-		if (line[i] == '\0')
-			break ;
 		i++;
+		// if ((line[i] != '"' && line[i] != '\'' && line[i] != ' '))
+		// {
+		// 	i += count_end_word(line, i);
+		// 	word++;
+		// }
+		// if (line[i] == '"' || line[i] == '\'')
+		// {
+		// 	if (count_end_quote(line, i) < 0)
+		// 		return (-1);
+		// 	i += count_end_quote(line, i);
+		// 	word++;
+		// }
+		// if (line[i] == '\0')
+		// 	break ;
+		// i++;
 	}
-	return (word);
+	return (word + 1);
 }

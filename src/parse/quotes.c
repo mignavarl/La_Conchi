@@ -58,30 +58,36 @@ int	search_end_quote(char *line, int i)
 char	*find_quote(char *line, int i, t_data *data)
 {
 	int 	l;
-	// int		n;
+	int		n;
 	char	*quote;
-	// char	*tmp_quote;
+	char	*tmp_quote;
 
 	l = i + 1;
-	(void)data;//temporal
 	while (line[l])
 	{
 		if ((line[i] == '"' && line[l] == '"') || (line[i] == '\'' && line[l] == '\''))
 		{
 			quote = ft_substr(&line[i], 1, (l - i) - 1);
-			// n = l + 1;
-			// while (line[n] && line[n] != ' ')
-			// {
-			// 	if (line[n] != '"' || line[n] != '\'')
-			// 	{
-			// 		tmp_quote = ft_strdup(quote);
-			// 		free(quote);
-			// 		quote = ft_strjoin(tmp_quote, &line[n]);
-			// 		free(tmp_quote);
-			// 	}
-			// 	n++;
-			// }
-			// data->quote_chars = n - 1;
+			if (line[l + 1] != '\0' || line[l + 1] != ' ')
+			{
+				n = l + 1;
+				while (line[n] && line[n] != ' ')
+				{
+					if (line[n] != '"' && line[n] != '\'')
+					{
+						tmp_quote = ft_strdup(quote);
+						if (!tmp_quote)
+							return (NULL);
+						free(quote);
+						quote = ft_joinchar(tmp_quote, line[n]);
+						if (!quote)
+							return (NULL);
+					}
+					n++;
+				}
+			}
+			data->quote_chars = n;
+			l = n - 1;
 			break ;
 		}
 		l++;

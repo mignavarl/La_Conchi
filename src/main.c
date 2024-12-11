@@ -58,7 +58,7 @@ int main(int argc, char **argv, char *envp[])
 		else if (data.words[0])
 		{
 			//Buscar en words
-			// if (!check_chars(data.words, &chars))
+			// if (!check_chars(data.words, &chars))t
 			// {
 			// 	printf(RED"A\n"END); 
 			// }

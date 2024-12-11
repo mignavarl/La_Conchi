@@ -38,10 +38,10 @@ char	**search_in_line(char *line, t_data *data)
 	{
 		if (line[i] != '"' && line[i] != '\'' && line[i] != ' ')
 		{
-			words[w] = find_words(line, i);
+			words[w] = find_words(line, i, data);
 			if (!words[w])
 				break ;
-			i += ft_strlen(words[w]) - 1;
+			i = data->quote_chars - 1;
 			w++;
 		}
 		else if (line[i] == '"' || line[i] == '\'')
@@ -49,20 +49,20 @@ char	**search_in_line(char *line, t_data *data)
 			words[w] = find_quote(line, i, data);
 			if (!words[w])
 				break ;
-			i += ft_strlen(words[w]);
-			//i = data->quote_chars - 1;
-			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i])
+			//i += ft_strlen(words[w]);
+			i = data->quote_chars - 1;
+			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i] && line[i + 1] != '\0')
 				i++;
-			printf(RED"Word[%d] = %s\nline[%d] = %c\n"END, w, words[w], i, line[i]);
+			//printf(RED"Word[%d] = %s\nline[%d] = %c\n"END, w, words[w], i, line[i]);
 			w++;
 		}
 		i++;
 	}
-	w = 0;
-	while (w < num_words)
-	{
-		printf("Word [%d] = %s / %d\n", w, words[w], w);
-		w++;
-	}
+	// w = 0;//TODO: borrar, para ver words
+	// while (w < num_words)
+	// {
+	// 	printf("Word [%d] = %s / %d\n", w, words[w], w);
+	// 	w++;
+	// }
 	return (words);
 }
