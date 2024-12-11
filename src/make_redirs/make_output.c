@@ -31,7 +31,11 @@ t_cmds	*last_file_output(t_cmds *node)
 	{
 		printf(RED"last = %s\n"END, last->cmd);
 		if (last->next)
+		{
+			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+			close(fd);
 			first = last->next;
+		}
 		if (first->next)
 		{
 			printf(RED"first = %s\n"END, first->cmd);
