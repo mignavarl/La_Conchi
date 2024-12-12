@@ -51,7 +51,8 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 		close(data->pipe_fd[READ]);
 		dup2(data->pipe_fd[WRITE], STDOUT_FILENO);
 		close(data->pipe_fd[WRITE]);
-		child(command, env);
+		//child(command, env);
+		execute_cmd(command, env, pid);
 	}
 	else
 	{

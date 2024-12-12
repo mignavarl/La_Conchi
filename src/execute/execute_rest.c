@@ -12,6 +12,18 @@
 
 #include "minishell.h"
 
+void	execute_rest_pid(char **command, t_env *env)
+{
+	char	**envp;
+	char	*route;
+
+	envp = set_env(env);
+	route = search_route(command[0], envp);
+	execve(route, command, envp);
+	printf("%s: command not found\n", command[0]);
+	free_execve(command, env, envp, route);
+}
+
 void	execute_rest(char **command, t_env *env)
 {
 	char	**envp;
@@ -26,7 +38,6 @@ void	execute_rest(char **command, t_env *env)
 	if (pid == 0)
 	{
 		execve(route, command, envp);
-		//TODO: si falla execve liberar
 		printf("%s: command not found\n", command[0]);
 		free_execve(command, env, envp, route);
 	}

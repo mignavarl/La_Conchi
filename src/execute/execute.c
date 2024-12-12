@@ -120,7 +120,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
         }
         else
         {
-            execute_cmd(command, env);  // Ejecutar el comando
+            execute_cmd(command, env, 1);  // Ejecutar el comando
 			break ;
         }
      //   ft_free_double(command);  // Liberar el array de comandos después de usarlo
@@ -150,7 +150,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 	}
 	else
 	{
-		execute_cmd(ft_split(now->cmd, ' '), env);
+		execute_cmd(ft_split(now->cmd, ' '), env, 1);
 		return ;
 	}
 }

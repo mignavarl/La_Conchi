@@ -82,7 +82,7 @@ int		m_ischar(char *c);
 
 //-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C
-void	execute_cmd(char **command, t_env *env);
+void	execute_cmd(char **command, t_env *env, pid_t pid);
 
 //EXECUTE_CD.C
 void 	execute_cd(char **command);
@@ -92,6 +92,7 @@ void	execute_pwd(void);
 
 //EXECUTE_REST.C
 void	execute_rest(char **command, t_env *env);
+void	execute_rest_pid(char **command, t_env *env);
 
 //EXECUTE.C
 void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data);
