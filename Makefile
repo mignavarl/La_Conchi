@@ -68,7 +68,6 @@ clean:
 
 fclean: clean
 	@cd libft && $(MAKE) fclean
-	@echo "    [🗑️ Mucho 🗑️ ]"
 	@${RM} ${NAME}
 
 re: fclean all

@@ -68,6 +68,28 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			else
 				break ;
 		}
+		if (i == 0 && !ft_strcmp(now->cmd, "<"))
+		{
+			data->to_close = 1;
+			if (!first_argument_input(next->cmd))
+				break ;
+			if (next->next)
+			{
+				now = next->next;
+				if (m_ischar(now->cmd))
+				{
+					restaure_fd(data);
+					now = now->next;
+				}
+				if (now->next)
+					next = now->next;
+				else
+					next = NULL;
+			}
+			else
+				break ;
+			
+		}
         i = 1;
         command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
         if (!command)
@@ -123,9 +145,6 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
             execute_cmd(command, env, 1);  // Ejecutar el comando
 			break ;
         }
-     //   ft_free_double(command);  // Liberar el array de comandos después de usarlo
-        // now = next->next;
-        // next = now->next;
 		if(next->next)
         	now = next->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else

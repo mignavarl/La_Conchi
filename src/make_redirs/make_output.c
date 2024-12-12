@@ -12,11 +12,33 @@
 
 #include "minishell.h"
 
+t_cmds	*find_last(t_cmds *first, t_cmds *last)
+{
+	int	fd;
+
+	while (1)
+	{
+		if (last->next)
+		{
+			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+			close(fd);
+			first = last->next;
+		}
+		if (first->next)
+		{
+			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+			close(fd);
+			last = first->next;
+		}
+		else
+			return (first);
+	}
+}
+
 t_cmds	*last_file_output(t_cmds *node)
 {
 	t_cmds	*first;
 	t_cmds	*last;
-	int		fd;
 
 	first = node;
 	if (first->next)
@@ -27,25 +49,7 @@ t_cmds	*last_file_output(t_cmds *node)
 	}
 	else
 		return (node);
-	while (1)
-	{
-		printf(RED"last = %s\n"END, last->cmd);
-		if (last->next)
-		{
-			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
-			close(fd);
-			first = last->next;
-		}
-		if (first->next)
-		{
-			printf(RED"first = %s\n"END, first->cmd);
-			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
-			close(fd);
-			last = first->next;
-		}
-		else
-			return (first);
-	}
+	first = find_last(first, last);
 	return (first);
 }
 

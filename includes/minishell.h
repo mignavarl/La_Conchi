@@ -122,6 +122,7 @@ void	close_pipe(int pipe_fd[2], t_data *data);
 
 //MAKE_INPUT.C <
 void	make_input(char **command, t_env *env, char *file);
+int		first_argument_input(char *file);
 
 //MAKE.OUTPUT.C >
 void	make_output(char **command, t_env *env, char *file);

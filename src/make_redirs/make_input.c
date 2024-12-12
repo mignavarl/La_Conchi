@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+int	first_argument_input(char *file)
+{
+	int		fd_input;
+
+	fd_input = open(file, O_RDONLY);
+	if (fd_input < 0)
+	{
+		printf("La Conchi says: no such file or directory: %s\n", file);
+		return (0);
+	}
+	dup2(fd_input, STDIN_FILENO);
+	close(fd_input);
+	return (1);
+}
+
 void	make_input(char **command, t_env *env, char *file)
 {
 	int		fd_input;
