@@ -76,7 +76,7 @@ void	make_output(char **command, t_env *env, char *file)
 	{
 		dup2(fd_output, STDOUT_FILENO);
 		close(fd_output);
-		child(command, env);
+		execute_cmd(command, env, pid);
 	}
 	else
 		close(fd_output);

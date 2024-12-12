@@ -26,18 +26,6 @@ void	close_pipe(int pipe_fd[2], t_data *data)
 	}
 }
 
-void	child(char **command, t_env *env)
-{
-	char	**envp;
-	char	*route;
-
-	envp = set_env(env);
-	route = search_route(command[0], envp);
-	execve(route, command, envp);
-	printf("%s: command not found\n", command[0]);
-	free_execve(command, env, envp, route);
-}
-
 void	make_pipe(char **command, t_env *env, t_data *data)
 {
 	pid_t	pid;
@@ -51,7 +39,6 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 		close(data->pipe_fd[READ]);
 		dup2(data->pipe_fd[WRITE], STDOUT_FILENO);
 		close(data->pipe_fd[WRITE]);
-		//child(command, env);
 		execute_cmd(command, env, pid);
 	}
 	else

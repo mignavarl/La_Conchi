@@ -30,7 +30,7 @@ void	make_input(char **command, t_env *env, char *file)
 	{
 		dup2(fd_input, STDIN_FILENO);
 		close(fd_input);
-		child(command, env);
+		execute_cmd(command, env, pid);
 	}
 	else
 		close(fd_input);
