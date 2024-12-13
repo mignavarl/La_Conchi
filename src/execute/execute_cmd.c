@@ -20,22 +20,19 @@ void	execute_cmd(char **command, t_env *env, pid_t pid)
 		execute_cd(command);
 	else if (!ft_strcmp(command[0], "pwd"))
 		execute_pwd();
+	else if (!ft_strcmp(command[0], "echo"))
+		execute_echo(command);
 	else
 	{
 		if (pid != 0)
+		{
 			execute_rest(command, env);
+		}
 		else
+		{
 			execute_rest_pid(command, env);
+		}
 	}
-	if (pid != 0)
-	{
-		if (command)
-			ft_free_double(command);
-	}
-	else
-	{
+	if (command)
 		ft_free_double(command);
-		free_env(env);
-		exit(0);
-	}
 }

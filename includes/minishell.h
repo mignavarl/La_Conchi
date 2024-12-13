@@ -87,6 +87,9 @@ void	execute_cmd(char **command, t_env *env, pid_t pid);
 //EXECUTE_CD.C
 void 	execute_cd(char **command);
 
+//EXECUTE_ECHO.C
+void	execute_echo(char **command);
+
 //EXECUTE_PWD.C
 void	execute_pwd(void);
 
