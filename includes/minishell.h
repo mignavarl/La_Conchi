@@ -93,6 +93,9 @@ void	execute_echo(char **command);
 //EXECUTE_PWD.C
 void	execute_pwd(void);
 
+//EXECUTE_ENV.C
+void	execute_env(char **command, t_env *env);
+
 //EXECUTE_REST.C
 void	execute_rest(char **command, t_env *env);
 void	execute_rest_pid(char **command, t_env *env);

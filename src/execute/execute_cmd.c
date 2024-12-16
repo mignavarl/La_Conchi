@@ -22,6 +22,8 @@ void	execute_cmd(char **command, t_env *env, pid_t pid)
 		execute_pwd();
 	else if (!ft_strcmp(command[0], "echo"))
 		execute_echo(command);
+	else if (!ft_strcmp(command[0], "env"))
+		execute_env(command, env);
 	else
 	{
 		if (pid != 0)

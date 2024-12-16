@@ -37,11 +37,16 @@ int main(int argc, char **argv, char *envp[])
 	t_env	*env;
 	char	*line;
 
+	if (argc != 1)
+	{
+		printf(RED"No arguments\n"END);
+		return (0);
+	}
 	ft_memset(&data, 0, sizeof(t_data));
+	env = NULL;
+	env = init_env(envp, env);
 	while (1)
 	{
-		env = NULL;
-		env = init_env(envp, env);
 		find_signal();
 		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
 		if (!line || !ft_strcmp(line, "exit"))
@@ -71,7 +76,7 @@ int main(int argc, char **argv, char *envp[])
 				continue ;
 			m_listclear(&command, free);
 		}
-		free_env(env);
+		//free_env(env);
 		free(line);
 		ft_free_double(data.words);
 		close_pipe(data.pipe_fd, &data);

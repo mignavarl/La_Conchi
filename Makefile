@@ -18,6 +18,7 @@ SRCS = main.c\
 		$(EXE_DIR)execute_cd.c\
 		$(EXE_DIR)execute_cmd.c\
 		$(EXE_DIR)execute_echo.c\
+		$(EXE_DIR)execute_env.c\
 		$(EXE_DIR)execute_pwd.c\
 		$(EXE_DIR)execute_rest.c\
 		$(EXE_DIR)execute_utils.c\
