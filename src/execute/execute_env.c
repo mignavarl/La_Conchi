@@ -12,6 +12,32 @@
 
 #include "minishell.h"
 
+void	execute_export(/* char **command, t_env *env */)
+{
+	// int		w;
+	// int		i;
+	// char	*key;
+	// char	*value;
+
+	// w = 0;
+	// while (command[w])
+	// 	w++;
+	// if (w != 2)
+	// {
+	// 	write(1, "export: too many arguments\n", 28);
+	// 	return ;
+	// }
+	// i = 0;
+	// while (command[1][i] != '=' && command[1][i])
+	// 	i++;
+	// key = ft_substr(command[1], 0, i);
+	// value = ft_substr(command[1], (i + 1), (ft_strlen(command[1]) - i));
+	// add_env_var(&env, key, value);
+	// free(key);
+	// free(value);
+	printf(RED"🔧 WIP 🔨 \n"END);
+}
+
 void	execute_env(char **command, t_env *env)
 {
 	t_env 	*tmp;
@@ -23,7 +49,7 @@ void	execute_env(char **command, t_env *env)
 		i++;
 	if (i > 1)
 	{
-		printf("env: too many arguments\n");
+		write(1, "env: too many arguments\n", 25);
 		return ;
 	}
 	while (tmp)

@@ -5,6 +5,8 @@
 		"types.h": "c",
 		"type_traits": "cpp",
 		"cmath": "cpp",
-		"env.h": "c"
+		"env.h": "c",
+		"minishell.h": "c",
+		"history.h": "c"
 	}
 }
