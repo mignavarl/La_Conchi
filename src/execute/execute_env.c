@@ -12,6 +12,22 @@
 
 #include "minishell.h"
 
+void	execute_unset(char **command, t_env *env)
+{
+	int	w;
+
+
+	w = 0;
+	while (command[w])
+		w++;
+	if (w != 2)
+	{
+		write(1, "unset: too many arguments\n", 26);
+		return ;
+	}
+	remove_env_var(&env, command[1]);
+}
+
 void	execute_export(char **command, t_env *env)
 {
 	int		w;
@@ -24,7 +40,7 @@ void	execute_export(char **command, t_env *env)
 		w++;
 	if (w != 2)
 	{
-		write(1, "export: too many arguments\n", 28);
+		write(1, "export: too many arguments\n", 27);
 		return ;
 	}
 	i = 0;
@@ -48,7 +64,7 @@ void	execute_env(char **command, t_env *env)
 		i++;
 	if (i > 1)
 	{
-		write(1, "env: too many arguments\n", 25);
+		write(1, "env: too many arguments\n", 24);
 		return ;
 	}
 	while (tmp)
