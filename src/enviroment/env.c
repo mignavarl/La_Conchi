@@ -38,13 +38,12 @@ t_env *init_env(char **envp, t_env *env)
 
 void add_env_var(t_env **env_list, char *key, char *value)
 {
-	t_env *new_var = malloc(sizeof(t_env));
+	t_env *new_var;
+
+	new_var = malloc(sizeof(t_env));
 	new_var->key = ft_strdup(key);
 	new_var->value = ft_strdup(value);
-	new_var->next = *env_list;
-	*env_list = new_var;
-	// printf("args:\n  key = %s\n  value = %s\n", key, value);
-	// printf("new_var:\n  key = %s\n  value = %s\n", new_var->key, new_var->value);
+	env_add_back(env_list, new_var);
 }
 
 char *get_env_var(t_env *env_list, char *key)
@@ -58,20 +57,6 @@ char *get_env_var(t_env *env_list, char *key)
 	return NULL;
 }
 
-void free_env(t_env *env_list)
-{
-	t_env *tmp;
-
-	while (env_list)
-	{
-		tmp = env_list;
-		env_list = env_list->next;
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
-	}
-	env_list = NULL;
-}
 // Función para actualizar o agregar una variable de entorno
 void update_env_var(t_env **env_list, char *key, char *value)
 {
@@ -83,7 +68,7 @@ void update_env_var(t_env **env_list, char *key, char *value)
 		if (ft_strcmp(current->key, key) == 0)
 		{
 			free(current->value);
-			current->value = strdup(value);
+			current->value = ft_strdup(value);
 			return;
 		}
 		current = current->next;
@@ -116,19 +101,4 @@ void remove_env_var(t_env **env_list, char *key)
 		prev = current;
 		current = current->next;
 	}
-}
-
-int	env_lstsize(t_env *lst)
-{
-	t_env	*l;
-	int		i;
-
-	l = lst;
-	i = 0;
-	while (l != NULL)
-	{
-		i++;
-		l = l->next;
-	}
-	return (i);
 }

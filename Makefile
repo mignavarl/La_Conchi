@@ -15,6 +15,7 @@ UTIL_DIR = utils/
 #~~~~~~ Src Files ~~~~~~~
 SRCS = main.c\
 		$(ENV_DIR)env.c\
+		$(ENV_DIR)env_utils.c\
 		$(EXE_DIR)execute_cd.c\
 		$(EXE_DIR)execute_cmd.c\
 		$(EXE_DIR)execute_echo.c\

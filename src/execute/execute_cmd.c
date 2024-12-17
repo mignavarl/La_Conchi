@@ -29,14 +29,12 @@ void	execute_cmd(char **command, t_env *env, pid_t pid)
 	else
 	{
 		if (pid != 0)
-		{
 			execute_rest(command, env);
-		}
 		else
-		{
 			execute_rest_pid(command, env);
-		}
 	}
+	if (pid == 0)
+		exit(0);
 	if (command)
 		ft_free_double(command);
 }

@@ -95,7 +95,7 @@ void	execute_pwd(void);
 
 //EXECUTE_ENV.C
 void	execute_env(char **command, t_env *env);
-void	execute_export(/* char **command, t_env *env */);//TODO:WIP
+void	execute_export(char **command, t_env *env);//TODO:WIP
 
 //EXECUTE_REST.C
 void	execute_rest(char **command, t_env *env);
