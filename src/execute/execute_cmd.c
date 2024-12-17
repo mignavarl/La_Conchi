@@ -12,6 +12,39 @@
 
 #include "minishell.h"
 
+int	execute_exit(char **command, t_env *env)
+{
+	int	w;
+	int	i;
+
+	w = 0;
+	i = 0;
+	while(command[w])
+		w++;
+	if (w > 2)
+		return (write(1, "exit: too many arguments\n", 25));
+	if (w == 2)
+	{
+		while (command[1][i])
+		{
+			if (!ft_isdigit(command[1][i]))
+				return (write(1, "exit: numeric argument required\n", 30));
+			i++;
+		}
+		free_execve(command, env, NULL, NULL);
+		exit(ft_atoi(command[1]));
+	}
+	return(0);
+}
+
+void	rest(char **command, t_env *env, pid_t pid)
+{
+	if (pid != 0)
+		execute_rest(command, env);
+	else
+		execute_rest_pid(command, env);
+}
+
 void	execute_cmd(char **command, t_env *env, pid_t pid)
 {
 	if (!command || !env)
@@ -28,13 +61,10 @@ void	execute_cmd(char **command, t_env *env, pid_t pid)
 		execute_export(command, env);
 	else if (!ft_strcmp(command[0], "unset"))
 		execute_unset(command, env);
+	else if (!ft_strcmp(command[0], "exit"))
+		execute_exit(command, env);
 	else
-	{
-		if (pid != 0)
-			execute_rest(command, env);
-		else
-			execute_rest_pid(command, env);
-	}
+		rest(command, env, pid);
 	if (pid == 0)
 		exit(0);
 	if (command)
