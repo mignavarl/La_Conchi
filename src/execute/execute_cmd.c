@@ -28,11 +28,13 @@ int	execute_exit(char **command, t_env *env)
 		while (command[1][i])
 		{
 			if (!ft_isdigit(command[1][i]))
-				return (write(1, "exit: numeric argument required\n", 30));
+				return (write(1, "exit: numeric argument required\n", 32));
 			i++;
 		}
-		free_execve(command, env, NULL, NULL);
-		exit(ft_atoi(command[1]));
+		i = ft_atoi(command[1]);
+		ft_free_double(command);
+		free_env(env);;
+		exit(i);
 	}
 	return(0);
 }
