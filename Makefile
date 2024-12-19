@@ -27,6 +27,7 @@ SRCS = main.c\
 		$(LIST_DIR)list_command.c\
 		$(LIST_DIR)list_mini.c\
 		$(LIST_DIR)list_utils.c\
+		$(MAKE_DIR)make_append.c\
 		$(MAKE_DIR)make_input.c\
 		$(MAKE_DIR)make_output.c\
 		$(MAKE_DIR)make_pipe.c\

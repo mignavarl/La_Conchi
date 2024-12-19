@@ -30,7 +30,6 @@ void	print_cmd(t_cmds **comand)//TODO: BORRAR
 
 int main(int argc, char **argv, char *envp[])
 {
-	(void)argc;
 	(void)argv;
 	t_data	data;
 	t_cmds	*command;
@@ -39,7 +38,7 @@ int main(int argc, char **argv, char *envp[])
 
 	if (argc != 1)
 	{
-		printf(RED"No arguments\n"END);
+		printf(RED"Don't put arguments\n"END);
 		return (0);
 	}
 	ft_memset(&data, 0, sizeof(t_data));
@@ -62,14 +61,9 @@ int main(int argc, char **argv, char *envp[])
 			;
 		else if (data.words[0])
 		{
-			//Buscar en words
-			// if (!check_chars(data.words, &chars))t
-			// {
-			// 	printf(RED"A\n"END); 
-			// }
 			command = NULL;
 			command = list_cmd(command, data.words);
-			// print_cmd(&command);//PARA IMPRIMIR
+			print_cmd(&command);//PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
 			while (waitpid(-1, NULL, 0) != -1)

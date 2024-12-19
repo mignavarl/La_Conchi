@@ -58,11 +58,11 @@ char	**search_in_line(char *line, t_data *data)
 		}
 		i++;
 	}
-	// w = 0;//TODO: borrar, para ver words
-	// while (w < num_words)
-	// {
-	// 	printf("Word [%d] = %s / %d\n", w, words[w], w);
-	// 	w++;
-	// }
+	w = 0;//TODO: borrar, para ver words
+	while (w < num_words)
+	{
+		printf("Word [%d] = %s / %d\n", w, words[w], w);
+		w++;
+	}
 	return (words);
 }
