@@ -142,7 +142,7 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 			else if ((sym == 1 && words[w][i + 1] == '\0') ||
 				(sym == 2 && words[w][i + 2] == '\0'))// ES CHAR Y SÍ EL ÚLTIMO
 			{
-				printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
+				//printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
 				m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
 				break ;
 			}
