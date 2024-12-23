@@ -20,7 +20,8 @@ void	make_append(char **command, t_env *env, char *file)
 	fd_append = open(file, O_WRONLY | O_CREAT | O_APPEND, 00644);
 	if (fd_append < 0)
 	{
-		printf("La Conchi says: no such file or directory: %s\n", file);
+		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
+		ft_putendl_fd(file, 1);
 		return ;
 	}
 	pid = fork();

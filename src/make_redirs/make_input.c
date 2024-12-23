@@ -19,7 +19,8 @@ int	first_argument_input(char *file)
 	fd_input = open(file, O_RDONLY);
 	if (fd_input < 0)
 	{
-		printf("La Conchi says: no such file or directory: %s\n", file);
+		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
+		ft_putendl_fd(file, 1);
 		return (0);
 	}
 	dup2(fd_input, STDIN_FILENO);
@@ -35,7 +36,8 @@ void	make_input(char **command, t_env *env, char *file)
 	fd_input = open(file, O_RDONLY);
 	if (fd_input < 0)
 	{
-		printf("La Conchi says: no such file or directory: %s\n", file);
+		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
+		ft_putendl_fd(file, 1);
 		return ;
 	}
 	pid = fork();

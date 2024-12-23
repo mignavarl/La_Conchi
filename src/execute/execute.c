@@ -46,6 +46,8 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 
 	save_fd(data);
 	i = 0;
+	//TODO: meter función con los i = 0, que son los del principio. Asi ahorramos el i
+	replace_here_doc(now);
 	while (now)
 	{
 		if (i == 0 && !ft_strcmp(now->cmd, ">"))
@@ -88,7 +90,6 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			}
 			else
 				break ;
-			
 		}
 		i = 1;
 		command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
@@ -126,6 +127,10 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					ft_free_double(command);
 					break ;
 				}
+			}
+			if (!ft_strcmp(next->cmd, ">>"))
+			{
+
 			}
 			if (!ft_strcmp(next->cmd, "<"))
 			{
