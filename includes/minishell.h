@@ -171,23 +171,23 @@ void	    free_env(t_env *env_list);
 
 //BUIILTINS
 //builtins1.c
-void            ft_myprintecho(char *echo, int flag);
-static int      ft_myecho(char *echo);
-t_list	        *builtins(void);
-static int	    echo_aux(char *prompt);
-int	            terminator(t_tools *tools, char *prompt, int blt);
+//void            ft_myprintecho(char *echo, int flag);
+//static int      ft_myecho(char *echo);
+//t_list	        *builtins(void);
+//static int	    echo_aux(char *prompt);
+//int	            terminator(t_tools *tools, char *prompt, int blt);
 //builtins2.c
-void	        get_builts(t_string *built, unsigned int i);
-int	            ft_myunset(t_tools *tools, char *name);
-int	            ft_myexport(t_tools *tools, char *prompt);
-char	        *prsstraux(char *aux, char *str, unsigned int *i, t_tools *tools);
+//void	        get_builts(t_string *built, unsigned int i);
+//int	            ft_myunset(t_tools *tools, char *name);
+//int	            ft_myexport(t_tools *tools, char *prompt);
+//char	        *prsstraux(char *aux, char *str, unsigned int *i, t_tools *tools);
 //builtins3.c
-int	            iter_str(char c);
-static void	    ft_printenvp_ii(char *str, int *flag);
-void	        ft_printenvp(t_tools *tools);
-int	            ft_strcmp(char *str1, char *str2);
-int	            ft_customenvp(t_tools *tools);
-char	        *ft_searchqu(char *str, char c, unsigned int *i, t_tools *tools);
+//int	            iter_str(char c);
+//static void	    ft_printenvp_ii(char *str, int *flag);
+//void	        ft_printenvp(t_tools *tools);
+//int	            ft_strcmp(char *str1, char *str2);
+//int	            ft_customenvp(t_tools *tools);
+//char	        *ft_searchqu(char *str, char c, unsigned int *i, t_tools *tools);
 
 
 //-----------------------LEXER FUNCTIONS-----------------------//

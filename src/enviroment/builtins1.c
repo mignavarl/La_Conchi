@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+/*#include "env.h"
 
 void	ft_myprintecho(char *echo, int flag)
 {
@@ -108,4 +108,4 @@ int	terminator(t_tools *tools, char *prompt, int blt)
 	else if (blt == BT_PWD)
 		printf("%s\n", tools->pwd);
 	return (res);
-}
+}*/

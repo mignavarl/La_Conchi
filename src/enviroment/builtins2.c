@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+/*#include "env.h"
 
 void	get_builts(t_string *built, unsigned int i)
 {
@@ -104,4 +104,4 @@ int	iter_str(char c)
 		return (0);
 	else
 		return (1);
-}
+}*/

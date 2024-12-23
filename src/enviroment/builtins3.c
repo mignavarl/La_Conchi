@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+/*#include "env.h"
 
 static void	ft_printenvp_ii(char *str, int *flag)
 {
@@ -118,4 +118,4 @@ char	*ft_searchqu(char *str, char c, unsigned int *i, t_tools *tools)
 	}
 	free(str);
 	return (NULL);
-}
+}*/
