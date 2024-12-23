@@ -70,7 +70,8 @@ void	make_output(char **command, t_env *env, char *file)
 	fd_output = open(file, O_WRONLY | O_CREAT | O_TRUNC, 00644);
 	if (fd_output < 0)
 	{
-		printf("La Conchi says: no such file or directory: %s\n", file);
+		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
+		ft_putendl_fd(file, 1);
 		return ;
 	}
 	pid = fork();
