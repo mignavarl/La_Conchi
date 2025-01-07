@@ -132,13 +132,18 @@ void	close_pipe(int pipe_fd[2], t_data *data);
 void	make_input(char **command, t_env *env, char *file);
 int		first_argument_input(char *file);
 
-//MAKE.OUTPUT.C >
+//MAKE_OUTPUT.C >
 void	make_output(char **command, t_env *env, char *file);
 void	first_argument_output(char *file);
 t_cmds	*last_file_output(t_cmds *node);
 
 //MAKE_APPEND.C
 void	make_append(char **command, t_env *env, char *file);
+
+//MAKE_DELIMITER.C
+void	replace_here_doc(t_cmds *now);
+void	make_delimiter(char **command, t_env *env, char *file);
+char	**first_delimiter(char **command);
 
 //-----------------------UTILS-----------------------//
 //EXIT_MINI.C
@@ -148,7 +153,7 @@ void	free_execve(char **command, t_env *env, char **envp, char *route);
 char	*ft_joinchar(char *str, char c);
 
 //-----------------------ENVIROMENT-----------------------//
-typedef struct s_env
+/* typedef struct s_env
 {
     char *key;
     char *value;
@@ -168,7 +173,7 @@ int		    env_lstsize(t_env *lst);
 t_env	    *env_last(t_env *lst);
 void	    env_add_back(t_env **lst, t_env *new);
 void	    free_env(t_env *env_list);
-
+ */
 //BUIILTINS
 //builtins1.c
 //void            ft_myprintecho(char *echo, int flag);

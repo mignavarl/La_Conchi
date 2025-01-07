@@ -20,12 +20,15 @@ void	while_here_doc(t_cmds *search, int delim)
 	int		fd;
 
 	eof = search->next;
-	tmp_file = ft_threejoin("/tmp/", "tmp", ft_itoa(delim));
+	line = ft_itoa(delim);
+	tmp_file = ft_strjoin("/tmp/tmp", line);
+	free(line);
 	fd = open(tmp_file, O_RDWR | O_TRUNC | O_APPEND | O_CREAT, 00644);
 	while (1)
 	{
 		line = get_next_line(0);
-		if (!ft_strcmp(line, eof->cmd))
+		if (!ft_strncmp(line, eof->cmd, ft_strlen(line) - 1))
+			break ;
 		ft_putstr_fd(line, fd);
 		free(line);
 	}
@@ -61,4 +64,63 @@ void	replace_here_doc(t_cmds *now)
 		}
 		search = search->next;
 	}
+}
+
+void	make_delimiter(char **command, t_env *env, char *file)
+{
+	int		fd_delim;
+	pid_t	pid;
+
+	fd_delim = open(file, O_RDONLY);
+	if (fd_delim < 0)
+	{
+		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
+		ft_putendl_fd(file, 1);
+		return ;
+	}
+	pid = fork();
+	if (pid < 0)
+		perror("Fork mal hecho");//TODO:funcion para salir
+	if (pid == 0)
+	{
+		dup2(fd_delim, STDIN_FILENO);
+		close(fd_delim);
+		execute_cmd(command, env, pid);
+	}
+	else
+		close(fd_delim);
+}
+
+char	**first_delimiter(char **command)
+{
+	char	**new_cmd;
+	int		c;
+	int		n;
+	int		fd_delim;
+
+	c = 1;
+	while (command[c])
+		c++;
+	if (c <= 2)
+	{
+		ft_free_double(command);
+		return (NULL);
+	}
+	new_cmd = malloc(c * sizeof(char *));
+	if (!new_cmd)
+		return (NULL);
+	fd_delim = open(command[1], O_RDONLY);
+	dup2(fd_delim, STDIN_FILENO);
+	close(fd_delim);
+	c = 2;
+	n = 0;
+	while (command[c])
+	{
+		new_cmd[n] = ft_strdup(command[c]);
+		c++;
+		n++;
+	}
+	new_cmd[n] = NULL;
+	ft_free_double(command);
+	return (new_cmd);
 }

@@ -25,10 +25,23 @@ int	count_com(t_cmds *now)
 	
 	tmp = now;
 	i = 0;
-	while(tmp && tmp->cmd && !m_ischar(tmp->cmd))
+	if (!ft_strcmp(tmp->cmd, "<<"))
 	{
 		tmp = tmp->next;
 		i++;
+		while(tmp && tmp->cmd && !m_ischar(tmp->cmd))
+		{
+			tmp = tmp->next;
+			i++;
+		}
+	}
+	else
+	{
+		while(tmp && tmp->cmd && !m_ischar(tmp->cmd))
+		{
+			tmp = tmp->next;
+			i++;
+		}
 	}
 	return (i + 1);
 }
@@ -94,7 +107,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		i = 1;
 		command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
 		if (!command)
-			return; // Si malloc falla, salimos de la función
+			return ; // Si malloc falla, salimos de la función
 		command[0] = ft_strdup(now->cmd);  // Copia del comando
 		if (!command[0])  // Verifica si la asignación falla
 		{
@@ -113,6 +126,13 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			i++;
 		}
 		command[i] = NULL;  // Terminamos el array de comandos
+		if (!ft_strcmp(now->cmd, "<<"))
+		{
+			data->to_close = 1;
+			command = first_delimiter(command);
+			if (!command)
+				break ;
+		}
 		if (next && m_ischar(next->cmd))
 		{
 			data->to_close = 1;
@@ -128,9 +148,15 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					break ;
 				}
 			}
-			if (!ft_strcmp(next->cmd, ">>"))
+			if (!ft_strcmp(next->cmd, "<<"))
 			{
-
+				next = next->next;
+				make_delimiter(command, env, next->cmd);
+				if (!next->next)
+				{
+					ft_free_double(command);
+					break ;
+				}
 			}
 			if (!ft_strcmp(next->cmd, "<"))
 			{

@@ -31,6 +31,7 @@ SRCS = main.c\
 		$(MAKE_DIR)make_input.c\
 		$(MAKE_DIR)make_output.c\
 		$(MAKE_DIR)make_pipe.c\
+		$(MAKE_DIR)make_delimiter.c\
 		$(PARS_DIR)check_chars.c\
 		$(PARS_DIR)count.c\
 		$(PARS_DIR)quotes.c\
