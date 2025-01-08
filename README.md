@@ -20,12 +20,12 @@ El proyecto minishell se divide en varias partes:
 
 Tests
 
-    echo bonjour ; |
-    echo bonjour | |
+    echo hello ; |
+    echo hello | |
     |
-    echo bonjour |;
-    echo bonjour ; ls
-    echo bonjour > test\ 1
+    echo hello |;
+    echo hello ; ls
+    echo hello > test\ 1
     cd $HOME/Documents
     echo "\s" & echo "\s"
     echo >
@@ -35,18 +35,18 @@ Tests
     export "" et unset ""
     echo test > file test1
     $
-    not_cmd bonjour > salut
+    not_cmd hello > salut
     env puis export puis env # vars aren't sorted
     cat Makefile | grep pr | head -n 5 | cd test (mybin) # check status code
     cat Makefile | grep pr | head -n 5 | cat test (bin) # check status code
     cat Makefile | grep pr | head -n 5 | hello (NA) # check status code
-    echo bonjour >>> test
-    echo bonjour > > out
+    echo hello >>> test
+    echo hello > > out
     echo 2 >> out1 > out2
     echo 2 > out1 >> out2
     cat < test # with non-existent test
     export var; export var=test
-    echo bonjour > $test # with test not defined
+    echo hello > $test # with test not defined
     file_name_in_current_dir
     cd ../../../../../.. ; pwd
     ctrl-C . 130 sur bin(ex : sleep 10)&line vide
@@ -58,10 +58,10 @@ Tests
     export "test=ici"=coucou
     c$var Makefile # with var=at
     $LESS$VAR
-    /bin/echo bonjour
+    /bin/echo hello
     not_cmd
     sleep 5 | exit
-    echo bonjour > $test w/ t
+    echo hello > $test w/ t
     "exit retour a la ligne"
     minishell # binary not in path without "./" before
     cat diufosgid # check exit code
