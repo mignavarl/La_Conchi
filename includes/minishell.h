@@ -134,20 +134,28 @@ int		first_argument_input(char *file);
 
 //MAKE_OUTPUT.C >
 void	make_output(char **command, t_env *env, char *file);
-void	first_argument_output(char *file);
+t_cmds	*first_argument_output(t_cmds *node);
 t_cmds	*last_file_output(t_cmds *node);
 
 //MAKE_APPEND.C
 void	make_append(char **command, t_env *env, char *file);
 
 //MAKE_DELIMITER.C
-void	replace_here_doc(t_cmds *now);
-void	make_delimiter(char **command, t_env *env, char *file);
+
+t_cmds	*make_delimiter(char **command, t_env *env, char *file, t_cmds *next);
 char	**first_delimiter(char **command);
+
+//MAKE_HERE_DOC.C
+void	replace_here_doc(t_cmds *now);
 
 //-----------------------UTILS-----------------------//
 //EXIT_MINI.C
 void	free_execve(char **command, t_env *env, char **envp, char *route);
+void	free_fork(char **command, t_env *env);
+
+//FD_UTILS.C
+void	restaure_fd(t_data *data);
+void	save_fd(t_data *data);
 
 //FT_JOINCHAR.C
 char	*ft_joinchar(char *str, char c);

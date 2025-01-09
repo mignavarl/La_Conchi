@@ -53,13 +53,24 @@ t_cmds	*last_file_output(t_cmds *node)
 	return (first);
 }
 
-void	first_argument_output(char *file)
+t_cmds	*first_argument_output(t_cmds *node)
 {
 	int		fd_output;
+	t_cmds	*next;
 
-	fd_output = open(file, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+	fd_output = open(node->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
 	dup2(fd_output, STDOUT_FILENO);
 	close(fd_output);
+	if (node->next && !ft_strcmp(node->next->cmd, ">"))
+	{
+		next = last_file_output(node);
+		fd_output = open(next->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+		dup2(fd_output, STDOUT_FILENO);
+		close(fd_output);
+		return (next);
+	}
+	else
+		return (node);
 }
 
 void	make_output(char **command, t_env *env, char *file)
@@ -76,7 +87,7 @@ void	make_output(char **command, t_env *env, char *file)
 	}
 	pid = fork();
 	if (pid < 0)
-		perror("Fork mal hecho");//TODO:funcion salir
+		free_fork(command, env);
 	if (pid == 0)
 	{
 		dup2(fd_output, STDOUT_FILENO);

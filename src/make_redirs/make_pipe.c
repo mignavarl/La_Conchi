@@ -33,7 +33,7 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 	pipe(data->pipe_fd);
 	pid = fork();
 	if (pid < 0)
-		perror("Fork mal hecho");//TODO:funcion para salir
+		free_fork(command, env);
 	if (pid == 0)
 	{
 		close(data->pipe_fd[READ]);

@@ -12,12 +12,6 @@
 
 #include "minishell.h"
 
-void	save_fd(t_data *data)
-{
-	data->clon_stdin = dup(STDIN_FILENO);
-	data->clon_stdout = dup(STDOUT_FILENO);
-}
-
 int	count_com(t_cmds *now)
 {
 	t_cmds *tmp;
@@ -46,12 +40,6 @@ int	count_com(t_cmds *now)
 	return (i + 1);
 }
 
-void	restaure_fd(t_data *data)
-{
-	dup2(data->clon_stdout, STDOUT_FILENO);
-	close(data->clon_stdout);
-}
-
 void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 {
 	char    **command;
@@ -66,7 +54,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		if (i == 0 && !ft_strcmp(now->cmd, ">"))
 		{
 			data->to_close = 1;
-			first_argument_output(next->cmd);
+			next = first_argument_output(next);
 			if (next->next)
 			{
 				now = next->next;
@@ -151,7 +139,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			if (!ft_strcmp(next->cmd, "<<"))
 			{
 				next = next->next;
-				make_delimiter(command, env, next->cmd);
+				next = make_delimiter(command, env, next->cmd, next);
 				if (!next->next)
 				{
 					ft_free_double(command);
@@ -160,9 +148,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			}
 			if (!ft_strcmp(next->cmd, "<"))
 			{
-				//printf("Input:\n%s\n", next->cmd);
 				next = next->next;
-				//printf("%s\n", next->cmd);
 				make_input(command, env, next->cmd);
 				if (!next->next)
 				{

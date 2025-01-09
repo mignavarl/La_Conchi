@@ -42,7 +42,7 @@ void	make_input(char **command, t_env *env, char *file)
 	}
 	pid = fork();
 	if (pid < 0)
-		perror("Fork mal hecho");//TODO:funcion para salir
+		free_fork(command, env);
 	if (pid == 0)
 	{
 		dup2(fd_input, STDIN_FILENO);

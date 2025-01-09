@@ -28,10 +28,11 @@ SRCS = main.c\
 		$(LIST_DIR)list_mini.c\
 		$(LIST_DIR)list_utils.c\
 		$(MAKE_DIR)make_append.c\
+		$(MAKE_DIR)make_delimiter.c\
+		$(MAKE_DIR)make_here_doc.c\
 		$(MAKE_DIR)make_input.c\
 		$(MAKE_DIR)make_output.c\
 		$(MAKE_DIR)make_pipe.c\
-		$(MAKE_DIR)make_delimiter.c\
 		$(PARS_DIR)check_chars.c\
 		$(PARS_DIR)count.c\
 		$(PARS_DIR)quotes.c\
@@ -39,6 +40,7 @@ SRCS = main.c\
 		$(PARS_DIR)search_in_line.c\
 		$(PARS_DIR)words.c\
 		$(SIG_DIR)signal.c\
+		$(UTIL_DIR)fd_utils.c\
 		$(UTIL_DIR)exit_mini.c\
 		$(UTIL_DIR)ft_joinchar.c
 #~~~~~~ Obj Files ~~~~~~~
