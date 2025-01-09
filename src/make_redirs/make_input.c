@@ -28,17 +28,58 @@ int	first_argument_input(char *file)
 	return (1);
 }
 
-void	make_input(char **command, t_env *env, char *file)
+t_cmds	*check_pipe(t_cmds *node)
+{
+	t_cmds	*last;
+
+	if (!node->next)
+		return (node);
+	last = node->next;
+	if (!ft_strcmp(last->cmd, "|"))
+		return (last);
+	return (node);
+}
+
+t_cmds	*find_output_from_in(t_cmds *last)
+{
+	int		fd_out;
+	t_cmds	*node;
+
+	while (1)
+	{
+		if (!ft_strcmp(last->cmd, ">"))
+		{
+			node = last->next;
+	
+			fd_out = open(node->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);		
+			if (node->next)
+				last = node->next;
+			else
+				break ;
+		}
+		else
+			break ;
+		close(fd_out);
+	}
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
+	node = check_pipe(node);
+	return (node);
+}
+
+t_cmds	*make_input(char **command, t_env *env, char *file, t_cmds* node)
 {
 	int		fd_input;
 	pid_t	pid;
 
 	fd_input = open(file, O_RDONLY);
+	if (node->next && !ft_strcmp(node->next->cmd, ">"))
+		node = find_output_from_in(node->next);
 	if (fd_input < 0)
 	{
 		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
 		ft_putendl_fd(file, 1);
-		return ;
+		return (node);
 	}
 	pid = fork();
 	if (pid < 0)
@@ -51,4 +92,5 @@ void	make_input(char **command, t_env *env, char *file)
 	}
 	else
 		close(fd_input);
+	return (node);
 }

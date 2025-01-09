@@ -129,13 +129,14 @@ void	make_pipe(char **command, t_env *env, t_data *data);
 void	close_pipe(int pipe_fd[2], t_data *data);
 
 //MAKE_INPUT.C <
-void	make_input(char **command, t_env *env, char *file);
+t_cmds	*make_input(char **command, t_env *env, char *file, t_cmds *last);
 int		first_argument_input(char *file);
 
 //MAKE_OUTPUT.C >
 void	make_output(char **command, t_env *env, char *file);
 t_cmds	*first_argument_output(t_cmds *node);
 t_cmds	*last_file_output(t_cmds *node);
+t_cmds	*find_last(t_cmds *first, t_cmds *last);
 
 //MAKE_APPEND.C
 void	make_append(char **command, t_env *env, char *file);

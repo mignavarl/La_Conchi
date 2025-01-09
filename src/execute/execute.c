@@ -149,7 +149,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			if (!ft_strcmp(next->cmd, "<"))
 			{
 				next = next->next;
-				make_input(command, env, next->cmd);
+				next = make_input(command, env, next->cmd, next);
 				if (!next->next)
 				{
 					ft_free_double(command);
@@ -165,6 +165,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					ft_free_double(command);
 					break ;
 				}
+				data->to_close = 1;
 			}
 		}
 		else
