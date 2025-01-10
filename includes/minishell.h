@@ -54,6 +54,7 @@ struct s_data
 	int		to_close;
 	char	**words;
 	int		quote_chars;
+	int		signal_switch;
 };
 
 //----------------PARSE--------------------------------//
@@ -75,7 +76,7 @@ int		count_words(char *line);
 char	*find_words(char *line, int i, t_data *data);
 
 //SIGNAL.C
-void	find_signal();
+void	find_signal(t_data *data);
 
 //CHECK_CHARS.C
 int		m_ischar(char *c);

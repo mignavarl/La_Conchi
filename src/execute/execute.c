@@ -155,6 +155,10 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					ft_free_double(command);
 					break ;
 				}
+				if (!ft_strcmp(next->cmd, "|"))
+					restaure_fd(data);
+				ft_putendl_fd(" ", 1);
+				ft_putendl_fd(next->cmd, 1);
 			}
 			if (!ft_strcmp(next->cmd, ">"))
 			{

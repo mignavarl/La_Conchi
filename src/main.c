@@ -46,7 +46,7 @@ int main(int argc, char **argv, char *envp[])
 	env = init_env(envp, env);
 	while (1)
 	{
-		find_signal();
+		find_signal(&data);
 		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
 		if (!line || !ft_strcmp(line, "exit"))
 		{
@@ -58,14 +58,16 @@ int main(int argc, char **argv, char *envp[])
 		add_history(line);
 		data.words = search_in_line(line, &data);
 		if (!data.words)
-			;
+			data.signal_switch = 0;
 		else if (data.words[0])
 		{
+			data.signal_switch = 1;
 			command = NULL;
 			command = list_cmd(command, data.words);
 			//print_cmd(&command);//PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
+			close_pipe(data.pipe_fd, &data);
 			while (waitpid(-1, NULL, 0) != -1)
 				continue ;
 			m_listclear(&command, free);
@@ -73,7 +75,6 @@ int main(int argc, char **argv, char *envp[])
 		//free_env(env);
 		free(line);
 		ft_free_double(data.words);
-		close_pipe(data.pipe_fd, &data);
 	}
 	return 0;
 }

@@ -22,7 +22,6 @@ char	*search_path(char **envp)
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
-			// path = ft_substr(envp[i], 5, ft_strlen(envp[i])-5);
 			path = ft_substr(envp[i], 1, ft_strlen(envp[i]));
 			return (path);
 		}
@@ -37,8 +36,6 @@ char	*search_route(char *command, char **envp)
 	char	**route;
 	int		i;
 
-	if (access(command, F_OK) == 0)
-		return(ft_strdup(command));
 	path = search_path(envp);
 	if (!path)
 		return (NULL);
@@ -57,6 +54,8 @@ char	*search_route(char *command, char **envp)
 		i++;
 	}
 	ft_free_double(route);
+	if (access(command, F_OK) == 0)
+		return(ft_strdup(command));
 	return (NULL);
 }
 
