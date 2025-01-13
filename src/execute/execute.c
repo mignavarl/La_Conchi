@@ -96,18 +96,24 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		command = ft_calloc(count_com(now), sizeof(char *));  // Asignación de memoria para el array de comandos
 		if (!command)
 			return ; // Si malloc falla, salimos de la función
+		ft_putstr_fd("---NOW---", 1);
+		ft_putstr_fd(now->cmd, 1);
+		ft_putendl_fd("----------", 1);
 		command[0] = ft_strdup(now->cmd);  // Copia del comando
 		if (!command[0])  // Verifica si la asignación falla
 		{
-			free(command);  // Liberar el array de comandos en caso de error
+			ft_free_double(&command);  // Liberar el array de comandos en caso de error
 			return;
 		}
 		while (next && next->cmd && !m_ischar(next->cmd))
 		{
+			ft_putstr_fd("---NEXT---", 1);
+			ft_putstr_fd(next->cmd, 1);
+			ft_putendl_fd("--", 1);
 			command[i] = ft_strdup(next->cmd);  // Copia de los comandos siguientes
 			if (!command[i])  // Verifica si la asignación falla
 			{
-				ft_free_double(command);  // Liberar el array de comandos si algo falla
+				ft_free_double(&command);  // Liberar el array de comandos si algo falla
 				return;
 			}
 			next = next->next;
@@ -124,15 +130,13 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		if (next && m_ischar(next->cmd))
 		{
 			data->to_close = 1;
-			if (!ft_strcmp(next->cmd, "|"))
-				make_pipe(command, env, data);
 			if (!ft_strcmp(next->cmd, ">>"))
 			{
 				next = next->next;
 				make_append(command, env, next->cmd);
 				if (!next->next)
 				{
-					ft_free_double(command);
+					ft_free_double(&command);
 					break ;
 				}
 			}
@@ -142,7 +146,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				next = make_delimiter(command, env, next->cmd, next);
 				if (!next->next)
 				{
-					ft_free_double(command);
+					ft_free_double(&command);
 					break ;
 				}
 			}
@@ -152,13 +156,9 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				next = make_input(command, env, next->cmd, next);
 				if (!next->next)
 				{
-					ft_free_double(command);
+					ft_free_double(&command);
 					break ;
 				}
-				if (!ft_strcmp(next->cmd, "|"))
-					restaure_fd(data);
-				ft_putendl_fd(" ", 1);
-				ft_putendl_fd(next->cmd, 1);
 			}
 			if (!ft_strcmp(next->cmd, ">"))
 			{
@@ -166,11 +166,13 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				make_output(command, env, next->cmd);
 				if (!next->next)
 				{
-					ft_free_double(command);
+					ft_free_double(&command);
 					break ;
 				}
 				data->to_close = 1;
 			}
+			if (!ft_strcmp(next->cmd, "|"))
+				make_pipe(command, env, data);
 		}
 		else
 		{
@@ -181,6 +183,8 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			now = next->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
 			now = NULL;
+		if (!ft_strcmp(now->cmd, "|"))
+			now = pipe_exception(now, data);
 		if (now->next)
 			next = now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else

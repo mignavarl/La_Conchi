@@ -54,7 +54,6 @@ struct s_data
 	int		to_close;
 	char	**words;
 	int		quote_chars;
-	int		signal_switch;
 };
 
 //----------------PARSE--------------------------------//
@@ -76,7 +75,7 @@ int		count_words(char *line);
 char	*find_words(char *line, int i, t_data *data);
 
 //SIGNAL.C
-void	find_signal(t_data *data);
+void	find_signal(void);
 
 //CHECK_CHARS.C
 int		m_ischar(char *c);
@@ -128,6 +127,7 @@ void	m_listclear(t_cmds **lst, void (*del)(void *));
 //MAKE_PIPE.C
 void	make_pipe(char **command, t_env *env, t_data *data);
 void	close_pipe(int pipe_fd[2], t_data *data);
+t_cmds	*pipe_exception(t_cmds *now, t_data *data);
 
 //MAKE_INPUT.C <
 t_cmds	*make_input(char **command, t_env *env, char *file, t_cmds *last);

@@ -83,7 +83,7 @@ char	**first_delimiter(char **command)
 		c++;
 	if (c <= 2)
 	{
-		ft_free_double(command);
+		ft_free_double(&command);
 		return (NULL);
 	}
 	new_cmd = malloc(c * sizeof(char *));
@@ -94,6 +94,6 @@ char	**first_delimiter(char **command)
 	close(fd_delim);
 	c = 2;
 	new_cmd = create_new_cmd(command, new_cmd, c);
-	ft_free_double(command);
+	ft_free_double(&command);
 	return (new_cmd);
 }

@@ -47,13 +47,13 @@ char	*search_route(char *command, char **envp)
 		path = ft_threejoin(route[i], "/", command);
 		if (access(path, F_OK) == 0)
 		{
-			ft_free_double(route);
+			ft_free_double(&route);
 			return (path);
 		}
 		free(path);
 		i++;
 	}
-	ft_free_double(route);
+	ft_free_double(&route);
 	if (access(command, F_OK) == 0)
 		return(ft_strdup(command));
 	return (NULL);
@@ -74,7 +74,7 @@ char **set_env(t_env *env)
 	{
         envp[i] = ft_threejoin(tmp->key, "=", tmp->value);
         if (!envp[i]) 
-			return (ft_free_double(envp), NULL);
+			return (ft_free_double(&envp), NULL);
         tmp = tmp->next;
         i++;
     }

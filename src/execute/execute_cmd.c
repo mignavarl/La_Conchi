@@ -32,7 +32,7 @@ int	execute_exit(char **command, t_env *env)
 			i++;
 		}
 		i = ft_atoi(command[1]);
-		ft_free_double(command);
+		ft_free_double(&command);
 		free_env(env);;
 		exit(i);
 	}
@@ -70,5 +70,5 @@ void	execute_cmd(char **command, t_env *env, pid_t pid)
 	if (pid == 0)
 		exit(0);
 	if (command)
-		ft_free_double(command);
+		ft_free_double(&command);
 }

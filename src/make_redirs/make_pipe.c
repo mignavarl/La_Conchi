@@ -12,6 +12,17 @@
 
 #include "minishell.h"
 
+t_cmds	*pipe_exception(t_cmds *now, t_data *data)
+{
+	ft_putendl_fd("AAAAAAAAAAAAAAAAAAAAAAAAAA", 2);
+	pipe(data->pipe_fd);
+	close(data->pipe_fd[WRITE]);
+	dup2(data->pipe_fd[READ], STDIN_FILENO);
+	close(data->pipe_fd[READ]);
+	now = now->next;
+	return (now);
+}
+
 void	close_pipe(int pipe_fd[2], t_data *data)
 {
 	if (data->to_close == 1)
@@ -46,6 +57,6 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 		close(data->pipe_fd[WRITE]);
 		dup2(data->pipe_fd[READ], STDIN_FILENO);
 		close(data->pipe_fd[READ]);
-		ft_free_double(command);
+		ft_free_double(&command);
 	}
 }

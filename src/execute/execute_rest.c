@@ -43,7 +43,7 @@ void	execute_rest(char **command, t_env *env)
 	}
 	else
 	{
-		ft_free_double(envp);
+		ft_free_double(&envp);
 		free(route);
 	}
 }
