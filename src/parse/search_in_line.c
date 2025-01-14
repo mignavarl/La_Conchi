@@ -22,6 +22,8 @@ char	**search_in_line(char *line, t_data *data)
 	(void)data;//temporal
 	i = 0;
 	num_words = count_words(line);
+	ft_putnbr_fd(num_words, 2);
+	ft_putendl_fd("  -> num_words", 2);
 	if (num_words < 0)
 	{
 		printf(RED"Close the quotes\n"END);

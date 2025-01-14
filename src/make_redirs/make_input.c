@@ -45,13 +45,11 @@ t_cmds	*find_output_from_in(t_cmds *last)
 	int		fd_out;
 	t_cmds	*node;
 
-	ft_putendl_fd("OUT IN ->", 1);
 	while (!ft_strcmp(last->cmd, ">"))
 	{
 		if (!ft_strcmp(last->cmd, ">"))
 		{
 			node = last->next;
-			ft_putendl_fd(node->cmd, 1);
 			fd_out = open(node->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
 			close(fd_out);	
 			if (node->next)
@@ -62,11 +60,10 @@ t_cmds	*find_output_from_in(t_cmds *last)
 		else
 			break ;
 	}
-	ft_putendl_fd("------", 1);
 	fd_out = open(node->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
 	dup2(fd_out, STDOUT_FILENO);
 	close(fd_out);
-	node = check_pipe(node);
+	//node = check_pipe(node);
 	return (node);
 }
 

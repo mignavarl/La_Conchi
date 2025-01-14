@@ -180,11 +180,21 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			break ;
 		}
 		if(next->next)
+		{
 			now = next->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
+			ft_putstr_fd("--now->", 2);
+			ft_putendl_fd(now->cmd, 2);
+			ft_putstr_fd("--", 2);
+			if (!ft_strcmp(now->cmd, "|"))
+			{
+				pipe_exception();
+				now = now->next;
+			}
+		}
 		else
 			now = NULL;
-		if (!ft_strcmp(now->cmd, "|"))
-			now = pipe_exception(now, data);
+		//if (!ft_strcmp(now->cmd, "|"))
+
 		if (now->next)
 			next = now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
