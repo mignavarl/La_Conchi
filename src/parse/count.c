@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 //TODO: DESUSO ---- BOORRAR
-/*int	count_end_quote(char *line, int i)
+int	count_end_quote(char *line, int i)
 {
 	int		l;
 
@@ -29,21 +29,30 @@
 int	count_end_word(char *line, int i)
 {
 	int	l;
+	int	q;
 
 	l = i;
 	while (line[l])
 	{
-		if (line[l] == ' ' || line[l] == '"' || line[l] == '\'')
+		if ((line[l] == '"' || line[l] == '\'') && line[l + 1] != '\0')
+		{
+			q = count_end_quote(&line[l], l);
+			if (q < 0)
+				return (-1);
+			l += q;
+		}
+		if (line[l] == ' ')
 			return (l - i);
 		l++;
 	}
 	return (l - i);
-}*/
+}
 
 int	count_words(char *line)
 {
 	int	i;
 	int	word;
+	int	q;
 
 	i = 0;
 	word = 0;
@@ -52,21 +61,25 @@ int	count_words(char *line)
 		if (line[i] == ' ')
 			word++;
 		i++;
-		// if ((line[i] != '"' && line[i] != '\'' && line[i] != ' '))
-		// {
-		// 	i += count_end_word(line, i);
-		// 	word++;
-		// }
-		// if (line[i] == '"' || line[i] == '\'')
-		// {
-		// 	if (count_end_quote(line, i) < 0)
-		// 		return (-1);
-		// 	i += count_end_quote(line, i);
-		// 	word++;
-		// }
-		// if (line[i] == '\0')
-		// 	break ;
-		// i++;
+		if ((line[i] != '"' && line[i] != '\'' && line[i] != ' '))
+		{
+			q = count_end_word(line, i);
+			if (q < 0)
+				return (-1);
+			i += q - 1;
+			word++;
+		}
+		if (line[i] == '"' || line[i] == '\'')
+		{
+			q = count_end_quote(line, i);
+			if (q < 0)
+				return (-1);
+			i += q; 
+			word++;
+		}
+		if (line[i] == '\0')
+			break ;
+		i++;
 	}
 	return (word + 1);
 }
