@@ -19,8 +19,9 @@ int	count_end_quote(char *line, int i)
 	l = i + 1;
 	while (line[l])
 	{
+		printf("end quote: %d = %c\n", l, line[l]);
 		if (line[l] == line[i])
-			return (l - i);
+			return (l);
 		l++;
 	}
 	return (-1);
@@ -34,18 +35,19 @@ int	count_end_word(char *line, int i)
 	l = i;
 	while (line[l])
 	{
-		if ((line[l] == '"' || line[l] == '\'') && line[l + 1] != '\0')
+		if ((line[l] == '"' || line[l] == '\''))
 		{
-			q = count_end_quote(&line[l], l);
+			printf("end word: %d = %c\n", l, line[l]);
+			q = count_end_quote(line, l);
 			if (q < 0)
 				return (-1);
-			l += q;
+			l = q + 1;
 		}
 		if (line[l] == ' ')
-			return (l - i);
+			return (l);
 		l++;
 	}
-	return (l - i);
+	return (l);
 }
 
 int	count_words(char *line)
@@ -60,21 +62,23 @@ int	count_words(char *line)
 	{
 		if (line[i] == ' ')
 			word++;
-		i++;
+		//i++;
 		if ((line[i] != '"' && line[i] != '\'' && line[i] != ' '))
 		{
+			printf("count word: %d = %c\n", i, line[i]);
 			q = count_end_word(line, i);
 			if (q < 0)
 				return (-1);
-			i += q - 1;
+			i = q;
 			word++;
 		}
 		if (line[i] == '"' || line[i] == '\'')
 		{
+			printf("count quote: %d = %c\n", i, line[i]);
 			q = count_end_quote(line, i);
 			if (q < 0)
 				return (-1);
-			i += q; 
+			i = q; 
 			word++;
 		}
 		if (line[i] == '\0')
@@ -83,5 +87,3 @@ int	count_words(char *line)
 	}
 	return (word + 1);
 }
-
-//echo hi";" hihi
