@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   count.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-10-04 10:38:02 by mignavar          #+#    #+#             */
-/*   Updated: 2024-10-04 10:38:02 by mignavar         ###   ########.fr       */
+/*   Created: 2024/10/04 10:38:02 by mignavar          #+#    #+#             */
+/*   Updated: 2025/01/15 12:58:04 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,3 +83,5 @@ int	count_words(char *line)
 	}
 	return (word + 1);
 }
+
+//echo hi";" hihi
