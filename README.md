@@ -119,3 +119,12 @@ Tests
     exit 1 | exit 0
 
 
+    export
+    export a=hola
+    env
+
+    unset a=holaSSSSSS 1a=adios b=nada
+    export
+    unset a 1a b
+    export
+
