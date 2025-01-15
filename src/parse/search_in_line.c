@@ -27,6 +27,9 @@ char	**search_in_line(char *line, t_data *data)
 		printf(RED"Close the quotes\n"END);
 		return (NULL);
 	}
+	printf("num_word = %d\n", num_words);
+	if (num_words == 1)
+		return (NULL);
 	words = (char **)ft_calloc(num_words + 1, sizeof(char *));
 	w = 0;
 	if (line[0] == '\0')
@@ -63,6 +66,11 @@ char	**search_in_line(char *line, t_data *data)
 	// {
 	// 	printf("Word [%d] = %s / %d\n", w, words[w], w);
 	// 	w++;
+	// }
+	// if (!words[0] || words[0][0] == '\0')
+	// {
+	// 	ft_free_double(&words);
+	// 	return (NULL);
 	// }
 	return (words);
 }

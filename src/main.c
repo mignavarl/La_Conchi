@@ -70,9 +70,9 @@ int main(int argc, char **argv, char *envp[])
 			while (waitpid(-1, NULL, 0) != -1)
 				continue ;
 			m_listclear(&command, free);
-			ft_free_double(&data.words);
 		}
-		//free_env(env);
+		if (data.words)
+			ft_free_double(&data.words);
 		free(line);
 	}
 	return 0;
