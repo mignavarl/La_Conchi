@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-void	pipe_exception(void)
+void	pipe_exception(t_data *data)
 {
 	int	fd_pipe[2];
 
-	ft_putendl_fd("AAAAAAAAAAAAAAAAAAAAAAAAAA", 2);
 	pipe(fd_pipe);
 	close(fd_pipe[WRITE]);
 	dup2(fd_pipe[READ], STDIN_FILENO);
 	close(fd_pipe[READ]);
+	data->to_close = 1;
 }
 
 void	close_pipe(int pipe_fd[2], t_data *data)

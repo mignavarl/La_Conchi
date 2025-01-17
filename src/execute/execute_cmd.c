@@ -52,7 +52,7 @@ void	execute_cmd(char **command, t_env *env, pid_t pid)
 	if (!command || !env || !command[0])
 	{
 		ft_free_double(&command);
-		return ;//TODO:funcion salir
+		return ;
 	}
 	if (!ft_strcmp(command[0], "cd"))
 		execute_cd(command);
