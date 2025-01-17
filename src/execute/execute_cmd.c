@@ -49,8 +49,11 @@ void	rest(char **command, t_env *env, pid_t pid)
 
 void	execute_cmd(char **command, t_env *env, pid_t pid)
 {
-	if (!command || !env)
+	if (!command || !env || !command[0])
+	{
+		ft_free_double(&command);
 		return ;//TODO:funcion salir
+	}
 	if (!ft_strcmp(command[0], "cd"))
 		execute_cd(command);
 	else if (!ft_strcmp(command[0], "pwd"))

@@ -22,7 +22,7 @@ void	execute_unset(char **command, t_env *env)
 		w++;
 	if (w < 2)
 	{
-		write(1, "unset: too many arguments\n", 26);
+		ft_putendl_fd("unset: too many arguments", 2);
 		return ;
 	}
 	w = 1;
@@ -44,7 +44,7 @@ void	while_export(char **command, t_env *env, int w)
 		while (command[w][i] != '=' && command[w][i])
 			i++;
 		key = ft_substr(command[w], 0, i);
-		ft_putstr_fd("La conchi says: ", 2);
+		ft_putstr_fd("export: ", 2);
 		ft_putstr_fd(key, 2);
 		ft_putendl_fd(": not a valid identifier", 2);
 		free(key);
@@ -61,11 +61,6 @@ void	while_export(char **command, t_env *env, int w)
 	}
 }
 
-// void	show_env_tidy(t_env *env)
-// {
-
-// }
-
 void	execute_export(char **command, t_env *env)
 {
 	int		w;
@@ -75,8 +70,7 @@ void	execute_export(char **command, t_env *env)
 		w++;
 	if (w == 1)
 	{
-		// show_env_tidy(env);
-		ft_putendl_fd("WIP", 2);
+		ft_putendl_fd("export: too few arguments", 2);
 		return ;
 	}
 	w = 1;
@@ -98,7 +92,7 @@ void	execute_env(char **command, t_env *env)
 		i++;
 	if (i > 1)
 	{
-		write(1, "env: too many arguments\n", 24);
+		ft_putendl_fd("env: too many arguments", 2);
 		return ;
 	}
 	while (tmp)

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-//TODO: DESUSO ---- BOORRAR
+
 int	count_end_quote(char *line, int i)
 {
 	int		l;

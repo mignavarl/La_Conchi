@@ -193,8 +193,6 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		}
 		else
 			now = NULL;
-		//if (!ft_strcmp(now->cmd, "|"))
-
 		if (now->next)
 			next = now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 		else
@@ -208,6 +206,8 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 	t_cmds	*next;
 
 	now = *cmd;
+	if (!now)
+		return ;
 	if (m_lstsize(*cmd) > 1)
 	{
 		next = now->next;

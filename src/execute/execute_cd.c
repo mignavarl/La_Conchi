@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void execute_cd(char **command)
+void	execute_cd(char **command)
 {
 	int	i;
 

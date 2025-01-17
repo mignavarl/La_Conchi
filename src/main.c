@@ -26,6 +26,7 @@ void	print_cmd(t_cmds **comand)//TODO: BORRAR
 		i++;
 		(*comand) = (*comand)->next;
 	}
+	printf(CYAN"FIN Print\n"END);
 }
 
 int main(int argc, char **argv, char *envp[])
