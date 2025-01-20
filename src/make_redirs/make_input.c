@@ -28,18 +28,6 @@ int	first_argument_input(char *file)
 	return (1);
 }
 
-t_cmds	*check_pipe(t_cmds *node)
-{
-	t_cmds	*last;
-
-	if (!node->next)
-		return (node);
-	last = node->next;
-	if (!ft_strcmp(last->cmd, "|"))
-		return (last);
-	return (node);
-}
-
 t_cmds	*find_output_from_in(t_cmds *last)
 {
 	int		fd_out;
@@ -63,7 +51,6 @@ t_cmds	*find_output_from_in(t_cmds *last)
 	fd_out = open(node->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
 	dup2(fd_out, STDOUT_FILENO);
 	close(fd_out);
-	//node = check_pipe(node);
 	return (node);
 }
 

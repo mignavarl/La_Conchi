@@ -134,7 +134,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					break ;
 				}
 			}
-			if (!ft_strcmp(next->cmd, "<<"))
+			else if (!ft_strcmp(next->cmd, "<<"))
 			{
 				next = next->next;
 				next = make_delimiter(command, env, next->cmd, next);
@@ -144,7 +144,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					break ;
 				}
 			}
-			if (!ft_strcmp(next->cmd, "<"))
+			else if (!ft_strcmp(next->cmd, "<"))
 			{
 				next = next->next;
 				next = make_input(command, env, next->cmd, next);
@@ -154,7 +154,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					break ;
 				}
 			}
-			if (!ft_strcmp(next->cmd, ">"))
+			else if (!ft_strcmp(next->cmd, ">"))
 			{
 				next = last_file_output(next->next);
 				make_output(command, env, next->cmd);
@@ -165,7 +165,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				}
 				data->to_close = 1;
 			}
-			if (!ft_strcmp(next->cmd, "|"))
+			else if (!ft_strcmp(next->cmd, "|"))
 				make_pipe(command, env, data);
 		}
 		else

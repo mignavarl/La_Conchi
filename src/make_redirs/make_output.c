@@ -16,23 +16,26 @@ t_cmds	*find_last(t_cmds *first, t_cmds *last)
 {
 	int	fd;
 
-	while (1)
+	fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+	close(fd);
+	while(1)
 	{
-		if (last->next)
+		if (!ft_strcmp(last->cmd, ">"))
 		{
-			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
-			close(fd);
 			first = last->next;
-		}
-		if (first->next)
-		{
 			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
 			close(fd);
-			last = first->next;
+			if (first->next)
+			{
+				last = first->next;
+				if (ft_strcmp(last->cmd, ">"))
+					return (first);
+			}
+			else
+				return (first);
 		}
-		else
-			return (first);
 	}
+	return (first);
 }
 
 t_cmds	*last_file_output(t_cmds *node)

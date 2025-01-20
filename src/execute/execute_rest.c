@@ -20,7 +20,8 @@ void	execute_rest_pid(char **command, t_env *env)
 	envp = set_env(env);
 	route = search_route(command[0], envp);
 	execve(route, command, envp);
-	printf("%s: command not found\n", command[0]);
+	ft_putstr_fd(command[0], 2);
+	ft_putendl_fd(": command not found", 2);
 	free_execve(command, env, envp, route);
 }
 
