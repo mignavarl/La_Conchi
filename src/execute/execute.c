@@ -133,6 +133,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					ft_free_double(&command);
 					break ;
 				}
+				ft_free_double(&command);
 			}
 			else if (!ft_strcmp(next->cmd, "<<"))
 			{
@@ -143,6 +144,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					ft_free_double(&command);
 					break ;
 				}
+				ft_free_double(&command);
 			}
 			else if (!ft_strcmp(next->cmd, "<"))
 			{
@@ -153,6 +155,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 					ft_free_double(&command);
 					break ;
 				}
+				ft_free_double(&command);
 			}
 			else if (!ft_strcmp(next->cmd, ">"))
 			{
@@ -161,9 +164,10 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				if (!next->next)
 				{
 					ft_free_double(&command);
-					break ;
+					return ;
 				}
 				data->to_close = 1;
+				ft_free_double(&command);
 			}
 			else if (!ft_strcmp(next->cmd, "|"))
 				make_pipe(command, env, data);
