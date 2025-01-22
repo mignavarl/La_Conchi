@@ -127,7 +127,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			if (!ft_strcmp(next->cmd, ">>"))
 			{
 				next = next->next;
-				make_append(command, env, next->cmd);
+				make_append(command, env, next->cmd, data);
 				if (!next->next)
 				{
 					ft_free_double(&command);
@@ -138,7 +138,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			else if (!ft_strcmp(next->cmd, "<<"))
 			{
 				next = next->next;
-				next = make_delimiter(command, env, next->cmd, next);
+				next = make_delimiter(command, env, next, data);
 				if (!next->next)
 				{
 					ft_free_double(&command);
@@ -149,7 +149,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			else if (!ft_strcmp(next->cmd, "<"))
 			{
 				next = next->next;
-				next = make_input(command, env, next->cmd, next);
+				next = make_input(command, env, next, data);
 				if (!next->next)
 				{
 					ft_free_double(&command);
@@ -160,7 +160,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			else if (!ft_strcmp(next->cmd, ">"))
 			{
 				next = last_file_output(next->next);
-				make_output(command, env, next->cmd);
+				make_output(command, env, next->cmd, data);
 				if (!next->next)
 				{
 					ft_free_double(&command);
@@ -174,7 +174,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		}
 		else
 		{
-			execute_cmd(command, env, 1);  // Ejecutar el comando
+			execute_cmd(command, env, 1, data);  // Ejecutar el comando
 			break ;
 		}
 		if(next->next)
@@ -215,7 +215,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 			printf("La Conchi says: syntax error near %s\n", now->cmd);
 			return ;
 		}
-		execute_cmd(ft_split(now->cmd, ' '), env, 1);
+		execute_cmd(ft_split(now->cmd, ' '), env, 1, data);
 		return ;
 	}
 }

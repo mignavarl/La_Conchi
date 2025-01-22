@@ -12,20 +12,20 @@
 
 #include "minishell.h"
 
-void	execute_rest_pid(char **command, t_env *env)
+void	execute_rest_pid(char **command, t_env *env, t_data *data)
 {
 	char	**envp;
 	char	*route;
 
 	envp = set_env(env);
 	route = search_route(command[0], envp);
-	execve(route, command, envp);
+	data->last_exit = execve(route, command, envp);
 	ft_putstr_fd(command[0], 2);
 	ft_putendl_fd(": command not found", 2);
 	free_execve(command, env, envp, route);
 }
 
-void	execute_rest(char **command, t_env *env)
+void	execute_rest(char **command, t_env *env, t_data *data)
 {
 	char	**envp;
 	char	*route;
@@ -38,7 +38,7 @@ void	execute_rest(char **command, t_env *env)
 		perror("Fork mal hecho");
 	if (pid == 0)
 	{
-		execve(route, command, envp);
+		data->last_exit = execve(route, command, envp);
 		ft_putstr_fd(command[0], 2);
 		ft_putendl_fd(": command not found", 2);
 		free_execve(command, env, envp, route);

@@ -4,15 +4,14 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdio.h>
-//# include <minishell.h>
 # include "../libft/libft.h"
 
 typedef struct s_env
 {
-    char *key;
-    char *value;
-    struct s_env *next;
-} t_env;
+    char 			*key;
+    char 			*value;
+    struct s_env	*next;
+}	t_env;
 
 // Declaraciones de funciones
 //ENV.C

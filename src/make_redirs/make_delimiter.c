@@ -30,17 +30,17 @@ t_cmds	*find_output(t_cmds *node)
 	return (next);
 }
 
-t_cmds	*make_delimiter(char **command, t_env *env, char *eof, t_cmds *node)
+t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data)
 {
 	int		fd_delim;
 	pid_t	pid;
 
-	fd_delim = open(eof, O_RDONLY);
+	fd_delim = open(node->cmd, O_RDONLY);
 	node = find_output(node);
 	if (fd_delim < 0)
 	{
 		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
-		ft_putendl_fd(eof, 1);
+		ft_putendl_fd(node->cmd, 1);
 		return (NULL);
 	}
 	pid = fork();
@@ -50,7 +50,7 @@ t_cmds	*make_delimiter(char **command, t_env *env, char *eof, t_cmds *node)
 	{
 		dup2(fd_delim, STDIN_FILENO);
 		close(fd_delim);
-		execute_cmd(command, env, pid);
+		execute_cmd(command, env, pid, data);
 	}
 	else
 		close(fd_delim);

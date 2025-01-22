@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	make_append(char **command, t_env *env, char *file)
+void	make_append(char **command, t_env *env, char *file, t_data *data)
 {
 	int		fd_append;
 	pid_t	pid;
@@ -31,7 +31,7 @@ void	make_append(char **command, t_env *env, char *file)
 	{
 		dup2(fd_append, STDOUT_FILENO);
 		close(fd_append);
-		execute_cmd(command, env, pid);
+		execute_cmd(command, env, pid, data);
 	}
 	else
 		close(fd_append);

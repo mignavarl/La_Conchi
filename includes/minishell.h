@@ -54,6 +54,7 @@ struct s_data
 	int		to_close;
 	char	**words;
 	int		quote_chars;
+	int		last_exit;
 };
 
 //----------------PARSE--------------------------------//
@@ -82,13 +83,13 @@ int		m_ischar(char *c);
 
 //-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C
-void	execute_cmd(char **command, t_env *env, pid_t pid);
+void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data);
 
 //EXECUTE_CD.C
 void 	execute_cd(char **command);
 
 //EXECUTE_ECHO.C
-void	execute_echo(char **command);
+void	execute_echo(char **command, t_data *data);
 
 //EXECUTE_PWD.C
 void	execute_pwd(void);
@@ -99,8 +100,8 @@ void	execute_export(char **command, t_env *env);
 void	execute_unset(char **command, t_env *env);
 
 //EXECUTE_REST.C
-void	execute_rest(char **command, t_env *env);
-void	execute_rest_pid(char **command, t_env *env);
+void	execute_rest(char **command, t_env *env, t_data *data);
+void	execute_rest_pid(char **command, t_env *env, t_data *data);
 
 //EXECUTE.C
 void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data);
@@ -130,21 +131,21 @@ void	close_pipe(int pipe_fd[2], t_data *data);
 void	pipe_exception(t_data *data);
 
 //MAKE_INPUT.C <
-t_cmds	*make_input(char **command, t_env *env, char *file, t_cmds *last);
+t_cmds	*make_input(char **command, t_env *env, t_cmds* node, t_data *data);
 int		first_argument_input(char *file);
 
 //MAKE_OUTPUT.C >
-void	make_output(char **command, t_env *env, char *file);
+void	make_output(char **command, t_env *env, char *file, t_data *data);
 t_cmds	*first_argument_output(t_cmds *node);
 t_cmds	*last_file_output(t_cmds *node);
 t_cmds	*find_last(t_cmds *first, t_cmds *last);
 
 //MAKE_APPEND.C
-void	make_append(char **command, t_env *env, char *file);
+void	make_append(char **command, t_env *env, char *file, t_data *data);
 
 //MAKE_DELIMITER.C
 
-t_cmds	*make_delimiter(char **command, t_env *env, char *file, t_cmds *next);
+t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data);
 char	**first_delimiter(char **command);
 
 //MAKE_HERE_DOC.C

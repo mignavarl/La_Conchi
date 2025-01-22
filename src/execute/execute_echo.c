@@ -42,8 +42,9 @@ void	echo_normal(char **command)
 	printf("\n");
 }
 
-void	execute_echo(char **command)
+void	execute_echo(char **command, t_data *data)
 {
+	(void)data;
 	int	w;
 	int	i;
 

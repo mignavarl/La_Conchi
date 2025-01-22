@@ -76,7 +76,7 @@ t_cmds	*first_argument_output(t_cmds *node)
 		return (node);
 }
 
-void	make_output(char **command, t_env *env, char *file)
+void	make_output(char **command, t_env *env, char *file, t_data *data)
 {
 	int		fd_output;
 	pid_t	pid;
@@ -95,7 +95,7 @@ void	make_output(char **command, t_env *env, char *file)
 	{
 		dup2(fd_output, STDOUT_FILENO);
 		close(fd_output);
-		execute_cmd(command, env, pid);
+		execute_cmd(command, env, pid, data);
 	}
 	else
 		close(fd_output);
