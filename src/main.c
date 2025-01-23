@@ -15,18 +15,21 @@
 void	print_cmd(t_cmds **comand)//TODO: BORRAR
 {
 	int i;
+	t_cmds *tmp;
 
 	i = 0;
+	tmp = *comand;
 	printf(CYAN"Print\n"END);
-	while ((*comand) != NULL)
+	while (tmp != NULL)
 	{
-		printf(CYAN"CMD (%d) = %s\n"END, i, (*comand)->cmd);
-		if ((*comand)->next == NULL)
+		printf(CYAN"CMD (%d) = %s\n"END, i, tmp->cmd);
+		if (tmp->next == NULL)
 			break;
 		i++;
-		(*comand) = (*comand)->next;
+		tmp = tmp->next;
 	}
 	printf(CYAN"FIN Print\n"END);
+	printf("------------------------------------\n");
 }
 
 int main(int argc, char **argv, char *envp[])
@@ -57,14 +60,14 @@ int main(int argc, char **argv, char *envp[])
 			break ;
 		}
 		add_history(line);
-		data.words = search_in_line(line, &data);
+		data.words = search_in_line(line, &data, env);
 		if (!data.words)
 			;
 		else if (data.words[0])
 		{
 			command = NULL;
 			command = list_cmd(command, data.words);
-			//print_cmd(&command);//PARA IMPRIMIR
+			print_cmd(&command);//PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
 			close_pipe(data.pipe_fd, &data);

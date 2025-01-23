@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	**search_in_line(char *line, t_data *data)
+char	**search_in_line(char *line, t_data *data, t_env *env)
 {
 	int		i;
 	int		w;
@@ -48,10 +48,9 @@ char	**search_in_line(char *line, t_data *data)
 		}
 		else if (line[i] == '"' || line[i] == '\'')
 		{
-			words[w] = find_quote(line, i, data);
+			words[w] = find_quote(line, i, data, env);
 			if (!words[w])
 				break ;
-			//i += ft_strlen(words[w]);
 			i = data->quote_chars - 1;
 			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i] && line[i + 1] != '\0')
 				i++;
@@ -60,16 +59,11 @@ char	**search_in_line(char *line, t_data *data)
 		}
 		i++;
 	}
-	// w = 0;//TODO: borrar, para ver words
-	// while (w < num_words)
-	// {
-	// 	printf("Word [%d] = %s / %d\n", w, words[w], w);
-	// 	w++;
-	// }
-	// if (!words[0] || words[0][0] == '\0')
-	// {
-	// 	ft_free_double(&words);
-	// 	return (NULL);
-	// }
+	w = 0;//TODO: borrar, para ver words
+	while (w < num_words)
+	{
+		printf("Word [%d] = %s / %d\n", w, words[w], w);
+		w++;
+	}
 	return (words);
 }

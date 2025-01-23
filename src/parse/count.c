@@ -41,7 +41,7 @@ int	count_end_word(char *line, int i)
 				return (-1);
 			l = q + 1;
 		}
-		if (line[l] == ' ')
+		if (line[l] == ' ' || line[l] == '\0')
 			return (l);
 		l++;
 	}

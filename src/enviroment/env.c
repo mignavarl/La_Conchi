@@ -51,10 +51,10 @@ char *get_env_var(t_env *env_list, char *key)
 	while (env_list)
 	{
 		if (ft_strcmp(env_list->key, key) == 0)
-			return env_list->value;
+			return (env_list->value);
 		env_list = env_list->next;
 	}
-	return NULL;
+	return (NULL);
 }
 
 // Función para actualizar o agregar una variable de entorno

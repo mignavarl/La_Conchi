@@ -58,13 +58,13 @@ struct s_data
 };
 
 //----------------PARSE--------------------------------//
-char	**search_in_line(char *line, t_data *data);
+char	**search_in_line(char *line, t_data *data, t_env *env);
 
 //QUOTES.C
 void	while_end(char *line, int i);
 int		search_end_quote(char *line, int i);
 char	*extract_quote(char *line, int start, int final);
-char	*find_quote(char *line, int i, t_data *data);
+char	*find_quote(char *line, int i, t_data *data, t_env *env);
 void	search_end_while(char *line);
 
 //COUNT.C
