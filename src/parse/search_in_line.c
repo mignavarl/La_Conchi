@@ -52,6 +52,7 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 			if (!words[w])
 				break ;
 			i = data->quote_chars - 1;
+			printf("words = %s\n", words[w]);
 			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i] && line[i + 1] != '\0')
 				i++;
 			//printf(RED"Word[%d] = %s\nline[%d] = %c\n"END, w, words[w], i, line[i]);

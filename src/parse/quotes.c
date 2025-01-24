@@ -61,13 +61,44 @@ char	*clean_line(char *line, int init, int end)
 	int		n;
 
 	n = 0;
-	new_line = ft_calloc(ft_strlen(line) - (end - init), sizeof(char));
+	new_line = ft_calloc(ft_strlen(line) - (end - init) + 1, sizeof(char));
 	if (!new_line)
 		return (NULL);
 	while (n < init)
 	{
 		new_line[n] = line[n];
 		n++;
+	}
+	while (line[end])
+	{
+		new_line[n] = line[end];
+		n++;
+		end++;
+	}
+	return (new_line);
+}
+
+char	*update_line(char *line, char *value, int init, int end)
+{
+	char	*new_line;
+	int		n;
+	int		v;
+
+	n = 0;
+	new_line = ft_calloc((ft_strlen(line) + ft_strlen(value) + 1), sizeof(char));
+	if (!new_line)
+		return (NULL);
+	while (n < init)
+	{
+		new_line[n] = line[n];
+		n++;
+	}
+	v = 0;
+	while (value[v])
+	{
+		new_line[n] = value[v];
+		n++;
+		v++;
 	}
 	while (line[end])
 	{
@@ -88,8 +119,6 @@ char	*expand_var_quote(char *line, int init, t_env *env)
 	end = init + 1;
 	while (line[end] && line[end] != ' ' && line[end] != '"')
 		end++;
-	if (line[end] == ' ' || line[end] == '"')
-		end--;
 	var = ft_substr(line, init, (end - init));
 	value = get_env_var(env, var);
 	if (!value)
@@ -98,11 +127,16 @@ char	*expand_var_quote(char *line, int init, t_env *env)
 		free(value);
 		return(clean_line(line, (init - 1), end));
 	}
-	new_line = update_line(line, (init - 1), end);//TODO:to do
+	new_line = update_line(line, value, (init - 1), end);
+	free(var);
+	free(value);
+	free(line);
+	return (new_line);
 }
 
 char	*find_quote(char *line, int i, t_data *data, t_env *env)
 {
+	(void)env;
 	int 	l;
 	int		n;
 	char	*quote;
@@ -111,8 +145,8 @@ char	*find_quote(char *line, int i, t_data *data, t_env *env)
 	l = i + 1;
 	while (line[l])
 	{
-		if (line[l] == '$' && line[i] == '"')
-			line = expand_var_quote(line, (l + 1), env);
+		// if (line[l] == '$' && line[i] == '"')
+		// 	line = expand_var_quote(line, (l + 1), env);
 		if ((line[i] == '"' && line[l] == '"') || (line[i] == '\'' && line[l] == '\''))
 		{
 			quote = ft_substr(&line[i], 1, (l - i) - 1);
