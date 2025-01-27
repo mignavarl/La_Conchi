@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	while_here_doc(t_cmds *search, int delim)
+void	while_here_doc(t_cmds *search, int delim)//TODO: arreglar ctrl+C
 {
 	t_cmds	*eof;
 	char	*line;
