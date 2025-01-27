@@ -90,3 +90,14 @@ char	*expand_var_quote(char *line, int init, t_env *env)
 	free(line);
 	return (new_line);
 }
+
+// char	**clean_and_expand(char **words, t_env *env)
+// {
+// 	int	w;
+
+// 	w = 0;
+// 	while (words[w])
+// 	{
+// 		w++;
+// 	}
+// }

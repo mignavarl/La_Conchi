@@ -47,11 +47,14 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 		free_fork(command, env);
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		close(data->pipe_fd[READ]);
 		dup2(data->pipe_fd[WRITE], STDOUT_FILENO);
 		close(data->pipe_fd[WRITE]);
 		execute_cmd(command, env, pid, data);
 	}
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		perror("Signal");
 	else
 	{
 		close(data->pipe_fd[WRITE]);

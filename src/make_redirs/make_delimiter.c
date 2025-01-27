@@ -48,10 +48,13 @@ t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data)
 		free_fork(command, env);
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		dup2(fd_delim, STDIN_FILENO);
 		close(fd_delim);
 		execute_cmd(command, env, pid, data);
 	}
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		perror("Signal");
 	else
 		close(fd_delim);
 	return (node);

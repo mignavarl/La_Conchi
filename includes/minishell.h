@@ -82,6 +82,7 @@ void	find_signal(void);
 int		m_ischar(char *c);
 
 //EXPAND_VARIABLE.C
+char	**clean_and_expand(char **words, t_env *env);
 char	*clean_line(char *line, int init, int end);
 char	*update_line(char *line, char *value, int init, int end);
 char	*expand_var_quote(char *line, int init, t_env *env);

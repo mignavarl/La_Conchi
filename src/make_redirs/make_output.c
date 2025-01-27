@@ -93,10 +93,13 @@ void	make_output(char **command, t_env *env, char *file, t_data *data)
 		free_fork(command, env);
 	if (pid == 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		dup2(fd_output, STDOUT_FILENO);
 		close(fd_output);
 		execute_cmd(command, env, pid, data);
 	}
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		perror("Signal");
 	else
 		close(fd_output);
 }
