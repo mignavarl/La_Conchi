@@ -64,7 +64,7 @@ char	**search_in_line(char *line, t_data *data, t_env *env);
 void	while_end(char *line, int i);
 int		search_end_quote(char *line, int i);
 char	*extract_quote(char *line, int start, int final);
-char	*find_quote(char *line, int i, t_data *data, t_env *env);
+char	*find_quote(char *line, int init, t_data *data);
 void	search_end_while(char *line);
 
 //COUNT.C
@@ -80,6 +80,11 @@ void	find_signal(void);
 
 //CHECK_CHARS.C
 int		m_ischar(char *c);
+
+//EXPAND_VARIABLE.C
+char	*clean_line(char *line, int init, int end);
+char	*update_line(char *line, char *value, int init, int end);
+char	*expand_var_quote(char *line, int init, t_env *env);
 
 //-----------------EXECUTE------------------------------//
 //EXECUTE_CMD.C

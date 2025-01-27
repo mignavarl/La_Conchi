@@ -20,7 +20,7 @@ int	count_end_quote(char *line, int i)
 	while (line[l])
 	{
 		if (line[l] == line[i])
-			return (l);
+			return (l + 1);
 		l++;
 	}
 	return (-1);

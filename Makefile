@@ -35,6 +35,7 @@ SRCS = main.c\
 		$(MAKE_DIR)make_pipe.c\
 		$(PARS_DIR)check_chars.c\
 		$(PARS_DIR)count.c\
+		$(PARS_DIR)expand_variable.c\
 		$(PARS_DIR)quotes.c\
 		$(PARS_DIR)lexer.c\
 		$(PARS_DIR)search_in_line.c\

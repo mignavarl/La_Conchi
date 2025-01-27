@@ -55,101 +55,19 @@ int	search_end_quote(char *line, int i)
 	return (0);
 }
 
-char	*clean_line(char *line, int init, int end)
+/* char	*find_quote(char *line, int init, t_data *data)
 {
-	char	*new_line;
-	int		n;
-
-	n = 0;
-	new_line = ft_calloc(ft_strlen(line) - (end - init) + 1, sizeof(char));
-	if (!new_line)
-		return (NULL);
-	while (n < init)
-	{
-		new_line[n] = line[n];
-		n++;
-	}
-	while (line[end])
-	{
-		new_line[n] = line[end];
-		n++;
-		end++;
-	}
-	return (new_line);
-}
-
-char	*update_line(char *line, char *value, int init, int end)
-{
-	char	*new_line;
-	int		n;
-	int		v;
-
-	n = 0;
-	new_line = ft_calloc((ft_strlen(line) + ft_strlen(value) + 1), sizeof(char));
-	if (!new_line)
-		return (NULL);
-	while (n < init)
-	{
-		new_line[n] = line[n];
-		n++;
-	}
-	v = 0;
-	while (value[v])
-	{
-		new_line[n] = value[v];
-		n++;
-		v++;
-	}
-	while (line[end])
-	{
-		new_line[n] = line[end];
-		n++;
-		end++;
-	}
-	return (new_line);
-}
-
-char	*expand_var_quote(char *line, int init, t_env *env)
-{
-	char	*new_line;
-	char	*var;
-	char	*value;
-	int		end;
-
-	end = init + 1;
-	while (line[end] && line[end] != ' ' && line[end] != '"')
-		end++;
-	var = ft_substr(line, init, (end - init));
-	value = get_env_var(env, var);
-	if (!value)
-	{
-		free(var);
-		free(value);
-		return(clean_line(line, (init - 1), end));
-	}
-	new_line = update_line(line, value, (init - 1), end);
-	free(var);
-	free(value);
-	free(line);
-	return (new_line);
-}
-
-char	*find_quote(char *line, int i, t_data *data, t_env *env)
-{
-	(void)env;
 	int 	l;
 	int		n;
 	char	*quote;
 	char	*tmp_quote;
 
-	l = i + 1;
+	l = init + 1;
 	while (line[l])
 	{
-		// if (line[l] == '$' && line[i] == '"')
-		// 	line = expand_var_quote(line, (l + 1), env);
-		if ((line[i] == '"' && line[l] == '"') || (line[i] == '\'' && line[l] == '\''))
+		if ((line[init] == '"' && line[l] == '"') || (line[init] == '\'' && line[l] == '\''))
 		{
-			quote = ft_substr(&line[i], 1, (l - i) - 1);
+			quote = ft_substr(&line[init], 0, (l - init) + 1);
 			if (line[l + 1] != '\0' || line[l + 1] != ' ')
 			{
 				n = l + 1;
@@ -175,7 +93,7 @@ char	*find_quote(char *line, int i, t_data *data, t_env *env)
 		l++;
 	}
 	return (quote);
-}
+} */
 
 /* DESUSO
 void	search_end_while(char *line)
@@ -206,3 +124,22 @@ void	search_end_while(char *line)
 		i++;
 	}
 } */
+
+char	*find_quote(char *line, int init, t_data *data)
+{
+	int		q;
+	char	*quote;
+
+	q = init + 1;
+	while(line[q])
+	{
+		if (line[init] == line[q])
+		{
+			quote = ft_substr(&line[init], 0, (q - init + 1));
+			data->quote_chars = q;
+			return (quote);
+		}
+		q++;
+	}
+	return (NULL);
+}

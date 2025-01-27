@@ -19,7 +19,6 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 	int		num_words;  
 	char	**words;
 
-	(void)data;//temporal
 	i = 0;
 	num_words = count_words(line);
 	if (num_words < 0)
@@ -48,7 +47,7 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 		}
 		else if (line[i] == '"' || line[i] == '\'')
 		{
-			words[w] = find_quote(line, i, data, env);
+			words[w] = find_quote(line, i, data);
 			if (!words[w])
 				break ;
 			i = data->quote_chars - 1;
@@ -60,6 +59,7 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 		}
 		i++;
 	}
+	words = clean_and_expand(words, env);
 	w = 0;//TODO: borrar, para ver words
 	while (w < num_words)
 	{
