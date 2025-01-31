@@ -12,92 +12,58 @@
 
 #include "minishell.h"
 
-char	*clean_line(char *line, int init, int end)
+/* char	*expand_var_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 {
-	char	*new_line;
-	int		n;
+	char	
+}
+
+char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data)
+{
+	int	n;
 
 	n = 0;
-	new_line = ft_calloc(ft_strlen(line) - (end - init) + 1, sizeof(char));
-	if (!new_line)
-		return (NULL);
-	while (n < init)
+	data->quote_chars++;
+	while (old_word[data->quote_chars] != '"')
 	{
-		new_line[n] = line[n];
+		if (old_word[data->quote_chars] == '$')
+		{
+			new_word = expand_var_quote(old_word, new_word, env, data);
+		}
+		new_word[n] = old_word[data->quote_chars];
 		n++;
+		data->quote_chars++;
 	}
-	while (line[end])
-	{
-		new_line[n] = line[end];
-		n++;
-		end++;
-	}
-	return (new_line);
 }
 
-char	*update_line(char *line, char *value, int init, int end)
+char	*clean_word(char *old_word, t_env *env, t_data *data)
 {
-	char	*new_line;
-	int		n;
-	int		v;
+	char	*new_word;
 
-	n = 0;
-	new_line = ft_calloc((ft_strlen(line) + ft_strlen(value) + 1), sizeof(char));
-	if (!new_line)
-		return (NULL);
-	while (n < init)
+	data->quote_chars = 0;
+	new_word = ft_calloc(ft_strlen(old_word), sizeof(char));
+	while (old_word[data->quote_chars])
 	{
-		new_line[n] = line[n];
-		n++;
+		if (old_word[data->quote_chars] == '"')
+			new_word = double_quote(old_word, new_word, env, data);
+		else if (old_word[data->quote_chars] == '\'')
+			new_word = single_quote(old_word, new_word, data);
+		else
+			new_word = put_rest(old_word, new_word, env, data);
 	}
-	v = 0;
-	while (value[v])
-	{
-		new_line[n] = value[v];
-		n++;
-		v++;
-	}
-	while (line[end])
-	{
-		new_line[n] = line[end];
-		n++;
-		end++;
-	}
-	return (new_line);
+	return (new_word);
 }
 
-char	*expand_var_quote(char *line, int init, t_env *env)
+char	**clean_and_expand(char **words, t_env *env, t_data *data)
 {
-	char	*new_line;
-	char	*var;
-	char	*value;
-	int		end;
+	int	w;
 
-	end = init + 1;
-	while (line[end] && line[end] != ' ' && line[end] != '"')
-		end++;
-	var = ft_substr(line, init, (end - init));
-	value = get_env_var(env, var);
-	if (!value)
+	w = 0;
+	while (words[w])
 	{
-		free(var);
-		free(value);
-		return(clean_line(line, (init - 1), end));
+		if (words[w][0] == '"' || words [w][0] == '\'')
+			words[w] = clean_word(words[w], env, data);
+		w++;
 	}
-	new_line = update_line(line, value, (init - 1), end);
-	free(var);
-	free(value);
-	free(line);
-	return (new_line);
+	return (words);
 }
-
-// char	**clean_and_expand(char **words, t_env *env)
-// {
-// 	int	w;
-
-// 	w = 0;
-// 	while (words[w])
-// 	{
-// 		w++;
-// 	}
-// }
+ */

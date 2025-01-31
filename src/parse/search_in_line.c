@@ -50,17 +50,18 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 			words[w] = find_quote(line, i, data);
 			if (!words[w])
 				break ;
-			i = data->quote_chars - 1;
-			printf("words = %s\n", words[w]);
+			i = data->quote_chars;
+			printf("words = %s\ndata->quote_chars = %d\n", words[w], data->quote_chars);
 			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i] && line[i + 1] != '\0')
 				i++;
-			//printf(RED"Word[%d] = %s\nline[%d] = %c\n"END, w, words[w], i, line[i]);
+			if (!line[i])
+				break ;
 			w++;
 		}
 		i++;
 	}
-//	words = clean_and_expand(words, env);
 	(void)env;
+	//words = clean_and_expand(words, env, data);
 	w = 0;//TODO: borrar, para ver words
 	while (w < num_words)
 	{
