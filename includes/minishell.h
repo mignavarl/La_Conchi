@@ -11,6 +11,7 @@
 # include <sys/wait.h>
 # include "../libft/libft.h"
 # include "env.h"
+# include <sys/ioctl.h>
 
 # define TRUE 1
 # define FALSE 0

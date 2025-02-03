@@ -26,13 +26,17 @@ void	while_here_doc(t_cmds *search, int delim)//TODO: arreglar ctrl+C
 	fd = open(tmp_file, O_RDWR | O_TRUNC | O_APPEND | O_CREAT, 00644);
 	while (1)
 	{
-		ft_putstr_fd(GREEN"> "END, 2);
-		line = get_next_line(0);
-		if (!ft_strncmp(line, eof->cmd, ft_strlen(line) - 1))
+		// ft_putstr_fd(GREEN"> "END, 2);
+		//signal(SIGQUIT, SIG_DFL);
+		line = readline(">");
+		printf(YELLOW"Line --> [%s]\n"END, line);
+		if (!ft_strcmp(line, eof-> cmd))
 			break ;
 		ft_putstr_fd(line, fd);
+		ft_putstr_fd("\n", fd);
 		free(line);
 	}
+	printf(RED"sali\n"END);
 	free(line);
 	close(fd);
 	free(eof->cmd);

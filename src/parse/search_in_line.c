@@ -60,8 +60,7 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 		}
 		i++;
 	}
-	(void)env;
-	//words = clean_and_expand(words, env, data);
+	words = clean_and_expand(words, env, data);
 	w = 0;//TODO: borrar, para ver words
 	while (w < num_words)
 	{

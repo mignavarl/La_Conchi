@@ -123,7 +123,7 @@ char	*find_quote(char *line, int init, t_data *data)
 		{
 			quote = ft_substr(&line[init], 0, (l - init) + 1);
 			data->quote_chars = l;
-			if (line[l + 1] != '\0' || line[l + 1] != ' ')
+			if (line[l + 1] != '\0' && line[l + 1] != ' ')
 			{
 				init = l + 1;
 				while(line[init] && line[l])
@@ -146,52 +146,3 @@ char	*find_quote(char *line, int init, t_data *data)
 	}
 	return (quote);
 }
-
-/* DESUSO
-void	search_end_while(char *line)
-{
-	char	sym;
-	int		i;
-	int		l;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == '"' || line[i] == '\'')
-		{
-			sym = line[i];
-			l = i + 1;
-			while (line[l] || line[i + 1] == '\0')
-			{
-				if (line[l] == sym)
-					break ;
-				if (line[l + 1] =='\0' || line[l] == PIPE)
-				{
-					while_end(line, i);
-					return ;
-				}
-				l++;
-			}
-		}
-		i++;
-	}
-} */
-
-/* char	*find_quote(char *line, int init, t_data *data)
-{
-	int		q;
-	char	*quote;
-
-	q = init + 1;
-	while(line[q])
-	{
-		if (line[init] == line[q])
-		{
-			quote = ft_substr(&line[init], 0, (q - init + 1));
-			data->quote_chars = q;
-			return (quote);
-		}
-		q++;
-	}
-	return (NULL);
-} */

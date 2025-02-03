@@ -14,17 +14,18 @@
 
 void	trapper(int sig)
 {
-	if (sig == 2)
+	if (sig == SIGINT)
 	{
-		printf("\n");
+		// printf("\n");
+		ioctl(1, TIOCSTI, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		rl_redisplay();
+		//rl_redisplay();
 	}
 }
 
 void	find_signal(void)
 {
-	signal(SIGINT, trapper); 
+	signal(SIGINT, trapper);
 	signal(SIGQUIT, SIG_IGN);
 }
