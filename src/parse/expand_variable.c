@@ -67,6 +67,7 @@ char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 
 	n = 0;
 	data->quote_chars++;
+	printf("AAAAAAAAAAAAAAAAAAAAAAA\n");
 	while (old_word[data->quote_chars] && old_word[data->quote_chars] != '"')
 	{
 		if (old_word[data->quote_chars] == '$')
@@ -135,9 +136,10 @@ char	*clean_word(char *old_word, t_env *env, t_data *data)
 			new_word = single_quote(old_word, new_word, data);
 		else
 			new_word = put_rest(old_word, new_word, env, data);
-		printf(RED"clean: old = %s --> data.quote = %d\n"END, old_word, data->quote_chars);
+		printf(RED"clean: old = %s --> data.quote = %d\n"END"\n", old_word, data->quote_chars);
 	}
 	free(old_word);
+	printf("SALI\n new = %s\n", new_word);
 	return (new_word);
 }
 
