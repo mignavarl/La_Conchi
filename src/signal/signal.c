@@ -16,11 +16,9 @@ void	trapper(int sig)
 {
 	if (sig == SIGINT)
 	{
-		// printf("\n");
 		ioctl(1, TIOCSTI, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
-		//rl_redisplay();
 	}
 }
 
