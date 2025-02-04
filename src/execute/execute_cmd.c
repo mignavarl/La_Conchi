@@ -55,7 +55,7 @@ void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data)
 		return ;
 	}
 	if (!ft_strcmp(command[0], "cd"))
-		execute_cd(command);
+		execute_cd(command, env);
 	else if (!ft_strcmp(command[0], "pwd"))
 		execute_pwd();
 	else if (!ft_strcmp(command[0], "echo"))

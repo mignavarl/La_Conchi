@@ -12,9 +12,10 @@
 
 #include "minishell.h"
 
-void	execute_cd(char **command)
+void	execute_cd(char **command, t_env *env)
 {
-	int	i;
+	int		i;
+	char	*pwd;
 
 	i = 0;
 	while (command[i])
@@ -29,6 +30,12 @@ void	execute_cd(char **command)
 		printf("cd: too many arguments\n");
 		return ;
 	}
+	pwd = getcwd(NULL, 0);
+	update_env_var(&env, "OLDPWD", pwd);
+	free(pwd);
 	if (chdir(command[1]) == -1)
 		printf("cd: %s: No such file or directory\n", command[1]);
+	pwd = getcwd(NULL, 0);
+	update_env_var(&env, "PWD", pwd);
+	free(pwd);
 }

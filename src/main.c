@@ -76,9 +76,7 @@ int main(int argc, char **argv, char *envp[])
 			m_listclear(&command, free);
 		}
 		if (data.words)
-		{
 			ft_free_double(&data.words);
-		}
 		free(line);
 	}
 	return 0;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025-02-04 14:32:18 by mignavar          #+#    #+#             */
+/*   Updated: 2025-02-04 14:32:18 by mignavar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -38,11 +50,6 @@ typedef struct s_cmds	t_cmds;
 
 struct s_cmds
 {
-	int	pipe;
-	int	input;
-	int	output;
-	int	append;
-	int	delim;
 	char			*cmd;
 	struct s_cmds	*next;
 };
@@ -89,7 +96,7 @@ char	**clean_and_expand(char **words, t_env *env, t_data *data);
 void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data);
 
 //EXECUTE_CD.C
-void 	execute_cd(char **command);
+void	execute_cd(char **command, t_env *env);
 
 //EXECUTE_ECHO.C
 void	execute_echo(char **command, t_data *data);
@@ -113,7 +120,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data);
 //EXECUTE_UTILS.C
 char	*search_route(char *command, char **envp);
 char	**set_env(t_env *env);
-void 	ft_safe_free(void **ptr);
+void	ft_safe_free(void **ptr);
 
 //-----------------LIST FUNCTIONS-----------------------//
 //LIST_COMMAND.C
@@ -134,7 +141,7 @@ void	close_pipe(int pipe_fd[2], t_data *data);
 void	pipe_exception(t_data *data);
 
 //MAKE_INPUT.C <
-t_cmds	*make_input(char **command, t_env *env, t_cmds* node, t_data *data);
+t_cmds	*make_input(char **command, t_env *env, t_cmds	*node, t_data *data);
 int		first_argument_input(char *file);
 
 //MAKE_OUTPUT.C >
@@ -167,6 +174,6 @@ void	save_fd(t_data *data);
 char	*ft_joinchar(char *str, char c);
 
 //-----------------------LEXER FUNCTIONS-----------------------//
-int		lexer(char **words); 
+int		lexer(char **words);
 
 #endif
