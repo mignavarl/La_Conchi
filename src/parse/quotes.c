@@ -11,29 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-/* DESUSO
-void	while_end(char *line, int i)
-{
-	char	*new;
-	char	sym;
-
-	sym = line[i];
-	while (1)
-	{
-		new = readline("> ");
-		if (!new)
-			break ;
-		line = ft_threejoin(line, "\n", new);
-		if (sym == new[0])
-		{
-			free(new);
-			break ;
-		}
-		free(new);
-	}
-	add_history(line);
-	free(line);
-} */
 
 int	search_end_quote(char *line, int i)
 {

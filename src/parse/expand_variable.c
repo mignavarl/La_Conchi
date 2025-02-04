@@ -52,12 +52,8 @@ char	*expand_var_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 	free(key);
 	data->quote_chars = k;
 	if (!value)
-	{
-		free(value);
 		return (new_word);
-	}
 	new_word = join_var_more(old_word, new_word, value);
-	free(value);
 	return(new_word);
 }
 
@@ -67,7 +63,6 @@ char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 
 	n = 0;
 	data->quote_chars++;
-	printf("AAAAAAAAAAAAAAAAAAAAAAA\n");
 	while (old_word[data->quote_chars] && old_word[data->quote_chars] != '"')
 	{
 		if (old_word[data->quote_chars] == '$')
@@ -75,8 +70,11 @@ char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 			new_word = expand_var_quote(old_word, new_word, env, data);
 			n = ft_strlen(new_word);
 		}
-		new_word[n] = old_word[data->quote_chars];
-		n++;
+		else
+		{
+			new_word[n] = old_word[data->quote_chars];
+			n++;
+		}
 		data->quote_chars++;
 	}
 	return (new_word);
@@ -87,6 +85,7 @@ char	*single_quote(char *old_word, char *new_word, t_data *data)
 	int	new;
 
 	new = ft_strlen(new_word);
+	data->quote_chars++;
 	while (old_word[data->quote_chars] != '\'')
 	{
 		new_word[new] = old_word[data->quote_chars];
@@ -102,7 +101,6 @@ char	*put_rest(char *old_word, char *new_word, t_env *env, t_data *data)
 	int	n;
 
 	n = 0;
-	data->quote_chars++;
 	while (old_word[data->quote_chars] && old_word[data->quote_chars] != '"' &&
 			old_word[data->quote_chars] != '\'')
 	{
@@ -115,10 +113,9 @@ char	*put_rest(char *old_word, char *new_word, t_env *env, t_data *data)
 		{
 			new_word[n] = old_word[data->quote_chars];
 			n++;
+			data->quote_chars++;
 		}
-		data->quote_chars++;
 	}
-	data->quote_chars++;
 	return (new_word);
 }
 
@@ -136,10 +133,8 @@ char	*clean_word(char *old_word, t_env *env, t_data *data)
 			new_word = single_quote(old_word, new_word, data);
 		else
 			new_word = put_rest(old_word, new_word, env, data);
-		printf(RED"clean: old = %s --> data.quote = %d\n"END"\n", old_word, data->quote_chars);
 	}
 	free(old_word);
-	printf("SALI\n new = %s\n", new_word);
 	return (new_word);
 }
 
@@ -150,7 +145,7 @@ char	**clean_and_expand(char **words, t_env *env, t_data *data)
 	w = 0;
 	while (words[w])
 	{
-		if (words[w][0] == '"' || words [w][0] == '\'')
+		if (words[w][0] == '"' || words [w][0] == '\'' || words [w][0] == '$')
 			words[w] = clean_word(words[w], env, data);
 		w++;
 	}

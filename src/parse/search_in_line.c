@@ -51,7 +51,6 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 			if (!words[w])
 				break ;
 			i = data->quote_chars;
-			printf("words = %s\ndata->quote_chars = %d\n", words[w], data->quote_chars);
 			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i] && line[i + 1] != '\0')
 				i++;
 			if (!line[i])
