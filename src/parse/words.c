@@ -32,16 +32,13 @@ char *find_words(char *line, int i, t_data *data)
 	{
 		while (line[l])
 		{
-			if (line[l] != '"' && line[l] != '\'')
-			{
-				tmp_word = ft_strdup(word);
-				if (!word)
-					return (NULL);
-				free(word);
-				word = ft_joinchar(tmp_word, line[l]);
-				if (!word)
-					return (NULL);
-			}
+			tmp_word = ft_strdup(word);
+			if (!word)
+				return (NULL);
+			free(word);
+			word = ft_joinchar(tmp_word, line[l]);
+			if (!word)
+				return (NULL);
 			l++;
 		}
 	}

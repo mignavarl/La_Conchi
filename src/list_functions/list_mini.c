@@ -12,21 +12,6 @@
 
 #include "minishell.h"
 
-int	m_lstsize(t_cmds *lst)
-{
-	t_cmds	*l;
-	int		i;
-
-	l = lst;
-	i = 0;
-	while (l != NULL)
-	{
-		i++;
-		l = l -> next;
-	}
-	return (i);
-}
-
 t_cmds	*m_lst_intnew(char *com)
 {
 	t_cmds	*s;
@@ -71,5 +56,22 @@ void	m_lstadd_back(t_cmds **lst, t_cmds *cmd)
 		return ;
 	}
 	l = m_lstlast(*lst);
+	l->quote = 0;
+	l->next = cmd;
+}
+
+void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd)
+{
+	t_cmds	*l;
+
+	if (!cmd)
+		return ;
+	if (!*lst)
+	{
+		*lst = cmd;
+		return ;
+	}
+	l = m_lstlast(*lst);
+	l->quote = 1;
 	l->next = cmd;
 }

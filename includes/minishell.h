@@ -51,6 +51,7 @@ typedef struct s_cmds	t_cmds;
 struct s_cmds
 {
 	char			*cmd;
+	int				quote;
 	struct s_cmds	*next;
 };
 
@@ -61,8 +62,9 @@ struct s_data
 	int		clon_stdout;
 	int		to_close;
 	char	**words;
-	int		quote_chars;
 	int		last_exit;
+	int		quote_chars;
+	int		new_quote;
 };
 
 //----------------PARSE--------------------------------//
@@ -131,6 +133,7 @@ t_cmds	*m_lst_intnew(char *com);
 t_cmds	*m_lstlast(t_cmds *lst);
 void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
 void	m_lstadd_back(t_cmds **lst, t_cmds *cmd);
+void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd);
 int		m_lstsize(t_cmds *lst);
 void	m_listclear(t_cmds **lst, void (*del)(void *));
 

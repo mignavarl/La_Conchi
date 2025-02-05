@@ -86,6 +86,8 @@ int	next_word(char *word, int i)
 	return (i);
 }
 
+
+
 t_cmds	*list_cmd(t_cmds *command, char **words)
 {
 	int	w;
@@ -101,7 +103,7 @@ t_cmds	*list_cmd(t_cmds *command, char **words)
 		{
 			if (i == 0 && (words[w][i] == '"' || words[w][i] == '\''))
 			{
-				m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], 1, (ft_strlen(words[w]) - 2))));
+				m_lstadd_back_quote(&command, m_lst_intnew(ft_substr(words[w], 1, (ft_strlen(words[w]) - 2))));
 				break ;
 			}
 			sym = m_ischar(&words[w][i]);

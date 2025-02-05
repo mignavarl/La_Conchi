@@ -102,8 +102,10 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			ft_free_double(&command);  // Liberar el array de comandos en caso de error
 			return;
 		}
-		while (next && next->cmd && !m_ischar(next->cmd))
+		printf(YELLOW"next = %s --> next.quote = %d\n", next->cmd, next->quote);
+		while (next && next->cmd && (next->quote == 1 || !m_ischar(next->cmd)))
 		{
+			printf("AAAAAAAAAAAAAAa\n");
 			command[i] = ft_strdup(next->cmd);  // Copia de los comandos siguientes
 			if (!command[i])  // Verifica si la asignación falla
 			{
@@ -121,7 +123,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			if (!command)
 				break ;
 		}
-		if (next && m_ischar(next->cmd))
+		if (next && m_ischar(next->cmd) && next->quote == 0)
 		{
 			data->to_close = 1;
 			if (!ft_strcmp(next->cmd, ">>"))
