@@ -72,7 +72,8 @@ char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 			new_word[data->new_quote] = old_word[data->quote_chars];
 			data->new_quote++;
 		}
-		data->quote_chars++;
+		printf("DOUBLE: old: %s [%d] = %c\n", old_word, data->quote_chars, old_word[data->quote_chars]);
+		//data->quote_chars++;
 	}
 	data->quote_chars++;
 	return (new_word);

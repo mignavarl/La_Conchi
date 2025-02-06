@@ -31,7 +31,7 @@ int	count_com(t_cmds *now)
 	}
 	else
 	{
-		while(tmp && tmp->cmd && !m_ischar(tmp->cmd))
+		while(tmp && tmp->cmd && (tmp->quote == 1 || !m_ischar(tmp->cmd)))
 		{
 			tmp = tmp->next;
 			i++;
@@ -102,10 +102,8 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 			ft_free_double(&command);  // Liberar el array de comandos en caso de error
 			return;
 		}
-		printf(YELLOW"next = %s --> next.quote = %d\n", next->cmd, next->quote);
 		while (next && next->cmd && (next->quote == 1 || !m_ischar(next->cmd)))
 		{
-			printf("AAAAAAAAAAAAAAa\n");
 			command[i] = ft_strdup(next->cmd);  // Copia de los comandos siguientes
 			if (!command[i])  // Verifica si la asignación falla
 			{
@@ -126,7 +124,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 		if (next && m_ischar(next->cmd) && next->quote == 0)
 		{
 			data->to_close = 1;
-			if (!ft_strcmp(next->cmd, ">>"))
+			if (!ft_strcmp(next->cmd, ">>") && next->next)
 			{
 				next = next->next;
 				make_append(command, env, next->cmd, data);
@@ -137,7 +135,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				}
 				ft_free_double(&command);
 			}
-			else if (!ft_strcmp(next->cmd, "<<"))
+			else if (!ft_strcmp(next->cmd, "<<") && next->next)
 			{
 				next = next->next;
 				next = make_delimiter(command, env, next, data);
@@ -148,7 +146,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				}
 				ft_free_double(&command);
 			}
-			else if (!ft_strcmp(next->cmd, "<"))
+			else if (!ft_strcmp(next->cmd, "<") && next->next)
 			{
 				next = next->next;
 				next = make_input(command, env, next, data);
@@ -159,7 +157,7 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				}
 				ft_free_double(&command);
 			}
-			else if (!ft_strcmp(next->cmd, ">"))
+			else if (!ft_strcmp(next->cmd, ">") && next->next)
 			{
 				next = last_file_output(next->next);
 				make_output(command, env, next->cmd, data);
@@ -171,8 +169,14 @@ void loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data)
 				data->to_close = 1;
 				ft_free_double(&command);
 			}
-			else if (!ft_strcmp(next->cmd, "|"))
+			else if (!ft_strcmp(next->cmd, "|") && next->next)
 				make_pipe(command, env, data);
+			else
+			{
+				ft_putendl_fd("La Conchi says: last command not found", 2);
+				ft_free_double(&command);
+				break ;
+			}
 		}
 		else
 		{

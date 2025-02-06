@@ -56,7 +56,7 @@ void	m_lstadd_back(t_cmds **lst, t_cmds *cmd)
 		return ;
 	}
 	l = m_lstlast(*lst);
-	l->quote = 0;
+	cmd->quote = 0;
 	l->next = cmd;
 }
 
@@ -72,6 +72,6 @@ void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd)
 		return ;
 	}
 	l = m_lstlast(*lst);
-	l->quote = 1;
+	cmd->quote = 1;
 	l->next = cmd;
 }

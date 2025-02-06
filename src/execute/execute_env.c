@@ -50,7 +50,7 @@ void	while_export(char **command, t_env *env, int w)
 		free(key);
 	}
 	else if (command[w][0] == '=' || command[w][0] == '?')
-		ft_putstr_fd("export: not a valid identifier", 2);
+		ft_putendl_fd("export: not a valid identifier", 2);
 	else
 	{
 		while (command[w][i] != '=' && command[w][i])

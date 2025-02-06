@@ -67,7 +67,7 @@ int main(int argc, char **argv, char *envp[])
 		{
 			command = NULL;
 			command = list_cmd(command, data.words);
-			print_cmd(&command);//TODO:PARA IMPRIMIR
+			//print_cmd(&command);//TODO:PARA IMPRIMIR
 			//printf("cmd = %p\n", command);
 			execute(&command, env, &data);
 			close_pipe(data.pipe_fd, &data);
