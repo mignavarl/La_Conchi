@@ -26,8 +26,8 @@ void	while_here_doc(t_cmds *search, int delim)
 	fd = open(tmp_file, O_RDWR | O_TRUNC | O_APPEND | O_CREAT, 00644);
 	while (1)
 	{
-		line = readline(">");
-		if (!ft_strcmp(line, eof-> cmd))
+		line = readline(GREEN"> "END);
+		if (!ft_strcmp(line, eof-> cmd) || g_signal_c == 130)
 			break ;
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);

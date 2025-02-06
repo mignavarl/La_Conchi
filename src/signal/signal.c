@@ -16,6 +16,7 @@ void	trapper(int sig)
 {
 	if (sig == SIGINT)
 	{
+		g_signal_c = 130;
 		ioctl(1, TIOCSTI, "\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);

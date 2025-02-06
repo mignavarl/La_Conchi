@@ -45,15 +45,20 @@ char	*expand_var_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 	int		k;
 	
 	k = data->quote_chars + 1;
-	while (old_word[k] && old_word[k] != '"' && old_word[k] != ' ')
+	while (old_word[k] && old_word[k] != '"' && old_word[k] != ' ' && old_word[k] != '\'')
 		k++;
 	key = ft_substr(old_word, data->quote_chars + 1, (k - data->quote_chars) - 1);
-	value = get_env_var(env, key);
-	free(key);
+	if (!ft_strcmp(key, "?"))
+		value = ft_itoa(data->last_exit);
+	else
+		value = get_env_var(env, key);
 	data->quote_chars = k;
 	if (!value)
 		return (new_word);
 	new_word = join_var_more(old_word, new_word, value);
+	if (!ft_strcmp(key, "?"))
+		free(value);
+	free(key);
 	return(new_word);
 }
 
@@ -71,9 +76,8 @@ char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 		{
 			new_word[data->new_quote] = old_word[data->quote_chars];
 			data->new_quote++;
+			data->quote_chars++;
 		}
-		printf("DOUBLE: old: %s [%d] = %c\n", old_word, data->quote_chars, old_word[data->quote_chars]);
-		//data->quote_chars++;
 	}
 	data->quote_chars++;
 	return (new_word);

@@ -48,6 +48,7 @@
 typedef struct s_data	t_data;
 typedef struct s_cmds	t_cmds;
 
+extern int				g_signal_c;
 struct s_cmds
 {
 	char			*cmd;
