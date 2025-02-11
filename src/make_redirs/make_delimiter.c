@@ -30,6 +30,12 @@ t_cmds	*find_output(t_cmds *node)
 	return (next);
 }
 
+void	error_delimiter(char *cmd)
+{
+	ft_putstr_fd("La Conchi says: no such file or directory:", 2);
+	ft_putendl_fd(cmd, 2);
+}
+
 t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data)
 {
 	int		fd_delim;
@@ -39,8 +45,7 @@ t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data)
 	node = find_output(node);
 	if (fd_delim < 0)
 	{
-		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
-		ft_putendl_fd(node->cmd, 1);
+		error_delimiter(node->cmd);
 		return (NULL);
 	}
 	pid = fork();

@@ -12,31 +12,6 @@
 
 #include "minishell.h"
 
-// int	check_chars(char **words, t_chars *chars)//EN DESUSO
-// {
-// 	int	w;
-
-// 	w = 0;
-// 	while (words[w])
-// 	{
-// 		if (words[w][0] == PIPE && words[w][1] == 0)
-// 			chars -> pipe++;
-// 		else if (words[w][0] == INPUT && words[w][1] == 0)
-// 			chars -> input++;
-// 		else if (words[w][0] == OUTPUT && words[w][1] == 0)
-// 			chars -> output++;
-// 		else if (ft_strcmp(words[w], APPEND) == 0)
-// 			chars -> append++;
-// 		else if (ft_strcmp(words[w], DELIMITER) == 0)
-// 			chars -> delim++;
-// 		w++;
-// 	}
-// 	// if (!check_(words))
-// 	// 	return (FALSE);
-// 	return (TRUE);
-// 	//printf("Pipe = %d\nInput = %d\nOutput = %d\nAppend = %d\nDelimiter = %d\n", chars->pipe, chars->input, chars->output, chars->append, chars->delim);
-// }
-
 //Return: 0 = no char. 1 = | < >. 2 = >> <<
 int	m_ischar(char *c)
 {

@@ -92,6 +92,11 @@ void	find_signal(void);
 int		m_ischar(char *c);
 
 //EXPAND_VARIABLE.C
+char	*join_var_more(char *old_word, char *new_word, char *value);
+char	*expand_var_quote(char *old_word, char *new_word, t_env *env, t_data *data);
+char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data);
+
+//CLEAN_AND_EXPAND.C
 char	**clean_and_expand(char **words, t_env *env, t_data *data);
 
 //-----------------EXECUTE------------------------------//
@@ -154,15 +159,15 @@ t_cmds	*first_argument_output(t_cmds *node);
 t_cmds	*last_file_output(t_cmds *node);
 t_cmds	*find_last(t_cmds *first, t_cmds *last);
 
-//MAKE_APPEND.C
+//MAKE_APPEND.C >>
 void	make_append(char **command, t_env *env, char *file, t_data *data);
 
-//MAKE_DELIMITER.C
+//MAKE_DELIMITER.C <<
 
 t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data);
 char	**first_delimiter(char **command);
 
-//MAKE_HERE_DOC.C
+//MAKE_HERE_DOC.C <<
 void	replace_here_doc(t_cmds *now);
 
 //-----------------------UTILS-----------------------//

@@ -34,6 +34,7 @@ SRCS = main.c\
 		$(MAKE_DIR)make_output.c\
 		$(MAKE_DIR)make_pipe.c\
 		$(PARS_DIR)check_chars.c\
+		$(PARS_DIR)clean_and_expand.c\
 		$(PARS_DIR)count.c\
 		$(PARS_DIR)expand_variable.c\
 		$(PARS_DIR)quotes.c\
@@ -52,7 +53,7 @@ INCLUDES = $(INC_DIR)minishell.h\
 			$(INC_DIR)env.h
 #~~~~~~ Compiling ~~~~~~~
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=leak
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address -fsanitize=leak
 MAKEFLAGS = --no-print-directory
 LFLAGS = -L libft -lft -lreadline
 RM = rm -f

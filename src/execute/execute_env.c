@@ -32,6 +32,20 @@ void	execute_unset(char **command, t_env *env)
 		w++;
 	}
 }
+
+void	env_first_digit(char **command, int w, int i)
+{
+	char	*key;
+
+	while (command[w][i] != '=' && command[w][i])
+			i++;
+	key = ft_substr(command[w], 0, i);
+	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd(key, 2);
+	ft_putendl_fd(": not a valid identifier", 2);
+	free(key);
+}
+
 void	while_export(char **command, t_env *env, int w)
 {
 	int		i;
@@ -40,15 +54,7 @@ void	while_export(char **command, t_env *env, int w)
 
 	i = 0;
 	if (ft_isdigit(command[w][i]))
-	{
-		while (command[w][i] != '=' && command[w][i])
-			i++;
-		key = ft_substr(command[w], 0, i);
-		ft_putstr_fd("export: ", 2);
-		ft_putstr_fd(key, 2);
-		ft_putendl_fd(": not a valid identifier", 2);
-		free(key);
-	}
+		env_first_digit(command, w, i);
 	else if (command[w][0] == '=' || command[w][0] == '?')
 		ft_putendl_fd("export: not a valid identifier", 2);
 	else

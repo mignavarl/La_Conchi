@@ -47,11 +47,7 @@ char	*extract_quote(char *line, char *quote, int init, t_data *data)
 	n = 1;
 	new_line[0] = line[init];
 	while (line[q] != line[init])
-	{
-		new_line[n] = line[q];
-		q++;
-		n++;
-	}
+		new_line[n++] = line[q++];
 	new_line[n] = line[q];
 	new_quote = ft_strjoin(quote, new_line);
 	free(quote);

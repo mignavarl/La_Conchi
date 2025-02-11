@@ -223,6 +223,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 		}
 		execute_cmd(ft_split(now->cmd, ' '), env, 1, data);
 		g_signal_c = data->last_exit;
+		
 		return ;
 	}
 }

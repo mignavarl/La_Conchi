@@ -54,10 +54,11 @@ t_cmds	*find_output_from_in(t_cmds *last)
 	return (node);
 }
 
-void	no_input_make_input(char *file)
+t_cmds	*no_input_make_input(t_cmds *node, char *file)
 {
 	ft_putstr_fd("La Conchi says: no such file or directory:", 2);
 	ft_putendl_fd(file, 2);
+	return (node);
 }
 
 t_cmds	*make_input(char **command, t_env *env, t_cmds* node, t_data *data)
@@ -71,10 +72,7 @@ t_cmds	*make_input(char **command, t_env *env, t_cmds* node, t_data *data)
 	if (node->next && !ft_strcmp(node->next->cmd, ">"))
 		node = find_output_from_in(node->next);
 	if (fd_input < 0)
-	{
-		no_input_make_input(file);
-		return (node);
-	}
+		return (no_input_make_input(node, file));
 	pid = fork();
 	if (pid < 0)
 		free_fork(command, env);

@@ -48,19 +48,12 @@ int	count_end_word(char *line, int i)
 	return (l);
 }
 
-int	count_words(char *line)
+int	while_count_words(char *line, int i, int word, int q)
 {
-	int	i;
-	int	word;
-	int	q;
-
-	i = 0;
-	word = 0;
 	while (line[i])
 	{
 		if (line[i] == ' ' && line[i + 1] != ' ')
 			word++;
-		//i++;
 		if ((line[i] != '"' && line[i] != '\'' && line[i] != ' '))
 		{
 			q = count_end_word(line, i);
@@ -81,5 +74,20 @@ int	count_words(char *line)
 			break ;
 		i++;
 	}
+	return (word);
+}
+
+int	count_words(char *line)
+{
+	int	i;
+	int	word;
+	int	q;
+
+	i = 0;
+	word = 0;
+	q = 0;
+	word = while_count_words(line, i, word, q);
+	if (word < 0)
+		return (-1);
 	return (word + 1);
 }
