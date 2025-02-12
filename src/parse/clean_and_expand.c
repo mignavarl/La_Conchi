@@ -91,7 +91,6 @@ char	**clean_and_expand(char **words, t_env *env, t_data *data)
 		if (ft_have_this(words[w], '\'') || ft_have_this(words[w], '"')
 			 || ft_have_this(words[w], '$'))
 			words[w] = clean_word(words[w], env, data);
-		printf("CLEAN: word[%d] = %s\n", w, words[w]);
 		w++;
 	}
 	return (words);

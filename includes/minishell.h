@@ -47,6 +47,8 @@
 
 typedef struct s_data	t_data;
 typedef struct s_cmds	t_cmds;
+typedef struct s_exec	t_exec;
+
 
 extern int				g_signal_c;
 struct s_cmds
@@ -66,6 +68,14 @@ struct s_data
 	int		last_exit;
 	int		quote_chars;
 	int		new_quote;
+};
+
+struct s_exec
+{
+	t_cmds	*now;
+	t_cmds	*next;
+	t_data	*data;
+	t_env	*env;
 };
 
 //----------------PARSE--------------------------------//
@@ -117,18 +127,28 @@ void	execute_env(char **command, t_env *env);
 void	execute_export(char **command, t_env *env);
 void	execute_unset(char **command, t_env *env);
 
+//EXECUTE_REDIRECTION.C
+int		execute_redirection(char **command, t_exec *exec, t_env *env, t_data *data);
+
 //EXECUTE_REST.C
 void	execute_rest(char **command, t_env *env, t_data *data);
 void	execute_rest_pid(char **command, t_env *env, t_data *data);
 
 //EXECUTE.C
-void	loop_cmd(t_cmds *now, t_cmds *next, t_env *env, t_data *data);
+void	loop_cmd(t_exec *exec, t_env *env, t_data *data);
 void	execute(t_cmds **cmd, t_env *env, t_data *data);
 
 //EXECUTE_UTILS.C
 char	*search_route(char *command, char **envp);
 char	**set_env(t_env *env);
 void	ft_safe_free(void **ptr);
+
+//EXTRACT_COMMAND.C
+char	**extract_command(t_exec *exec, int i);
+
+//FIRST_REDIRECTION.C
+int		check_first_redirection(t_exec *exec, t_data *data);
+char	**first_is_delimiter(char **command, t_exec *exec, t_data *data);
 
 //-----------------LIST FUNCTIONS-----------------------//
 //LIST_COMMAND.C
