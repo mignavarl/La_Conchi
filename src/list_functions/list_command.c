@@ -12,145 +12,74 @@
 
 #include "minishell.h"
 
-int	init_word(char *word)
+int	redir_in_middle(t_cmds **command, char **words, int i, t_data *data)
 {
-	int	init;
+	int com;
 
-	init = 0;
-	while (word[init])
+	com = data->sym_list + i;
+	while (words[data->word_list][com])
 	{
-		if (!m_ischar(&word[init]))
+		if (m_ischar(&words[data->word_list][com]) || words[data->word_list][com + 1] == '\0')
 		{
-			return (init);
-		}
-		init++;
-	}
-	return (0);
-}
-
-int	word_len(char *word)
-{
-	int	len;
-
-	len = 0;
-	while (m_ischar(&word[len]) > 0)
-			len++;
-	len = 0;
-	while (word[len])
-	{
-		len++;
-	}
-	while (m_ischar(&word[len - 1]) > 0)
-		len--;
-	return (len);
-}
-
-int	find_last_sym(char *word)
-{
-	int	l;
-
-	l = ft_strlen(word) - 1;
-	if (l < 0)
-		return (0);
-	while (l >= 0 && m_ischar(&word[l]))
-		l--;
-	return (l + 1);
-}
-
-char	*m_find_word(char *line)
-{
-	char	*word;
-	int		init;
-	int		end;
-
-	init = 0;
-	while (m_ischar(&line[init]) && line[init])
-		init++;
-	end = init;
-	while (!m_ischar(&line[end]) && line[end])
-	{
-		end++;
-		if (m_ischar(&line[end]))
+			m_lstadd_back(command, m_lst_intnew(ft_substr(words[data->word_list], i, data->sym_list)));
 			break ;
+		}
+		com++;
 	}
-	word = ft_substr(line, init, end);
-	return (word);
-}
-
-int	next_word(char *word, int i)
-{
-	while (!m_ischar(&word[i]) && word[i])
-		i++;
-	while (m_ischar(&word[i]) && word[i])
+	i = com - 1;
+	while (!m_ischar(&words[data->word_list][i]))
 		i--;
+	data->sym_list = m_ischar(&words[data->word_list][com]);
 	return (i);
 }
 
-
-
-t_cmds	*list_cmd(t_cmds *command, char **words)
+int	put_in_list(t_cmds **command, char **words, int i, t_data *data)
 {
-	int	w;
-	int	i;
-	int	sym;
-	int	com;
+	if (data->sym_list == 0)//NO ES CHAR
+	{
+		m_lstadd_back(command, m_lst_intnew(m_find_word(&words[data->word_list][i])));
+		i = next_word(words[data->word_list], i);
+		if (words[data->word_list][i] == '\0')
+			i -= 1;
+		if (words[data->word_list][i + 1] == '\0')
+			return (-1);
+		data->sym_list = m_ischar(&words[data->word_list][i]) - 1;
+	}
+	else if ((data->sym_list == 1 && words[data->word_list][i + 1] != '\0') ||
+		(data->sym_list == 2 && words[data->word_list][i + 2] != '\0'))//ES CHAR, NO EL ÚLTIMO
+		i = redir_in_middle(command, words, i, data);
+	else if ((data->sym_list == 1 && words[data->word_list][i + 1] == '\0') ||
+		(data->sym_list == 2 && words[data->word_list][i + 2] == '\0'))// ES CHAR Y SÍ EL ÚLTIMO
+	{
+		m_lstadd_back(command, m_lst_intnew(ft_substr (words[data->word_list], find_last_sym(words[data->word_list]), data->sym_list)));
+		return (-1);
+	}
+	return (i);
+}
 
-	w = 0;
-	while (words[w])
+t_cmds	*list_cmd(t_cmds *command, char **words, t_data *data)
+{
+	int	i;
+
+	data->word_list = 0;
+	data->sym_list = 0;
+	while (words[data->word_list])
 	{
 		i = 0;
-		while (words[w][i])
+		while (words[data->word_list][i])
 		{
-			if (i == 0 && (words[w][i] == '"' || words[w][i] == '\''))
+			if (i == 0 && (words[data->word_list][i] == '"' || words[data->word_list][i] == '\''))
 			{
-				m_lstadd_back_quote(&command, m_lst_intnew(ft_substr(words[w], 1, (ft_strlen(words[w]) - 2))));
+				m_lstadd_back_quote(&command, m_lst_intnew(ft_substr(words[data->word_list], 1, (ft_strlen(words[data->word_list]) - 2))));
 				break ;
 			}
-			sym = m_ischar(&words[w][i]);
-			if (sym == 0)//NO ES CHAR
-			{
-				//printf(RED"4 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
-				m_lstadd_back(&command, m_lst_intnew(m_find_word(&words[w][i])));
-				//printf("i = %d\n", i);
-				i = next_word(words[w], i);
-				if (words[w][i] == '\0')
-					i -= 1;
-				//printf("i = %d\n", i);
-				if (words[w][i + 1] == '\0')
-					break ;
-				sym = m_ischar(&words[w][i]) - 1;
-			}
-			else if ((sym == 1 && words[w][i + 1] != '\0') ||
-				(sym == 2 && words[w][i + 2] != '\0'))//ES CHAR, NO EL ÚLTIMO
-			{
-				com = sym + i;
-				while (words[w][com])
-				{
-					if (m_ischar(&words[w][com]) || words[w][com + 1] == '\0')
-					{
-						//printf(RED"1 Word[%d][i = %d - com = %d] = %s\n"END, w, i, com, &words[w][i]);
-						m_lstadd_back(&command, m_lst_intnew(ft_substr(words[w], i, sym)));
-						break ;
-					}
-					com++;
-				}
-				//printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
-				i = com - 1;
-				while (!m_ischar(&words[w][i]))
-					i--;
-				sym = m_ischar(&words[w][com]);
-				//printf("i = %d -- sym = %d -- com = %d\n", i, sym, com);
-			}
-			else if ((sym == 1 && words[w][i + 1] == '\0') ||
-				(sym == 2 && words[w][i + 2] == '\0'))// ES CHAR Y SÍ EL ÚLTIMO
-			{
-				//printf(RED"2 Word[%d][i = %d - com = %d] = %s sym = %d\n"END, w, i, com, &words[w][i], sym);
-				m_lstadd_back(&command, m_lst_intnew(ft_substr (words[w], find_last_sym(words[w]), sym)));
+			data->sym_list = m_ischar(&words[data->word_list][i]);
+			i = put_in_list(&command, words, i, data);
+			if (i == -1)
 				break ;
-			}
 			i++;
 		}
-		w++;
+		data->word_list++;
 	}
 	return (command);
 }

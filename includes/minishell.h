@@ -68,6 +68,8 @@ struct s_data
 	int		last_exit;
 	int		quote_chars;
 	int		new_quote;
+	int		sym_list;
+	int		word_list;
 };
 
 struct s_exec
@@ -152,7 +154,14 @@ char	**first_is_delimiter(char **command, t_exec *exec, t_data *data);
 
 //-----------------LIST FUNCTIONS-----------------------//
 //LIST_COMMAND.C
-t_cmds	*list_cmd(t_cmds *command, char **words);
+t_cmds	*list_cmd(t_cmds *command, char **words, t_data *data);
+
+//LIST_COMMAND_UTILS.C
+int		init_word(char *word);
+int		word_len(char *word);
+int		find_last_sym(char *word);
+char	*m_find_word(char *line);
+int		next_word(char *word, int i);
 
 //LIST_MINI.C
 t_cmds	*m_lst_intnew(char *com);

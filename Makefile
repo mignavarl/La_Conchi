@@ -27,6 +27,7 @@ SRCS = main.c\
 		$(EXE_DIR)execute.c\
 		$(EXE_DIR)extract_command.c\
 		$(EXE_DIR)first_redirection.c\
+		$(LIST_DIR)list_command_utils.c\
 		$(LIST_DIR)list_command.c\
 		$(LIST_DIR)list_mini.c\
 		$(LIST_DIR)list_utils.c\

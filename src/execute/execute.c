@@ -59,13 +59,13 @@ void 	loop_cmd(t_exec *exec, t_env *env, t_data *data)
 
 	save_fd(data);
 	replace_here_doc(exec->now);
-	i = check_first_redirection(exec, data);
-	if (i == -1)
-		return ;
 	command = NULL;
 	exec->env = env;
 	while (exec->now)
 	{
+		i = check_first_redirection(exec, data);
+		if (i == -1)
+			return ;
 		if (!while_loop_cmd(command, i, exec, data))
 			break ;
 		update_now_and_next(exec, data);
