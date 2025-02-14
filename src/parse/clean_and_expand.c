@@ -67,20 +67,6 @@ char	*clean_word(char *old_word, t_env *env, t_data *data)
 	return (new_word);
 }
 
-int		ft_have_this(char *word, int this)
-{
-	int	d;
-
-	d = 0;
-	while (word[d])
-	{
-		if (word[d] == this)
-			return (1);
-		d++;
-	}
-	return (0);
-}
-
 char	**clean_and_expand(char **words, t_env *env, t_data *data)
 {
 	int	w;

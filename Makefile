@@ -47,6 +47,7 @@ SRCS = main.c\
 		$(PARS_DIR)words.c\
 		$(SIG_DIR)signal.c\
 		$(UTIL_DIR)fd_utils.c\
+		$(UTIL_DIR)ft_have_this.c\
 		$(UTIL_DIR)exit_mini.c\
 		$(UTIL_DIR)ft_joinchar.c
 #~~~~~~ Obj Files ~~~~~~~

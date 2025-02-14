@@ -53,6 +53,8 @@ void	while_export(char **command, t_env *env, int w)
 	char	*value;
 
 	i = 0;
+	if (!ft_have_this(command[w], '='))
+		return ;
 	if (ft_isdigit(command[w][i]))
 		env_first_digit(command, w, i);
 	else if (command[w][0] == '=' || command[w][0] == '?')
@@ -71,7 +73,7 @@ void	while_export(char **command, t_env *env, int w)
 
 void	execute_export(char **command, t_env *env)
 {
-	int		w;
+	int	w;
 
 	w = 0;
 	while (command[w])

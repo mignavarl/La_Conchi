@@ -211,6 +211,9 @@ void	save_fd(t_data *data);
 //FT_JOINCHAR.C
 char	*ft_joinchar(char *str, char c);
 
+//FT_HAVE_THIS.C
+int		ft_have_this(char *word, int this);
+
 //-----------------------LEXER FUNCTIONS-----------------------//
 int		lexer(char **words);
 

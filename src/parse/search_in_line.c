@@ -12,29 +12,11 @@
 
 #include "minishell.h"
 
-char	**search_in_line(char *line, t_data *data, t_env *env)
+char	**cut_line(char **words, char *line, t_data *data, int w)
 {
-	int		i;
-	int		w;
-	int		num_words;  
-	char	**words;
+	int	i;
 
 	i = 0;
-	num_words = count_words(line);
-	if (num_words < 0)
-	{
-		printf(RED"Close the quotes\n"END);
-		return (NULL);
-	}
-	if (num_words == 1)
-		return (NULL);
-	words = (char **)ft_calloc(num_words + 1, sizeof(char *));
-	w = 0;
-	if (line[0] == '\0')
-	{
-		words[0] = '\0';
-		return(words);
-	}
 	while (line && line[i])
 	{
 		if (line[i] != '"' && line[i] != '\'' && line[i] != ' ')
@@ -59,6 +41,31 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 		}
 		i++;
 	}
+	return (words);
+}
+
+char	**search_in_line(char *line, t_data *data, t_env *env)
+{
+	int		w;
+	int		num_words;  
+	char	**words;
+
+	num_words = count_words(line);
+	if (num_words < 0)
+	{
+		printf(RED"Close the quotes\n"END);
+		return (NULL);
+	}
+	if (num_words == 1)
+		return (NULL);
+	words = (char **)ft_calloc(num_words + 1, sizeof(char *));
+	w = 0;
+	if (line[0] == '\0')
+	{
+		words[0] = '\0';
+		return(words);
+	}
+	words = cut_line(words, line, data, w);
 	words = clean_and_expand(words, env, data);
 	return (words);
 }

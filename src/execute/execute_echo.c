@@ -24,7 +24,7 @@ void	echo_with_n(char **command)
 	w = 2;
 	while (command[w])
 	{
-		printf("%s", command[w]);
+		printf("%s ", command[w]);
 		w++;
 	}
 }
@@ -36,7 +36,7 @@ void	echo_normal(char **command)
 	w = 1;
 	while (command[w])
 	{
-		printf("%s", command[w]);
+		printf("%s ", command[w]);
 		w++;
 	}
 	printf("\n");
