@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-10 10:31:04 by mignavar          #+#    #+#             */
-/*   Updated: 2024-12-10 10:31:04 by mignavar         ###   ########.fr       */
+/*   Created: 2024/12/10 10:31:04 by mignavar          #+#    #+#             */
+/*   Updated: 2025/02/17 16:33:24 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data)
 {
 	if (!command || !env || !command[0])
 	{
-		ft_free_double(&command);
+		ft_free_double(&command); // si command = NULL, cerrar la minishell debido al fallo de alojamiento de memoria en malloc del split  
+		// Liberar todo y salir de minishell si command es NULL <- resumen
 		return ;
 	}
 	if (!ft_strcmp(command[0], "cd"))

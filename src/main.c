@@ -6,7 +6,7 @@
 /*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 21:23:30 by osredond          #+#    #+#             */
-/*   Updated: 2024/11/23 21:48:36 by osredond         ###   ########.fr       */
+/*   Updated: 2025/02/17 19:52:59 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_cmd(t_cmds **comand)//TODO: BORRAR
 	printf(CYAN"Print\n"END);
 	while (tmp != NULL)
 	{
-		printf(CYAN"CMD (%d) = %s\n"END, i, tmp->cmd);
+		printf(CYAN"CMD (%d) = [%s]\n"END, i, tmp->cmd);
 		if (tmp->next == NULL)
 			break;
 		i++;
@@ -62,7 +62,9 @@ int main(int argc, char **argv, char *envp[])
 			free_env(env);
 			break ;
 		}
-		add_history(line);
+		add_history(line); // Usar la funcion clear history para evitar leaks (readline devuelve un malloc )
+		if (lexer(line))
+			continue; 
 		data.words = search_in_line(line, &data, env); 
 		if (!data.words)
 			;

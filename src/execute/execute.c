@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-10 10:31:33 by mignavar          #+#    #+#             */
-/*   Updated: 2024-12-10 10:31:33 by mignavar         ###   ########.fr       */
+/*   Created: 2024/12/10 10:31:33 by mignavar          #+#    #+#             */
+/*   Updated: 2025/02/17 19:20:55 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	update_now_and_next(t_exec *exec, t_data *data)
 	}
 	else
 		exec->now = NULL;
-	if (exec->now->next)
+
+	if (exec->now && exec->now->next)
 		exec->next = exec->now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
 	else
 		exec->next = NULL;
@@ -93,7 +94,8 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 			ft_putendl_fd(exec.now->cmd, 2);
 			return ;
 		}
-		execute_cmd(ft_split(exec.now->cmd, ' '), env, 1, data);
+		printf(YELLOW"COMANDO --> [%s]\n"END, exec.now->cmd);
+		execute_cmd(ft_split(exec.now->cmd, ' '), env, 1, data); // $> "ls " no deberia funcionar
 		g_signal_c = data->last_exit;
 		return ;
 	}
