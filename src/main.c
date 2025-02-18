@@ -12,36 +12,58 @@
 
 #include "minishell.h"
 
-void	print_cmd(t_cmds **comand)//TODO: BORRAR
-{
-	int i;
-	t_cmds *tmp;
-
-	i = 0;
-	tmp = *comand;
-	printf(CYAN"Print\n"END);
-	while (tmp != NULL)
-	{
-		printf(CYAN"CMD (%d) = [%s]\n"END, i, tmp->cmd);
-		if (tmp->next == NULL)
-			break;
-		i++;
-		tmp = tmp->next;
-	}
-	printf(CYAN"FIN Print\n"END);
-	printf("------------------------------------\n");
-}
-
 int	g_signal_c = 0;
 
-int main(int argc, char **argv, char *envp[])
+void	to_execute(t_cmds *command, t_data *data, t_env *env)
 {
-	(void)argv;
-	t_data	data;
-	t_cmds	*command;
-	t_env	*env;
-	char	*line;
+	int	status;
 
+	status = 0;
+	command = list_cmd(command, data->words, data);
+	execute(&command, env, data);
+	close_pipe(data->pipe_fd, data);
+	while (waitpid(-1, &status, 0) != -1)
+		continue ;
+	m_listclear(&command, free);
+	if (WIFSIGNALED(status))
+		data->last_exit = 128 + WTERMSIG(status);
+	else
+		data->last_exit = WEXITSTATUS(status);
+}
+
+void	while_main(t_env *env, t_data *data)
+{
+	char	*line;
+	t_cmds	*command;
+
+	command = NULL;
+	while (1)
+	{
+		g_signal_c = 0;
+		find_signal();
+		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
+		if (!line || !ft_strcmp(line, "exit"))
+			exit_mini(line, env);
+		add_history(line);
+		if (lexer(line))
+			continue ;
+		data->words = search_in_line(line, data, env);
+		if (!data->words)
+			;
+		else if (data->words[0])
+			to_execute(command, data, env);
+		if (data->words)
+			ft_free_double(&data->words);
+		free(line);
+	}
+}
+
+int	main(int argc, char **argv, char *envp[])
+{
+	t_data	data;
+	t_env	*env;
+
+	(void)argv;
 	if (argc != 1)
 	{
 		printf(RED"Don't put arguments\n"END);
@@ -50,39 +72,7 @@ int main(int argc, char **argv, char *envp[])
 	ft_memset(&data, 0, sizeof(t_data));
 	env = NULL;
 	env = init_env(envp, env);
-	g_signal_c = 0;
-	while (1)
-	{
-		find_signal();
-		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
-		if (!line || !ft_strcmp(line, "exit"))
-		{
-			ft_putendl_fd("exit", 2);
-			free(line);
-			free_env(env);
-			break ;
-		}
-		add_history(line); // Usar la funcion clear history para evitar leaks (readline devuelve un malloc )
-		if (lexer(line))
-			continue; 
-		data.words = search_in_line(line, &data, env); 
-		if (!data.words)
-			;
-		else if (data.words[0])
-		{
-			command = NULL;
-			command = list_cmd(command, data.words, &data);
-			print_cmd(&command);//TODO:PARA IMPRIMIR
-			execute(&command, env, &data);
-			close_pipe(data.pipe_fd, &data);
-			while (waitpid(-1, NULL, 0) != -1)
-				continue ;
-			m_listclear(&command, free);
-			g_signal_c = data.last_exit;
-		}
-		if (data.words)
-			ft_free_double(&data.words);
-		free(line);
-	}
-	return 0;
+	while_main(env, &data);
+	clear_history();
+	return (0);
 }

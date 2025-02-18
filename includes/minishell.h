@@ -24,6 +24,7 @@
 # include "../libft/libft.h"
 # include "env.h"
 # include <sys/ioctl.h>
+# include <wait.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -120,7 +121,7 @@ void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data);
 void	execute_cd(char **command, t_env *env);
 
 //EXECUTE_ECHO.C
-void	execute_echo(char **command, t_data *data);
+void	execute_echo(char **command);
 
 //EXECUTE_PWD.C
 void	execute_pwd(void);
@@ -204,6 +205,7 @@ void	replace_here_doc(t_cmds *now);
 //EXIT_MINI.C
 void	free_execve(char **command, t_env *env, char **envp, char *route);
 void	free_fork(char **command, t_env *env);
+void	exit_mini(char *line, t_env *env);
 
 //FD_UTILS.C
 void	restaure_fd(t_data *data);

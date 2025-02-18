@@ -14,16 +14,16 @@
 
 int	count_com(t_cmds *now)
 {
-	t_cmds *tmp;
+	t_cmds	*tmp;
 	int		com;
-	
+
 	tmp = now;
 	com = 0;
 	if (!ft_strcmp(tmp->cmd, "<<"))
 	{
 		tmp = tmp->next;
 		com++;
-		while(tmp && tmp->cmd && !m_ischar(tmp->cmd))
+		while (tmp && tmp->cmd && !m_ischar(tmp->cmd))
 		{
 			tmp = tmp->next;
 			com++;
@@ -31,7 +31,7 @@ int	count_com(t_cmds *now)
 	}
 	else
 	{
-		while(tmp && tmp->cmd && (tmp->quote == 1 || !m_ischar(tmp->cmd)))
+		while (tmp && tmp->cmd && (tmp->quote == 1 || !m_ischar(tmp->cmd)))
 		{
 			tmp = tmp->next;
 			com++;

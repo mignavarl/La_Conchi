@@ -22,6 +22,7 @@ void	execute_rest_pid(char **command, t_env *env, t_data *data)
 	data->last_exit = execve(route, command, envp);
 	ft_putstr_fd(command[0], 2);
 	ft_putendl_fd(": command not found", 2);
+	data->last_exit = 127;
 	free_execve(command, env, envp, route);
 }
 
@@ -42,6 +43,7 @@ void	execute_rest(char **command, t_env *env, t_data *data)
 		data->last_exit = execve(route, command, envp);
 		ft_putstr_fd(command[0], 2);
 		ft_putendl_fd(": command not found", 2);
+		data->last_exit = 127;
 		free_execve(command, env, envp, route);
 	}
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)

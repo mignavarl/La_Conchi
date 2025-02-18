@@ -16,7 +16,6 @@ void	execute_unset(char **command, t_env *env)
 {
 	int	w;
 
-
 	w = 0;
 	while (command[w])
 		w++;
@@ -38,7 +37,7 @@ void	env_first_digit(char **command, int w, int i)
 	char	*key;
 
 	while (command[w][i] != '=' && command[w][i])
-			i++;
+		i++;
 	key = ft_substr(command[w], 0, i);
 	ft_putstr_fd("export: ", 2);
 	ft_putstr_fd(key, 2);
@@ -93,7 +92,7 @@ void	execute_export(char **command, t_env *env)
 
 void	execute_env(char **command, t_env *env)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	int		i;
 
 	tmp = env;

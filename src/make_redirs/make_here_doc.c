@@ -33,6 +33,7 @@ void	while_here_doc(t_cmds *search, int delim)
 		ft_putstr_fd("\n", fd);
 		free(line);
 	}
+	g_signal_c = 0;
 	free(line);
 	close(fd);
 	free(eof->cmd);

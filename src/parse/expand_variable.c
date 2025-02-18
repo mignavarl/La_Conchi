@@ -45,7 +45,8 @@ char	*expand_var_quote(char *old_word, char *new_word, t_env *env, t_data *data)
 	int		k;
 	
 	k = data->quote_chars + 1;
-	while (old_word[k] && old_word[k] != '"' && old_word[k] != ' ' && old_word[k] != '\'')
+	while (old_word[k] && old_word[k] != '"' && old_word[k] != ' '
+			&& old_word[k] != '\'' && old_word[k] != '$')
 		k++;
 	key = ft_substr(old_word, data->quote_chars + 1, (k - data->quote_chars) - 1);
 	if (!ft_strcmp(key, "?"))

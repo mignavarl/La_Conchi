@@ -16,15 +16,15 @@ void	execute_pwd(void)
 {
 	char	*s;
 
-	s = getcwd(NULL, 0); // Intenta obtener el directorio actual
-	if (!s)              // Verifica si `getcwd` falló
+	s = getcwd(NULL, 0);
+	if (!s)
 	{
 		perror("Error al obtener el directorio actual");
 		return;
 	}
-	if (write(STDOUT_FILENO, s, ft_strlen(s)) == -1) // Protege la salida
+	if (write(STDOUT_FILENO, s, ft_strlen(s)) == -1)
 		perror("Error al imprimir el directorio actual");
-	if (write(STDOUT_FILENO, "\n", 1) == -1) // Asegura que se imprima el salto de línea
+	if (write(STDOUT_FILENO, "\n", 1) == -1)
 		perror("Error al imprimir el salto de línea");
-	free(s); // Libera la memoria asignada por `getcwd`
+	free(s);
 }

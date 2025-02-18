@@ -81,6 +81,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 	exec.now = *cmd;
 	if (!exec.now)
 		return ;
+	data->last_exit = 0;
 	if (m_lstsize(*cmd) > 1)
 	{
 		exec.next = exec.now->next;
@@ -95,8 +96,14 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 			return ;
 		}
 		printf(YELLOW"COMANDO --> [%s]\n"END, exec.now->cmd);
+<<<<<<< HEAD
 		execute_cmd(ft_split(exec.now->cmd, '\0'), env, 1, data); // $> "ls " no deberia funcionar
 		g_signal_c = data->last_exit;
 		return ;
+=======
+		execute_cmd(ft_split(exec.now->cmd, ''), env, 1, data);
+		g_signal_c = data->last_exit;
+		return ; // $> "ls " no deberia funcionar
+>>>>>>> 4a55081 (recortes y arreglos)
 	}
 }

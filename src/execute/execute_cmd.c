@@ -73,7 +73,7 @@ void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data)
 	else if (!ft_strcmp(command[0], "pwd"))
 		execute_pwd();
 	else if (!ft_strcmp(command[0], "echo"))
-		execute_echo(command, data);
+		execute_echo(command);
 	else if (!ft_strcmp(command[0], "env"))
 		execute_env(command, env);
 	else if (!ft_strcmp(command[0], "export"))

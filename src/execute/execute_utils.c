@@ -55,37 +55,37 @@ char	*search_route(char *command, char **envp)
 	}
 	ft_free_double(&route);
 	if (access(command, F_OK) == 0)
-		return(ft_strdup(command));
+		return (ft_strdup(command));
 	return (NULL);
 }
 
-char **set_env(t_env *env)
+char	**set_env(t_env *env)
 {
 	char	**envp;
 	int		i;
 	t_env	*tmp;
 
-    tmp = env;
-    i = 0;
-    envp = ft_calloc(env_lstsize(env) + 1, sizeof(char *));
-    if (!envp) 
-        return NULL; // Si no se puede asignar memoria, devuelve NULL
-    while (tmp)
+	tmp = env;
+	i = 0;
+	envp = ft_calloc(env_lstsize(env) + 1, sizeof(char *));
+	if (!envp)
+		return (NULL);
+	while (tmp)
 	{
-        envp[i] = ft_threejoin(tmp->key, "=", tmp->value);
-        if (!envp[i]) 
+		envp[i] = ft_threejoin(tmp->key, "=", tmp->value);
+		if (!envp[i])
 			return (ft_free_double(&envp), NULL);
-        tmp = tmp->next;
-        i++;
-    }
-    return (envp);
+		tmp = tmp->next;
+		i++;
+	}
+	return (envp);
 }
 
-void ft_safe_free(void **ptr)
+void	ft_safe_free(void **ptr)
 {
-    if (ptr && *ptr) // Validar que el puntero y su contenido no sean NULL
-    {
-        free(*ptr);  // Liberar la memoria apuntada
-        *ptr = NULL; // Asignar NULL al puntero para evitar reutilización
-    }
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }
