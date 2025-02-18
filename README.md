@@ -164,9 +164,11 @@ Valor de retorno de un proceso
 
 Ejecuta una prueba simple con una ruta absoluta del tipo /bin/ls, o algún otro comando con argumentos pero sin comillas simples o comillas dobles. 
 Después ejecuta echo $?
-Comprueba el valor devuelto. P
-uedes hacer lo mismo en bash y comparar ambos resultados.
+Comprueba el valor devuelto. 
+
+Puedes hacer lo mismo en bash y comparar ambos resultados.
 Hazlo varias veces, con distintos comandos y argumentos. 
+
 Ejecuta algunos comandos que fallen como '/bin/ls archivo_que_no_existe'.
 Algo como 'expr $? + $?'.
 
