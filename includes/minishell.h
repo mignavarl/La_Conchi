@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-04 14:32:18 by mignavar          #+#    #+#             */
-/*   Updated: 2025-02-04 14:32:18 by mignavar         ###   ########.fr       */
+/*   Created: 2025/02/04 14:32:18 by mignavar          #+#    #+#             */
+/*   Updated: 2025/02/18 15:41:50 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ struct s_data
 	int		new_quote;
 	int		sym_list;
 	int		word_list;
+	int		have_redir;
 };
 
 struct s_exec
@@ -215,6 +216,6 @@ char	*ft_joinchar(char *str, char c);
 int		ft_have_this(char *word, int this);
 
 //-----------------------LEXER FUNCTIONS-----------------------//
-int		lexer(char **words);
+int		lexer(char *words);
 
 #endif

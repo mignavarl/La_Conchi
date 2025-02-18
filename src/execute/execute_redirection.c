@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_redirection.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-12 15:31:26 by mignavar          #+#    #+#             */
-/*   Updated: 2025-02-12 15:31:26 by mignavar         ###   ########.fr       */
+/*   Created: 2025/02/12 15:31:26 by mignavar          #+#    #+#             */
+/*   Updated: 2025/02/18 16:03:50 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	execute_redirection(char **command, t_exec *exec, t_env *env, t_data *data)
 
 	exit = 1;
 	data->to_close = 1;
+	data->have_redir = 0;
 	if (!ft_strcmp(exec->next->cmd, ">>") && exec->next->next)
 		exit = execute_append(command, exec, env, data);
 	else if (!ft_strcmp(exec->next->cmd, "<<") && exec->next->next)
@@ -87,5 +88,6 @@ int	execute_redirection(char **command, t_exec *exec, t_env *env, t_data *data)
 		ft_free_double(&command);
 		return (0);
 	}
+	data->have_redir = 1;
 	return (exit);
 }

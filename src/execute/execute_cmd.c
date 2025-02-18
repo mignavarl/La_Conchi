@@ -6,7 +6,7 @@
 /*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:31:04 by mignavar          #+#    #+#             */
-/*   Updated: 2025/02/17 16:33:24 by osredond         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:29:56 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ int	execute_exit(char **command, t_env *env)
 		w++;
 	if (w > 2)
 		return (write(1, "exit: too many arguments\n", 25));
-	if (w == 2)
+	if (w == 1)
+		exit(0);
+	else
 	{
 		while (command[1][i])
 		{
-			if (!ft_isdigit(command[1][i]))
+			if (!ft_isdigit(command[1][i]) || command[1][i] == '-')
 				return (write(1, "exit: numeric argument required\n", 32));
 			i++;
 		}
@@ -54,6 +56,17 @@ void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data)
 		ft_free_double(&command); // si command = NULL, cerrar la minishell debido al fallo de alojamiento de memoria en malloc del split  
 		// Liberar todo y salir de minishell si command es NULL <- resumen
 		return ;
+	}
+	if (data->have_redir == 1)
+	{
+		pid = fork();
+		if (pid < 0)
+			perror("Create Fork");
+		if (pid != 0)
+		{
+			ft_free_double(&command);
+			return ;
+		}
 	}
 	if (!ft_strcmp(command[0], "cd"))
 		execute_cd(command, env);

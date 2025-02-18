@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_rest.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-10 10:31:21 by mignavar          #+#    #+#             */
-/*   Updated: 2024-12-10 10:31:21 by mignavar         ###   ########.fr       */
+/*   Created: 2024/12/10 10:31:21 by mignavar          #+#    #+#             */
+/*   Updated: 2025/02/18 16:06:12 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	execute_rest(char **command, t_env *env, t_data *data)
 	route = search_route(command[0], envp);
 	pid = fork();
 	if (pid < 0)
-		perror("Fork mal hecho");
+		perror("Create Fork");
 	if (pid == 0)
 	{
 		signal(SIGQUIT, SIG_DFL);

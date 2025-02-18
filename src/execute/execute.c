@@ -6,7 +6,7 @@
 /*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:31:33 by mignavar          #+#    #+#             */
-/*   Updated: 2025/02/17 19:20:55 by osredond         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:48:20 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 			return ;
 		}
 		printf(YELLOW"COMANDO --> [%s]\n"END, exec.now->cmd);
-		execute_cmd(ft_split(exec.now->cmd, ' '), env, 1, data); // $> "ls " no deberia funcionar
+		execute_cmd(ft_split(exec.now->cmd, '\0'), env, 1, data); // $> "ls " no deberia funcionar
 		g_signal_c = data->last_exit;
 		return ;
 	}
