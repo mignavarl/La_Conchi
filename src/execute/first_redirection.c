@@ -37,8 +37,7 @@ int	first_is_output(t_exec *exec, t_data *data)
 int	first_is_input(t_exec *exec, t_data *data)
 {
 	data->to_close = 1;
-	if (!first_argument_input(exec->next->cmd))
-		return (-1);
+	first_argument_input(exec->next->cmd);
 	if (exec->next->next)
 	{
 		exec->now = exec->next->next;
