@@ -170,15 +170,25 @@ Algo como 'expr $? + $?'.
 
 Señales
 Verifica que ctrl-C en una entrada limpia muestra una nueva línea con una entrada limpia.
+
 Verifica que ctrl-\ en una entrada limpia no hace nada.
+
 Verifica que ctrl-D en una entrada limpia termina minishell, ejecútalo de nuevo.
+
 Verifica que ctrl-C en una entrada con texto, muestra una nueva línea con una entrada limpia.
+
 El buffer debería limpiarse correctamente, pulsa "enter" para verificar que nada de lo que habías escrito se ejecute.
+
 Verifica que ctrl-D en una entrada con texto no hace nada.
+
 Verifica que ctrl-\ en una entrada con texto no hace nada.
+
 Verifica que ctrl-C después de ejecutar un comando bloqueante como cat sin argumentos o grep "algo".
+
 Verifica que ctrl-\ después de ejecutar un comando bloqueante como cat sin argumentos o grep "algo".
+
 Verifica que ctrl-D después de ejecutar un comando bloqueante como cat sin argumentos o grep "algo".
+
 
 Comillas dobles
 Ejecuta un comando simple con argumentos, esta vez con comillas dobles (deberías probar a incluir espacios en blanco
