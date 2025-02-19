@@ -12,6 +12,28 @@
 
 #include "minishell.h"
 
+int	first_is_append(t_exec *exec, t_data *data)
+{
+	data->to_close = 1;
+	exec->next = first_argument_append(exec->next);
+	if (exec->next->next)
+	{
+		exec->now = exec->next->next;
+		if (m_ischar(exec->now->cmd))
+		{
+			restaure_fd(data);
+			exec->now = exec->now->next;
+		}
+		if (exec->now->next)
+			exec->next = exec->now->next;
+		else
+			exec->next = NULL;
+	}
+	else
+		return (-1);
+	return (1);
+}
+
 int	first_is_output(t_exec *exec, t_data *data)
 {
 	data->to_close = 1;
@@ -65,6 +87,8 @@ int	check_first_redirection(t_exec *exec, t_data *data)
 		start = first_is_output(exec, data);
 	if (!ft_strcmp(exec->now->cmd, "<"))
 		start = first_is_input(exec, data);
+	if (!ft_strcmp(exec->now->cmd, ">>"))
+		start = first_is_append(exec, data);
 	return (start);
 }
 

@@ -12,6 +12,70 @@
 
 #include "minishell.h"
 
+t_cmds	*find_last_append(t_cmds *first, t_cmds *last)
+{
+	int	fd;
+
+	fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+	close(fd);
+	while(1)
+	{
+		if (!ft_strcmp(last->cmd, ">>"))
+		{
+			first = last->next;
+			fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
+			close(fd);
+			if (first->next)
+			{
+				last = first->next;
+				if (ft_strcmp(last->cmd, ">>"))
+					return (first);
+			}
+			else
+				return (first);
+		}
+	}
+	return (first);
+}
+
+t_cmds	*last_file_append(t_cmds *node)
+{
+	t_cmds	*first;
+	t_cmds	*last;
+
+	first = node;
+	if (first->next)
+	{
+		last = first->next;
+		if (ft_strcmp(last->cmd, ">>"))
+			return (node);
+	}
+	else
+		return (node);
+	first = find_last_append(first, last);
+	return (first);
+}
+
+t_cmds	*first_argument_append(t_cmds *node)
+{
+	int		fd_output;
+	t_cmds	*next;
+
+	fd_output = open(node->cmd, O_WRONLY | O_APPEND | O_CREAT, 00644);
+	dup2(fd_output, STDOUT_FILENO);
+	close(fd_output);
+	if (node->next && !ft_strcmp(node->next->cmd, ">>"))
+	{
+		next = last_file_append(node);
+		fd_output = open(next->cmd, O_WRONLY | O_APPEND | O_CREAT, 00644);
+		dup2(fd_output, STDOUT_FILENO);
+		close(fd_output);
+		return (next);
+	}
+	else
+		return (node);
+}
+
 void	make_append(char **command, t_env *env, char *file, t_data *data)
 {
 	int		fd_append;

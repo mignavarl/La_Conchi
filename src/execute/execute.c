@@ -14,9 +14,9 @@
 
 void	update_now_and_next(t_exec *exec, t_data *data)
 {
-	if(exec->next->next)
+	if (exec->next->next)
 	{
-		exec->now = exec->next->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
+		exec->now = exec->next->next;
 		if (!ft_strcmp(exec->now->cmd, "|"))
 		{
 			pipe_exception(data);
@@ -25,9 +25,8 @@ void	update_now_and_next(t_exec *exec, t_data *data)
 	}
 	else
 		exec->now = NULL;
-
 	if (exec->now && exec->now->next)
-		exec->next = exec->now->next; //Protección añadida, (solo accede al siguiente valor de la lista, si es que esta contiene algo nwn)
+		exec->next = exec->now->next;
 	else
 		exec->next = NULL;
 }
@@ -38,7 +37,7 @@ int	while_loop_cmd(char **command, int i, t_exec *exec, t_data *data)
 	if (!command)
 		return (0);
 	command = first_is_delimiter(command, exec, data);
-	if(!command)
+	if (!command)
 		return (0);
 	if (exec->next && m_ischar(exec->next->cmd) && exec->next->quote == 0)
 	{
@@ -47,16 +46,16 @@ int	while_loop_cmd(char **command, int i, t_exec *exec, t_data *data)
 	}
 	else
 	{
-		execute_cmd(command, exec->env, 1, data);  // Ejecutar el comando
+		execute_cmd(command, exec->env, 1, data);
 		return (0);
 	}
 	return (1);
 }
 
-void 	loop_cmd(t_exec *exec, t_env *env, t_data *data)
+void	loop_cmd(t_exec *exec, t_env *env, t_data *data)
 {
-	char    **command;
-	int     i;
+	char	**command;
+	int		i;
 
 	save_fd(data);
 	replace_here_doc(exec->now);
@@ -95,7 +94,6 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 			ft_putendl_fd(exec.now->cmd, 2);
 			return ;
 		}
-		printf(YELLOW"COMANDO --> [%s]\n"END, exec.now->cmd);
-		execute_cmd(ft_split(exec.now->cmd, '\0'), env, 1, data); // $> "ls " no deberia funcionar
+		execute_cmd(ft_split(exec.now->cmd, '\0'), env, 1, data);
 	}
 }

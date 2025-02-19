@@ -20,6 +20,7 @@ SRCS = main.c\
 		$(EXE_DIR)execute_cmd.c\
 		$(EXE_DIR)execute_echo.c\
 		$(EXE_DIR)execute_env.c\
+		$(EXE_DIR)execute_exit.c\
 		$(EXE_DIR)execute_pwd.c\
 		$(EXE_DIR)execute_redirection.c\
 		$(EXE_DIR)execute_rest.c\

@@ -150,6 +150,9 @@ void	ft_safe_free(void **ptr);
 //EXTRACT_COMMAND.C
 char	**extract_command(t_exec *exec, int i);
 
+//EXECUTE_EXIT.C
+int		execute_exit(char **command, t_env *env);
+
 //FIRST_REDIRECTION.C
 int		check_first_redirection(t_exec *exec, t_data *data);
 char	**first_is_delimiter(char **command, t_exec *exec, t_data *data);
@@ -192,6 +195,7 @@ t_cmds	*find_last(t_cmds *first, t_cmds *last);
 
 //MAKE_APPEND.C >>
 void	make_append(char **command, t_env *env, char *file, t_data *data);
+t_cmds	*first_argument_append(t_cmds *node);
 
 //MAKE_DELIMITER.C <<
 

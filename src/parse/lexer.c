@@ -38,30 +38,5 @@ int lexer(char *line)
 		}
 		i++;
 	}
-    return (EXIT_SUCCESS); // Retornar éxito si no hay errores de sintaxis
+	return (EXIT_SUCCESS); // Retornar éxito si no hay errores de sintaxis
 }
-
-
-
-    // int i = 0;
-
-    // while (words[i]) // Iterar sobre cada palabra en el array
-    // {
-    //     //printf("[%s]", words[i]); // Imprimir la palabra actual
-
-    //     // Si encontramos un pipe '|' sin tokens previos o al final, mostramos error
-    //     if ((ft_strncmp(words[i], "|", 1) == 0) &&
-    //         (i == 0 || !words[i + 1] || ft_strncmp(words[i + 1], "|", 1) == 0))
-    //     {
-    //         printf("Syntax Error\n");
-    //         return (EXIT_FAILURE);
-    //     }
-
-    //     // Expansión de variables ()
-    //     //if (words[i][0] == '$')
-    //     {
-    //         //otras variables ??
-    //     }
-
-    //     i++; // Avanzar al siguiente índice
-    // }

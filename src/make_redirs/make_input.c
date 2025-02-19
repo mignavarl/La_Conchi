@@ -19,8 +19,8 @@ int	first_argument_input(char *file)
 	fd_input = open(file, O_RDONLY);
 	if (fd_input < 0)
 	{
-		ft_putstr_fd("La Conchi says: no such file or directory:", 1);
-		ft_putendl_fd(file, 1);
+		ft_putstr_fd("La Conchi says: no such file or directory: ", 2);
+		ft_putendl_fd(file, 2);
 		return (0);
 	}
 	dup2(fd_input, STDIN_FILENO);
@@ -56,7 +56,7 @@ t_cmds	*find_output_from_in(t_cmds *last)
 
 t_cmds	*no_input_make_input(t_cmds *node, char *file)
 {
-	ft_putstr_fd("La Conchi says: no such file or directory:", 2);
+	ft_putstr_fd("La Conchi says: no such file or directory: ", 2);
 	ft_putendl_fd(file, 2);
 	return (node);
 }

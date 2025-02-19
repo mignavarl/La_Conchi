@@ -20,7 +20,7 @@ void	execute_pwd(void)
 	if (!s)
 	{
 		perror("Error al obtener el directorio actual");
-		return;
+		return ;
 	}
 	if (write(STDOUT_FILENO, s, ft_strlen(s)) == -1)
 		perror("Error al imprimir el directorio actual");

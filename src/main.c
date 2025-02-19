@@ -14,12 +14,43 @@
 
 int	g_signal_c = 0;
 
+int	check_redirs(t_cmds *command)
+{
+	t_cmds	*first;
+	t_cmds	*second;
+
+	first = command;
+	while (first)
+	{
+		if (m_ischar(first->cmd))
+		{
+			if (first->next)
+			{
+				second = first->next;
+				if (m_ischar(second->cmd))
+					return (ft_putendl_fd("Syntax error near unexpected token", 2), 
+						EXIT_FAILURE);
+			}
+			else
+				return (ft_putendl_fd("Syntax error near unexpected token", 2), 
+						EXIT_FAILURE);
+		}
+		first = first->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	to_execute(t_cmds *command, t_data *data, t_env *env)
 {
 	int	status;
 
 	status = 0;
 	command = list_cmd(command, data->words, data);
+	if (check_redirs(command))
+	{
+		m_listclear(&command, free);
+		return ;
+	}
 	execute(&command, env, data);
 	close_pipe(data->pipe_fd, data);
 	while (waitpid(-1, &status, 0) != -1)
