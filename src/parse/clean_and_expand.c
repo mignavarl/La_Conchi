@@ -30,7 +30,8 @@ char	*put_rest(char *old_word, char *new_word, t_env *env, t_data *data)
 	while (old_word[data->quote_chars] && old_word[data->quote_chars] != '"' &&
 			old_word[data->quote_chars] != '\'')
 	{
-		if (old_word[data->quote_chars] == '$')
+		if (old_word[data->quote_chars] == '$' && old_word[data->quote_chars + 1] != ' '
+			&& old_word[data->quote_chars + 1] != '\0')
 		{
 			new_word = expand_var_quote(old_word, new_word, env, data);
 			data->new_quote = ft_strlen(new_word);

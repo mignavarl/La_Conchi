@@ -75,7 +75,6 @@ void	while_main(t_env *env, t_data *data)
 		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
 		if (!line || !ft_strcmp(line, "exit"))
 			exit_mini(line, env);
-		add_history(line);
 		if (lexer(line))
 			continue ;
 		data->words = search_in_line(line, data, env);
@@ -85,6 +84,8 @@ void	while_main(t_env *env, t_data *data)
 			to_execute(command, data, env);
 		if (data->words)
 			ft_free_double(&data->words);
+		if (ft_strlen(line) != 0)
+			add_history(line);
 		free(line);
 	}
 }

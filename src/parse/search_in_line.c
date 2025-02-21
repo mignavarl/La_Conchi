@@ -67,8 +67,6 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 	}
 	words = cut_line(words, line, data, w);
 	words = clean_and_expand(words, env, data);
-	return (words);
-}
 
 	// w = 0;//TODO: borrar, para ver words
 	// while (w < num_words)
@@ -76,3 +74,5 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 	// 	printf("Word [%d] = %s / %d\n", w, words[w], w);
 	// 	w++;
 	// }
+	return (words);
+}
