@@ -44,8 +44,7 @@ void	execute_cmd(char **command, t_env *env, pid_t pid, t_data *data)
 {
 	if (!command || !env || !command[0])
 	{
-		ft_free_double(&command); // si command = NULL, cerrar la minishell debido al fallo de alojamiento de memoria en malloc del split  
-		// Liberar todo y salir de minishell si command es NULL <- resumen
+		ft_free_double(&command);
 		return ;
 	}
 	if (data->have_redir == 1)

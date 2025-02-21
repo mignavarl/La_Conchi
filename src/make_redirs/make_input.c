@@ -39,7 +39,7 @@ t_cmds	*find_output_from_in(t_cmds *last)
 		{
 			node = last->next;
 			fd_out = open(node->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
-			close(fd_out);	
+			close(fd_out);
 			if (node->next)
 				last = node->next;
 			else
@@ -61,7 +61,7 @@ t_cmds	*no_input_make_input(t_cmds *node, char *file)
 	return (node);
 }
 
-t_cmds	*make_input(char **command, t_env *env, t_cmds* node, t_data *data)
+t_cmds	*make_input(char **command, t_env *env, t_cmds *node, t_data *data)
 {
 	int		fd_input;
 	pid_t	pid;

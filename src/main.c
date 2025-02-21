@@ -24,16 +24,15 @@ int	check_redirs(t_cmds *command)
 	{
 		if (m_ischar(first->cmd))
 		{
-			if (first->next)
-			{
-				second = first->next;
-				if (m_ischar(second->cmd))
-					return (ft_putendl_fd("Syntax error near unexpected token", 2), 
-						EXIT_FAILURE);
-			}
-			else
-				return (ft_putendl_fd("Syntax error near unexpected token", 2), 
-						EXIT_FAILURE);
+			if (!first->next)
+				return (
+					ft_putendl_fd("Redirection at the end of line", 2),
+					EXIT_FAILURE);
+			second = first->next;
+			if (m_ischar(second->cmd) && second->cmd[0] == '|')
+				return (
+					ft_putendl_fd("Syntax error near unexpected token", 2),
+					EXIT_FAILURE);		
 		}
 		first = first->next;
 	}
@@ -75,6 +74,8 @@ void	while_main(t_env *env, t_data *data)
 		line = readline(GREEN"🐚La Conchi" YELLOW " ⇒ " END);
 		if (!line || !ft_strcmp(line, "exit"))
 			exit_mini(line, env);
+		if (ft_strlen(line) != 0)
+			add_history(line);
 		if (lexer(line))
 			continue ;
 		data->words = search_in_line(line, data, env);
@@ -84,8 +85,6 @@ void	while_main(t_env *env, t_data *data)
 			to_execute(command, data, env);
 		if (data->words)
 			ft_free_double(&data->words);
-		if (ft_strlen(line) != 0)
-			add_history(line);
 		free(line);
 	}
 }

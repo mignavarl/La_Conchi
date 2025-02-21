@@ -18,7 +18,7 @@ t_cmds	*find_last(t_cmds *first, t_cmds *last)
 
 	fd = open(first->cmd, O_WRONLY | O_TRUNC | O_CREAT, 00644);
 	close(fd);
-	while(1)
+	while (1)
 	{
 		if (!ft_strcmp(last->cmd, ">"))
 		{

@@ -67,7 +67,7 @@ int	while_count_words(char *line, int i, int word, int q)
 			q = count_end_quote(line, i);
 			if (q < 0)
 				return (-1);
-			i = q; 
+			i = q;
 			word++;
 		}
 		if (line[i] == '\0')

@@ -34,12 +34,10 @@ int	word_len(char *word)
 
 	len = 0;
 	while (m_ischar(&word[len]) > 0)
-			len++;
+		len++;
 	len = 0;
 	while (word[len])
-	{
 		len++;
-	}
 	while (m_ischar(&word[len - 1]) > 0)
 		len--;
 	return (len);

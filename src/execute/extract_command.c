@@ -44,26 +44,27 @@ char	**extract_command(t_exec *exec, int i)
 {
 	char	**command;
 
-	command = ft_calloc(count_com(exec->now), sizeof(char *));  // Asignación de memoria para el array de comandos
+	command = ft_calloc(count_com(exec->now), sizeof(char *));
 	if (!command)
-		return (NULL) ; // Si malloc falla, salimos de la función
-	command[0] = ft_strdup(exec->now->cmd);  // Copia del comando
-	if (!command[0])  // Verifica si la asignación falla
+		return (NULL);
+	command[0] = ft_strdup(exec->now->cmd);
+	if (!command[0])
 	{
-		ft_free_double(&command);  // Liberar el array de comandos en caso de error
+		ft_free_double(&command);
 		return (NULL);
 	}
-	while (exec->next && exec->next->cmd && (exec->next->quote == 1 || !m_ischar(exec->next->cmd)))
+	while (exec->next && exec->next->cmd
+		&& (exec->next->quote == 1 || !m_ischar(exec->next->cmd)))
 	{
-		command[i] = ft_strdup(exec->next->cmd);  // Copia de los comandos siguientes
-		if (!command[i])  // Verifica si la asignación falla
+		command[i] = ft_strdup(exec->next->cmd);
+		if (!command[i])
 		{
-			ft_free_double(&command);  // Liberar el array de comandos si algo falla
+			ft_free_double(&command);
 			return (NULL);
 		}
 		exec->next = exec->next->next;
 		i++;
 	}
-	command[i] = NULL;  // Terminamos el array de comandos
+	command[i] = NULL;
 	return (command);
 }

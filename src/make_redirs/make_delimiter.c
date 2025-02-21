@@ -14,7 +14,7 @@
 
 t_cmds	*find_output(t_cmds *node)
 {
-	t_cmds *next;
+	t_cmds	*next;
 	int		fd_out;
 
 	if (!node->next)
