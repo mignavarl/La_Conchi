@@ -12,6 +12,28 @@
 
 #include "env.h"
 
+char	*ft_strndup(char *str, size_t n)
+{
+	size_t	i;
+	char	*copy;
+
+	i = 0;
+	if (!str)
+		return (NULL);
+	if (ft_strlen(str) > n)
+		copy = ft_calloc(sizeof(char), n + 1);
+	else
+		copy = ft_calloc(sizeof(char), ft_strlen(str) + 1);
+	if (!copy)
+		return (NULL);
+	while (str[i] && i < n)
+	{
+		copy[i] = str[i];
+		i++;
+	}
+	return (copy);
+}
+
 int	env_lstsize(t_env *lst)
 {
 	t_env	*l;
@@ -57,9 +79,9 @@ void	env_add_back(t_env **lst, t_env *new)
 	new->next = NULL;
 }
 
-void free_env(t_env *env_list)
+void	free_env(t_env *env_list)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	while (env_list)
 	{

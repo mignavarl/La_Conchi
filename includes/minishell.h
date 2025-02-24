@@ -50,7 +50,6 @@ typedef struct s_data	t_data;
 typedef struct s_cmds	t_cmds;
 typedef struct s_exec	t_exec;
 
-
 extern int				g_signal_c;
 struct s_cmds
 {
@@ -107,7 +106,8 @@ int		m_ischar(char *c);
 
 //EXPAND_VARIABLE.C
 char	*join_var_more(char *old_word, char *new_word, char *value);
-char	*expand_var_quote(char *old_word, char *new_word, t_env *env, t_data *data);
+char	*expand_var_quote(char *old_word, char *new_word,
+			t_env *env, t_data *data);
 char	*double_quote(char *old_word, char *new_word, t_env *env, t_data *data);
 
 //CLEAN_AND_EXPAND.C
@@ -132,7 +132,8 @@ void	execute_export(char **command, t_env *env);
 void	execute_unset(char **command, t_env *env);
 
 //EXECUTE_REDIRECTION.C
-int		execute_redirection(char **command, t_exec *exec, t_env *env, t_data *data);
+int		execute_redirection(char **command, t_exec *exec,
+			t_env *env, t_data *data);
 
 //EXECUTE_REST.C
 void	execute_rest(char **command, t_env *env, t_data *data);

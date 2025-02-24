@@ -14,7 +14,7 @@
 
 int	search_end_quote(char *line, int i)
 {
-	int f;
+	int		f;
 	char	sym;
 
 	f = i + 1;
@@ -84,34 +84,44 @@ char	*extract_line(char *line, char *quote, int init, t_data *data)
 	return (new_space);
 }
 
+char	*find_more_quotes(char *line, int l, char *quote, t_data *data)
+{
+	int	init;
+
+	init = l + 1;
+	while (line[init] && line[l])
+	{
+		if (line[init] == ' ' || line[init] == '\0')
+		{
+			data->quote_chars = init + 1;
+			return (quote);
+		}
+		if (line[init] == '"' || line[init] == '\'')
+			quote = extract_quote(line, quote, init, data);
+		else
+			quote = extract_line(line, quote, init, data);
+		init = data->quote_chars;
+	}
+	return (quote);
+}
+
 char	*find_quote(char *line, int init, t_data *data)
 {
-	int 	l;
+	int		l;
 	char	*quote;
 
 	l = init + 1;
 	while (line[l])
 	{
-		if ((line[init] == '"' && line[l] == '"') || (line[init] == '\'' && line[l] == '\''))
+		if ((line[init] == '"' && line[l] == '"')
+			|| (line[init] == '\'' && line[l] == '\''))
 		{
 			quote = ft_substr(&line[init], 0, (l - init) + 1);
 			data->quote_chars = l;
 			if (line[l + 1] != '\0' && line[l + 1] != ' ')
 			{
 				init = l + 1;
-				while(line[init] && line[l])
-				{
-					if (line[init] == ' ' || line[init] == '\0')
-					{
-						data->quote_chars = init + 1;
-						return (quote);
-					}
-					if (line[init] == '"' || line[init] == '\'')
-						quote = extract_quote(line, quote, init, data);
-					else
-						quote = extract_line(line, quote, init, data);
-					init = data->quote_chars;
-				}
+				quote = find_more_quotes(line, l, quote, data);
 			}
 			break ;
 		}

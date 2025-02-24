@@ -27,10 +27,11 @@ char	*single_quote(char *old_word, char *new_word, t_data *data)
 
 char	*put_rest(char *old_word, char *new_word, t_env *env, t_data *data)
 {
-	while (old_word[data->quote_chars] && old_word[data->quote_chars] != '"' &&
-			old_word[data->quote_chars] != '\'')
+	while (old_word[data->quote_chars] && old_word[data->quote_chars] != '"'
+		&& old_word[data->quote_chars] != '\'')
 	{
-		if (old_word[data->quote_chars] == '$' && old_word[data->quote_chars + 1] != ' '
+		if (old_word[data->quote_chars] == '$'
+			&& old_word[data->quote_chars + 1] != ' '
 			&& old_word[data->quote_chars + 1] != '\0')
 		{
 			new_word = expand_var_quote(old_word, new_word, env, data);
@@ -76,7 +77,7 @@ char	**clean_and_expand(char **words, t_env *env, t_data *data)
 	while (words[w])
 	{
 		if (ft_have_this(words[w], '\'') || ft_have_this(words[w], '"')
-			 || ft_have_this(words[w], '$'))
+			|| ft_have_this(words[w], '$'))
 			words[w] = clean_word(words[w], env, data);
 		w++;
 	}

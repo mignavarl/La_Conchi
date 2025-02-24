@@ -32,7 +32,7 @@ int	check_redirs(t_cmds *command)
 			if (m_ischar(second->cmd) && second->cmd[0] == '|')
 				return (
 					ft_putendl_fd("Syntax error near unexpected token", 2),
-					EXIT_FAILURE);		
+					EXIT_FAILURE);
 		}
 		first = first->next;
 	}

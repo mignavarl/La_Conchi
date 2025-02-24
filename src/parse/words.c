@@ -12,19 +12,28 @@
 
 #include "minishell.h"
 
-char *find_words(char *line, int i, t_data *data)
+int	len_word(int i, char *line)
+{
+	int	l;
+
+	l = i;
+	while (line[l])
+	{
+		if (line[l] == ' ' || line[l] == '\0'
+			|| line[l] == '"' || line[l] == '\'')
+			break ;
+		l++;
+	}
+	return (l);
+}
+
+char	*find_words(char *line, int i, t_data *data)
 {
 	int		l;
 	char	*word;
 	char	*tmp_word;
 
-	l = i;
-	while(line[l])
-	{
-		if (line[l] == ' ' || line[l] == '\0' || line[l] == '"' || line[l] == '\'')
-			break ;
-		l++;
-	}
+	l = len_word(i, line);
 	word = ft_substr(line, i, (l - i));
 	if (!word)
 		return (NULL);

@@ -12,20 +12,14 @@
 
 #include "minishell.h"
 
-void	echo_with_n(char **command)
+void	echo_with_n(char **command, int w)
 {
-	int	w;
-
-	w = 0;
-	while (command[w])
-		w++;
-	if (w < 3)
-		return ;
-	w = 2;
 	while (command[w])
 	{
-		printf("%s ", command[w]);
+		printf("%s", command[w]);
 		w++;
+		if (command[w])
+			printf(" ");
 	}
 }
 
@@ -42,28 +36,52 @@ void	echo_normal(char **command)
 	printf("\n");
 }
 
+int	check_n_flag(char *str)
+{
+	int	i;
+
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] != 'n' && str[i] != '\0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_size_array_double(char **array)
+{
+	int	i;
+
+	i = 0;
+	while (array[i])
+		i++;
+	return (i);
+}
+
 void	execute_echo(char **command)
 {
 	int	w;
-	int	i;
 
-	w = 0;
-	i = 0;
-	while (command[w])
-		w++;
-	if (w < 2)
+	if (ft_size_array_double(command) < 2)
 	{
 		printf("\n");
 		return ;
 	}
 	w = 1;
-	if (command[w][0] == '-')
+	if (!ft_strncmp(command[w], "-n", 2))
 	{
-		i = 1;
-		while (command[w][i] == 'n')
-			i++;
-		if (command[w][i] != 'n' && command[w][i] == '\0')
-			echo_with_n(command);
+		while (command[w] && !ft_strncmp(command[w], "-n", 2))
+		{
+			if (!check_n_flag(command[w]))
+			{
+				echo_with_n(command, w);
+				return ;
+			}
+			w++;
+		}
+		echo_with_n(command, w);
 	}
 	else
 		echo_normal(command);

@@ -12,6 +12,15 @@
 
 #include "minishell.h"
 
+int	append_cut_line(int i, char *line, t_data *data)
+{
+	i = data->quote_chars;
+	if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'')
+		&& line[i] && line[i + 1] != '\0')
+		i++;
+	return (i);
+}
+
 char	**cut_line(char **words, char *line, t_data *data, int w)
 {
 	int	i;
@@ -30,14 +39,11 @@ char	**cut_line(char **words, char *line, t_data *data, int w)
 		else if (line[i] == '"' || line[i] == '\'')
 		{
 			words[w] = find_quote(line, i, data);
-			if (!words[w])
+			if (!words[w++])
 				break ;
-			i = data->quote_chars;
-			if ((line[i] != ' ' || line[i] != '"' || line[i] != '\'') && line[i] && line[i + 1] != '\0')
-				i++;
+			i = append_cut_line(i, line, data);
 			if (!line[i])
 				break ;
-			w++;
 		}
 		i++;
 	}

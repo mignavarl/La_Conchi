@@ -12,12 +12,11 @@
 
 #include "env.h"
 
-// Implementación de las funciones
-
-t_env *init_env(char **envp, t_env *env)
+t_env	*init_env(char **envp, t_env *env)
 {
 	int		i;
 	char	*equal_sign;
+	t_env	*new_env;
 
 	i = 0;
 	while (envp[i])
@@ -25,8 +24,8 @@ t_env *init_env(char **envp, t_env *env)
 		equal_sign = ft_strchr(envp[i], '=');
 		if (equal_sign)
 		{
-			t_env *new_env = malloc(sizeof(t_env));
-			new_env->key = strndup(envp[i], equal_sign - envp[i]);//TODO: FT_STRNDUP
+			new_env = malloc(sizeof(t_env));
+			new_env->key = ft_strndup(envp[i], equal_sign - envp[i]);
 			new_env->value = ft_strdup(equal_sign + 1);
 			new_env->next = env;
 			env = new_env;
@@ -36,9 +35,9 @@ t_env *init_env(char **envp, t_env *env)
 	return (env);
 }
 
-void add_env_var(t_env **env_list, char *key, char *value)
+void	add_env_var(t_env **env_list, char *key, char *value)
 {
-	t_env *new_var;
+	t_env	*new_var;
 
 	new_var = malloc(sizeof(t_env));
 	new_var->key = ft_strdup(key);
@@ -46,7 +45,7 @@ void add_env_var(t_env **env_list, char *key, char *value)
 	env_add_back(env_list, new_var);
 }
 
-char *get_env_var(t_env *env_list, char *key)
+char	*get_env_var(t_env *env_list, char *key)
 {
 	while (env_list)
 	{
@@ -58,32 +57,32 @@ char *get_env_var(t_env *env_list, char *key)
 }
 
 // Función para actualizar o agregar una variable de entorno
-void update_env_var(t_env **env_list, char *key, char *value)
+void	update_env_var(t_env **env_list, char *key, char *value)
 {
-	t_env *current = *env_list;
+	t_env	*current;
 
-	// Buscar si la variable ya existe
+	current = *env_list;
 	while (current)
 	{
 		if (ft_strcmp(current->key, key) == 0)
 		{
 			free(current->value);
 			current->value = ft_strdup(value);
-			return;
+			return ;
 		}
 		current = current->next;
 	}
-
-	// Si no existe, agregar una nueva variable
 	add_env_var(env_list, key, value);
 }
 
 // Función para eliminar una variable de entorno
-void remove_env_var(t_env **env_list, char *key)
+void	remove_env_var(t_env **env_list, char *key)
 {
-	t_env *current = *env_list;
-	t_env *prev = NULL;
+	t_env	*current;
+	t_env	*prev;
 
+	current = *env_list;
+	prev = NULL;
 	while (current)
 	{
 		if (ft_strcmp(current->key, key) == 0)
@@ -92,11 +91,10 @@ void remove_env_var(t_env **env_list, char *key)
 				prev->next = current->next;
 			else
 				*env_list = current->next;
-
 			free(current->key);
 			free(current->value);
 			free(current);
-			return;
+			return ;
 		}
 		prev = current;
 		current = current->next;

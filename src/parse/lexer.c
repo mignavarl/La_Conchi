@@ -12,31 +12,27 @@
 
 #include "minishell.h"
 
-
-/*
-lo que se hace aqui es simplemente evitar que hayan pipes solas, o cualquier elemento digase < | << > >> solo.
-cuando un comando tipo ej:(ls | ) sucede deberia haber un error ya que la pipe esta sola, y lo mismo para cualquier token
-asi que como he añadido pipes, podeis añadir con la misma logica para controlar  < << > >> y asi sucecivamente 
-*/
-// Es necesario hacer un parseo de todo AQUI, antes de pasarlo al executor, así el código es más limpio
-int lexer(char *line)
+int	lexer(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-	while(line[i])
+	i = 0;
+	while (line[i])
 	{
-		if(line[i] == '|' && line[i + 1] == '|')
+		if (line[i] == '|' && line[i + 1] == '|')
 		{
-			printf("La Conchi: syntax error near unexpected token `|'\n");
+			ft_putendl_fd(
+				"La Conchi: syntax error near unexpected token `|'\n",
+				2);
 			return (free(line), EXIT_FAILURE);
 		}
-		else if(line[i] == '|' && !line[i + 1])
+		else if (line[i] == '|' && !line[i + 1])
 		{
-			printf("La Conchi: syntax error near unexpected token `|'\n");
+			ft_putendl_fd("La Conchi: syntax error near unexpected token `|'\n",
+				2);
 			return (free(line), EXIT_FAILURE);
 		}
 		i++;
 	}
-	return (EXIT_SUCCESS); // Retornar éxito si no hay errores de sintaxis
+	return (EXIT_SUCCESS);
 }
