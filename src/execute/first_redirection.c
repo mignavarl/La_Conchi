@@ -59,22 +59,26 @@ int	first_is_output(t_exec *exec, t_data *data)
 int	first_is_input(t_exec *exec, t_data *data)
 {
 	data->to_close = 1;
-	first_argument_input(exec->next->cmd);
-	if (exec->next->next)
+	while (exec->now && !ft_strcmp(exec->now->cmd, "<"))
 	{
-		exec->now = exec->next->next;
-		if (m_ischar(exec->now->cmd))
+		if (exec->now->cmd[0] == '<' && !first_argument_input(exec->next->cmd))
+			return (-1);
+		if (exec->next->next)
 		{
-			restaure_fd(data);
-			exec->now = exec->now->next;
+			exec->now = exec->next->next;
+			if (m_ischar(exec->now->cmd) && exec->now->cmd[0] != '<')
+			{
+				restaure_fd(data);
+				exec->next = last_file_output(exec->now->next);
+			}
+			if (exec->now->next)
+				exec->next = exec->now->next;
+			else
+				exec->next = NULL;
 		}
-		if (exec->now->next)
-			exec->next = exec->now->next;
 		else
-			exec->next = NULL;
+			return (-1);
 	}
-	else
-		return (-1);
 	return (1);
 }
 
@@ -83,10 +87,10 @@ int	check_first_redirection(t_exec *exec, t_data *data)
 	int	start;
 
 	start = 1;
-	if (!ft_strcmp(exec->now->cmd, ">"))
-		start = first_is_output(exec, data);
 	if (!ft_strcmp(exec->now->cmd, "<"))
 		start = first_is_input(exec, data);
+	if (!ft_strcmp(exec->now->cmd, ">"))
+		start = first_is_output(exec, data);
 	if (!ft_strcmp(exec->now->cmd, ">>"))
 		start = first_is_append(exec, data);
 	return (start);
