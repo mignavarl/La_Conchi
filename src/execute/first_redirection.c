@@ -68,8 +68,8 @@ int	first_is_input(t_exec *exec, t_data *data)
 			exec->now = exec->next->next;
 			if (m_ischar(exec->now->cmd) && exec->now->cmd[0] != '<')
 			{
-				restaure_fd(data);
-				exec->next = last_file_output(exec->now->next);
+				exec->next = exec->now->next;
+				break ;
 			}
 			if (exec->now->next)
 				exec->next = exec->now->next;

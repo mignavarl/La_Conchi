@@ -65,7 +65,7 @@ void	loop_cmd(t_exec *exec, t_env *env, t_data *data)
 	{
 		i = check_first_redirection(exec, data);
 		if (i == -1)
-			return ;
+			break ;
 		if (!while_loop_cmd(command, i, exec, data))
 			break ;
 		update_now_and_next(exec, data);
