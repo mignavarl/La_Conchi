@@ -47,6 +47,7 @@ void	to_execute(t_cmds *command, t_data *data, t_env *env)
 	command = list_cmd(command, data->words, data);
 	if (check_redirs(command))
 	{
+		data->last_exit = 2;
 		m_listclear(&command, free);
 		return ;
 	}

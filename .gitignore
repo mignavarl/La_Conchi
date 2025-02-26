@@ -4,3 +4,4 @@ minishell
 *.txt
 *.pdf
 *.sh
+.gitignore

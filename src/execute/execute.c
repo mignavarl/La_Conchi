@@ -94,6 +94,9 @@ void	execute(t_cmds **cmd, t_env *env, t_data *data)
 			ft_putendl_fd(exec.now->cmd, 2);
 			return ;
 		}
-		execute_cmd(ft_split(exec.now->cmd, '\0'), env, 1, data);
+		if (ft_have_this(exec.now->cmd, ' '))
+			execute_cmd(ft_split(exec.now->cmd, ' '), env, 1, data);
+		else
+			execute_cmd(ft_split(exec.now->cmd, '\0'), env, 1, data);
 	}
 }
