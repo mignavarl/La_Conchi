@@ -61,14 +61,14 @@ int	put_in_list(t_cmds **command, char **words, int i, t_data *data)
 	return (i);
 }
 
-int	list_quote(t_cmds *command, char **words, t_data *data, int i)
+int	list_quote(t_cmds **command, char **words, t_data *data, int i)
 {
 	if (i == 0 && (words[data->word_list][i] == '"'
 		|| words[data->word_list][i] == '\''))
 	{
-		m_lstadd_back_quote(&command, m_lst_intnew(
-				ft_substr(words[data->word_list], 1, (ft_strlen(
-							words[data->word_list]) - 2))));
+		m_lstadd_back_quote(command, m_lst_intnew(ft_substr(
+					words[data->word_list], 1,
+					(ft_strlen(words[data->word_list]) - 2))));
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -85,7 +85,7 @@ t_cmds	*list_cmd(t_cmds *command, char **words, t_data *data)
 		i = 0;
 		while (words[data->word_list][i])
 		{
-			if (list_quote(command, words, data, i))
+			if (list_quote(&command, words, data, i))
 				break ;
 			data->sym_list = m_ischar(&words[data->word_list][i]);
 			i = put_in_list(&command, words, i, data);
