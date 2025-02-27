@@ -40,6 +40,7 @@ t_cmds	*find_output(t_cmds *node, t_data *data)
 	}
 	if (!ft_strcmp(next->cmd, "|"))
 	{
+
 		pipe_delimiter(data);
 		return (node);
 	}
@@ -97,5 +98,6 @@ t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data)
 		perror("Signal");
 	else
 		close(fd_delim);
+	restaure_fd(data);//Falla con varias redireccones
 	return (node);
 }

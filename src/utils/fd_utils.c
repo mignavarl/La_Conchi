@@ -22,5 +22,4 @@ void	save_fd(t_data *data)
 {
 	data->clon_stdin = dup(STDIN_FILENO);
 	data->clon_stdout = dup(STDOUT_FILENO);
-	data->delim_pipe = 0;
 }
