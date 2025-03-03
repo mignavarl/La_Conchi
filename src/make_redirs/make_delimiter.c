@@ -12,17 +12,6 @@
 
 #include "minishell.h"
 
-void	pipe_delimiter(t_data *data)
-{
-	int	fd_pipe[2];
-
-	pipe(fd_pipe);
-	close(fd_pipe[READ]);
-	dup2(fd_pipe[WRITE], STDOUT_FILENO);
-	close(fd_pipe[WRITE]);
-	data->to_close = 1;
-}
-
 t_cmds	*find_output(t_cmds *node, t_data *data)
 {
 	t_cmds	*next;
@@ -40,7 +29,6 @@ t_cmds	*find_output(t_cmds *node, t_data *data)
 	}
 	if (!ft_strcmp(next->cmd, "|"))
 	{
-
 		pipe_delimiter(data);
 		return (node);
 	}
@@ -98,6 +86,7 @@ t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data)
 		perror("Signal");
 	else
 		close(fd_delim);
-	restaure_fd(data);//Falla con varias redireccones
+	if (node->next && node->next->cmd[0] == '|')
+		node = case_pipe(data, node);
 	return (node);
 }

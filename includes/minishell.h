@@ -199,9 +199,12 @@ void	make_append(char **command, t_env *env, char *file, t_data *data);
 t_cmds	*first_argument_append(t_cmds *node);
 
 //MAKE_DELIMITER.C <<
-
 t_cmds	*make_delimiter(char **command, t_env *env, t_cmds *node, t_data *data);
 char	**first_delimiter(char **command);
+
+//PIPE_DELIMITER.C
+t_cmds	*case_pipe(t_data *data, t_cmds *node);
+void	pipe_delimiter(t_data *data);
 
 //MAKE_HERE_DOC.C <<
 void	replace_here_doc(t_cmds *now);
