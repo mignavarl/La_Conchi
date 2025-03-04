@@ -47,14 +47,14 @@ char	*put_rest(char *old_word, char *new_word, t_env *env, t_data *data)
 	return (new_word);
 }
 
-char	*clean_word(char *old_word, t_env *env, t_data *data)
+char	*clean_word(char *old_word, t_env *env, t_data *data, int quote)
 {
 	char	*new_word;
 
 	data->quote_chars = 0;
 	data->new_quote = 1;
 	new_word = ft_calloc(ft_strlen(old_word) + 2, sizeof(char));
-	new_word[0] = '"';
+	new_word[0] = quote;
 	while (old_word[data->quote_chars])
 	{
 		if (old_word[data->quote_chars] == '"')
@@ -65,7 +65,7 @@ char	*clean_word(char *old_word, t_env *env, t_data *data)
 			new_word = put_rest(old_word, new_word, env, data);
 	}
 	free(old_word);
-	new_word[data->new_quote] = '"';
+	new_word[data->new_quote] = quote;
 	return (new_word);
 }
 
@@ -76,9 +76,10 @@ char	**clean_and_expand(char **words, t_env *env, t_data *data)
 	w = 0;
 	while (words[w])
 	{
-		if (ft_have_this(words[w], '\'') || ft_have_this(words[w], '"')
-			|| ft_have_this(words[w], '$'))
-			words[w] = clean_word(words[w], env, data);
+		if (ft_have_this(words[w], '\'') || ft_have_this(words[w], '"'))
+			words[w] = clean_word(words[w], env, data, '"');
+		else if ((ft_have_this(words[w], '$')))
+			words[w] = clean_word(words[w], env, data, '\'');
 		w++;
 	}
 	return (words);

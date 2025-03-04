@@ -174,7 +174,7 @@ t_cmds	*m_lst_intnew(char *com);
 t_cmds	*m_lstlast(t_cmds *lst);
 void	m_lstadd_front(t_cmds **lst, t_cmds *cmd);
 void	m_lstadd_back(t_cmds **lst, t_cmds *cmd);
-void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd);
+void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd, int quote);
 int		m_lstsize(t_cmds *lst);
 void	m_listclear(t_cmds **lst, void (*del)(void *));
 

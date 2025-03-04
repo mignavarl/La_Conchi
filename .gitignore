@@ -4,5 +4,6 @@ minishell
 *.txt
 *.pdf
 *.sh
+.gitignore
 /.vscode
 *.json

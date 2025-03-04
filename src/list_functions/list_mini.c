@@ -60,18 +60,21 @@ void	m_lstadd_back(t_cmds **lst, t_cmds *cmd)
 	l->next = cmd;
 }
 
-void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd)
+void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd, int quote)
 {
 	t_cmds	*l;
 
 	if (!cmd)
 		return ;
+	if (quote == '"')
+		cmd->quote = 1;
+	else if (quote == '\'')
+		cmd->quote = 2;
 	if (!*lst)
 	{
 		*lst = cmd;
 		return ;
 	}
 	l = m_lstlast(*lst);
-	cmd->quote = 1;
 	l->next = cmd;
 }
