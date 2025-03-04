@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-10 10:31:27 by mignavar          #+#    #+#             */
-/*   Updated: 2024-12-10 10:31:27 by mignavar         ###   ########.fr       */
+/*   Created: 2024/12/10 10:31:27 by mignavar          #+#    #+#             */
+/*   Updated: 2025/03/04 16:23:12 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**set_env(t_env *env)
 	envp = ft_calloc(env_lstsize(env) + 1, sizeof(char *));
 	if (!envp)
 		return (NULL);
-	while (tmp)
+	while (tmp && tmp->key && tmp->value)
 	{
 		envp[i] = ft_threejoin(tmp->key, "=", tmp->value);
 		if (!envp[i])

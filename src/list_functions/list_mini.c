@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_mini.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-10 10:30:37 by mignavar          #+#    #+#             */
-/*   Updated: 2024-12-10 10:30:37 by mignavar         ###   ########.fr       */
+/*   Created: 2024/12/10 10:30:37 by mignavar          #+#    #+#             */
+/*   Updated: 2025/03/04 16:57:31 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	m_lstadd_back_quote(t_cmds **lst, t_cmds *cmd, int quote)
 		cmd->quote = 1;
 	else if (quote == '\'')
 		cmd->quote = 2;
+	else
+		cmd->quote = 0;
 	if (!*lst)
 	{
 		*lst = cmd;

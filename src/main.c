@@ -6,7 +6,7 @@
 /*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 21:23:30 by osredond          #+#    #+#             */
-/*   Updated: 2025/03/04 14:49:02 by osredond         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:57:45 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_redirs(t_cmds *command)
 	first = command;
 	while (first)
 	{
-		if (m_ischar(first->cmd))
+		if (m_ischar(first->cmd) && first->quote == 0)
 		{
 			if (!first->next)
 				return (

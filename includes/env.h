@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-02-24 11:34:48 by mignavar          #+#    #+#             */
-/*   Updated: 2025-02-24 11:34:48 by mignavar         ###   ########.fr       */
+/*   Created: 2025/02/24 11:34:48 by mignavar          #+#    #+#             */
+/*   Updated: 2025/03/04 15:47:52 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

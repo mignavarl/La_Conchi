@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-12-10 10:31:59 by mignavar          #+#    #+#             */
-/*   Updated: 2024-12-10 10:31:59 by mignavar         ###   ########.fr       */
+/*   Created: 2024/12/10 10:31:59 by mignavar          #+#    #+#             */
+/*   Updated: 2025/03/04 15:57:41 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
