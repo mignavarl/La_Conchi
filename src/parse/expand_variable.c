@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_variable.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-27 15:00:07 by mignavar          #+#    #+#             */
-/*   Updated: 2025-01-27 15:00:07 by mignavar         ###   ########.fr       */
+/*   Created: 2025/01/27 15:00:07 by mignavar          #+#    #+#             */
+/*   Updated: 2025/03/04 14:48:48 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

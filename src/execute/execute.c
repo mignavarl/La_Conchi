@@ -6,7 +6,7 @@
 /*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:31:33 by mignavar          #+#    #+#             */
-/*   Updated: 2025/02/18 15:48:20 by osredond         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:16:37 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	loop_cmd(t_exec *exec, t_env *env, t_data *data)
 
 	save_fd(data);
 	replace_here_doc(exec->now);
+	data->have_redir = 0;
 	command = NULL;
 	exec->env = env;
 	while (exec->now)

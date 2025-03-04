@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_here_doc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mignavar <mignavar@student.42madrid.com>   #+#  +:+       +#+        */
+/*   By: osredond < osredond@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-08 13:42:33 by mignavar          #+#    #+#             */
-/*   Updated: 2025-01-08 13:42:33 by mignavar         ###   ########.fr       */
+/*   Created: 2025/01/08 13:42:33 by mignavar          #+#    #+#             */
+/*   Updated: 2025/03/01 16:16:58 by osredond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
