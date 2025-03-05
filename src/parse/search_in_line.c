@@ -67,10 +67,7 @@ char	**search_in_line(char *line, t_data *data, t_env *env)
 	words = (char **)ft_calloc(num_words + 1, sizeof(char *));
 	w = 0;
 	if (line[0] == '\0')
-	{
-		words[0] = '\0';
-		return (words);
-	}
+		return (NULL);
 	words = cut_line(words, line, data, w);
 	words = clean_and_expand(words, env, data);
 	return (words);

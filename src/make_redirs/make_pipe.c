@@ -55,7 +55,7 @@ void	make_pipe(char **command, t_env *env, t_data *data)
 	}
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
 		perror("Signal");
-	else
+	if (pid != 0)
 	{
 		close(data->pipe_fd[WRITE]);
 		dup2(data->pipe_fd[READ], STDIN_FILENO);

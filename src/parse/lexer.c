@@ -22,13 +22,13 @@ int	lexer(char *line)
 		if (line[i] == '|' && line[i + 1] == '|')
 		{
 			ft_putendl_fd(
-				"La Conchi: syntax error near unexpected token `|'\n",
+				"La Conchi: syntax error near unexpected token `|'",
 				2);
 			return (free(line), EXIT_FAILURE);
 		}
 		else if (line[i] == '|' && !line[i + 1])
 		{
-			ft_putendl_fd("La Conchi: syntax error near unexpected token `|'\n",
+			ft_putendl_fd("La Conchi: syntax error near unexpected token `|'",
 				2);
 			return (free(line), EXIT_FAILURE);
 		}

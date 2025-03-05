@@ -111,6 +111,7 @@ char	*find_quote(char *line, int init, t_data *data)
 	char	*quote;
 
 	l = init + 1;
+	quote = NULL;
 	while (line[l])
 	{
 		if ((line[init] == '"' && line[l] == '"')
