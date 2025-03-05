@@ -59,7 +59,7 @@ OBJS = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
 INCLUDES = $(INC_DIR)minishell.h\
 			$(INC_DIR)env.h
 #~~~~~~ Compiling ~~~~~~~
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -fsanitize=leak
 MAKEFLAGS = --no-print-directory
 LFLAGS = -L libft -lft -lreadline

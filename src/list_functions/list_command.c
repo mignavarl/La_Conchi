@@ -69,7 +69,7 @@ int	list_quote(t_cmds **command, char **words, t_data *data, int i)
 		m_lstadd_back_quote(command, m_lst_intnew(ft_substr(
 					words[data->word_list], 1,
 					(ft_strlen(words[data->word_list]) - 2))),
-					words[data->word_list][i]);
+			words[data->word_list][i]);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
